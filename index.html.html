@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Direct Debit.cc — Phase 5 (All Screens)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+/* Phase 3 — design tokens aligned with Phase 1 */
+    :root {
+      --midnight-plum: #120C24;
+      --ultraviolet: #7A5CFF;
+      --luminous-orchid: #B36CFF;
+      --solar-coral: #FF6B68;
+      --warm-sand: #F6EFE8;
+      --mist-lavender: #EAE5F4;
+      --graphite-plum: #4E465E;
+      --white: #ffffff;
+      --rgb-midnight-plum: 18, 12, 36;
+      --rgb-ultraviolet: 122, 92, 255;
+      --rgb-white: 255, 255, 255;
+      --near-black: #1A1A2E;
+      --input-border: color-mix(in srgb, var(--mist-lavender) 78%, var(--graphite-plum) 22%);
+      --shadow-card: rgba(0, 0, 0, 0.06);
+      --sidebar-width: 248px;
+      --topbar-height: 56px;
+      --min-page-width: 1280px;
+      --page-bg: #FFFFFF;
+      --card-surface: #F8F7FB;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-width: var(--min-page-width);
+      font-family: "Inter", system-ui, sans-serif;
+      background: var(--page-bg);
+      color: var(--near-black);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    .main-content,
+    .app-shell,
+    .page-wrapper,
+    .content-area {
+      background: var(--page-bg);
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; }
+    .visually-hidden {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+
+    /* Prototype nav — Phase 3 naming */
+    .prototype-nav {
+      position: sticky; top: 0; z-index: 1000;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+      padding: 10px 16px;
+      background: var(--midnight-plum);
+      color: var(--white);
+      font-size: 13px;
+      border-bottom: 1px solid rgba(var(--rgb-ultraviolet), 0.35);
+      box-shadow: 0 4px 16px rgba(var(--rgb-midnight-plum), 0.25);
+    }
+    .proto-label { font-weight: 600; margin-right: 8px; }
+    .prototype-nav a {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px; border-radius: 8px;
+      background: rgba(var(--rgb-white), 0.08);
+      color: var(--white); text-decoration: none; font-weight: 500;
+      border: 1px solid transparent;
+    }
+    .prototype-nav a:hover { background: rgba(var(--rgb-ultraviolet), 0.45); }
+    .prototype-nav a.active {
+      background: #7A5CFF;
+      border-color: rgba(var(--rgb-white), 0.2);
+    }
+
+    .phase3-screen-anchor { scroll-margin-top: 52px; }
+
+    .app-shell { display: flex; min-height: 100vh; }
+    .sidebar {
+      width: var(--sidebar-width); flex-shrink: 0;
+      background: #120C24 !important;
+      color: var(--white); display: flex; flex-direction: column; min-height: 100vh;
+      position: relative; overflow: hidden;
+    }
+    .sidebar::after {
+      content: '';
+      position: absolute;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 180px;
+      height: 220px;
+      background: radial-gradient(ellipse at center, rgba(122,92,255,0.45) 0%, rgba(179,108,255,0.2) 40%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      border-radius: 50%;
+    }
+    .sidebar-inner {
+      position: relative; z-index: 2; display: flex; flex-direction: column; height: 100%;
+      min-height: 0;
+      padding: 0 16px 20px;
+    }
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 22px 18px 28px;
+      margin-bottom: 8px;
+      color: inherit;
+    }
+    .sidebar-brand svg { flex-shrink: 0; display: block; filter: drop-shadow(0 2px 14px rgba(122, 92, 255, 0.35)); }
+    .brand-text { display: flex; flex-direction: column; min-width: 0; }
+    .brand-name {
+      display: block;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+    }
+    .brand-sub {
+      display: block;
+      color: #B36CFF;
+      font-size: 7px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-top: 1px;
+      white-space: nowrap;
+    }
+    .sidebar-nav, .nav { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px;
+      font-size: 14px; font-weight: 500; color: var(--white);
+      transition: background 0.15s ease;
+      border-right: 3px solid transparent;
+    }
+    .nav-item:hover { background: rgba(var(--rgb-white), 0.08); }
+    .nav-item.active {
+      background: #7A5CFF !important;
+      color: #ffffff !important;
+      border-right: 3px solid #7A5CFF !important;
+    }
+    .nav-item svg {
+      width: 18px; height: 18px; flex-shrink: 0;
+      stroke: currentColor;
+    }
+    .sidebar-atmosphere { flex: 1; min-height: 56px; margin: 12px -8px 8px; pointer-events: none; z-index: 1; position: relative; }
+    .sidebar-footer { margin-top: 0; padding-top: 24px; flex-shrink: 0; position: relative; z-index: 2; }
+    .merchant-card {
+      display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 10px;
+      background: rgba(var(--rgb-white), 0.08);
+    }
+    .merchant-avatar {
+      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--ultraviolet), var(--luminous-orchid));
+      display: grid; place-items: center; font-size: 12px; font-weight: 600;
+      color: var(--white);
+    }
+    .merchant-meta { min-width: 0; }
+    .merchant-name {
+      font-size: 13px; font-weight: 600; color: var(--white);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .merchant-id { font-size: 11px; color: rgba(var(--rgb-white), 0.78); }
+
+    .main-wrap {
+      flex: 1; display: flex; flex-direction: column; min-width: 0;
+      max-width: calc(100vw - var(--sidebar-width));
+      background-color: var(--page-bg) !important;
+    }
+
+    /* Top bar — search visually centered, filters + CTA + actions right */
+    .phase3-topbar {
+      height: var(--topbar-height);
+      background: var(--page-bg);
+      border-bottom: 1px solid var(--mist-lavender);
+      display: flex; align-items: center; gap: 12px;
+      padding: 0 24px; flex-shrink: 0; min-width: 0;
+    }
+    .phase3-topbar .topbar-search-wrap {
+      flex: 1;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      min-width: 0;
+    }
+    .phase3-topbar .search-field {
+      width: 100%; max-width: 480px; position: relative;
+    }
+    .phase3-topbar .search-field input {
+      width: 100%; height: 40px; border: 1px solid var(--input-border); border-radius: 8px;
+      padding: 0 14px 0 40px; font-size: 14px; color: var(--near-black); background: var(--white);
+    }
+    .phase3-topbar .search-field input::placeholder { color: var(--graphite-plum); font-size: 13px; }
+    .phase3-topbar .search-field input:focus { outline: none; border-color: var(--ultraviolet); }
+    .phase3-topbar .search-field .search-icon {
+      position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+      color: var(--graphite-plum); width: 18px; height: 18px;
+    }
+    .phase3-topbar .topbar-actions {
+      display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+      margin-left: 0;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      border-radius: 8px; font-size: 13px; font-weight: 600;
+      border: 1px solid transparent;
+      padding: 8px 14px; line-height: 1; white-space: nowrap;
+    }
+    .btn-primary {
+      background: #7A5CFF !important;
+      color: #ffffff !important;
+      border: none !important;
+    }
+    .btn-primary:hover:not(:disabled) { background: #6a4ee8 !important; }
+    .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; background: #a39bb8 !important; color: #fff !important; }
+    .btn-secondary {
+      background: var(--white); border-color: var(--input-border); color: var(--graphite-plum);
+      font-weight: 500; padding: 8px 12px; font-size: 13px;
+    }
+    .btn-ghost { background: transparent; border: none; padding: 8px; color: var(--graphite-plum); }
+    .user-pill { display: flex; align-items: center; gap: 8px; }
+    .user-avatar {
+      width: 36px; height: 36px; border-radius: 50%; background: var(--mist-lavender);
+      display: grid; place-items: center; font-size: 13px; font-weight: 600; color: var(--ultraviolet);
+    }
+    .user-name { font-size: 13px; font-weight: 500; color: var(--near-black); }
+
+    .content {
+      padding: 20px 20px 40px; flex: 1; min-width: 0;
+      display: flex; flex-direction: column;
+      background: var(--page-bg);
+    }
+    .breadcrumb {
+      font-size: 12px; font-weight: 500; color: var(--graphite-plum); margin-bottom: 8px;
+      display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    }
+    .breadcrumb a { color: var(--graphite-plum); text-decoration: underline; text-underline-offset: 2px; }
+    .breadcrumb-sep { opacity: 0.6; }
+    .breadcrumb-current { color: var(--near-black); text-decoration: none; }
+    .page-header { margin-bottom: 14px; flex-shrink: 0; }
+    .page-title {
+      font-size: 22px; font-weight: 700; color: var(--near-black); margin: 0 0 4px;
+      letter-spacing: -0.02em;
+    }
+    .page-subtitle { margin: 0; font-size: 13px; color: var(--graphite-plum); font-weight: 400; max-width: 860px; }
+
+    .table-toolbar {
+      display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 12px; margin-bottom: 12px;
+    }
+    .table-toolbar .toolbar-grow {
+      flex: 1; min-width: 200px; max-width: 360px; position: relative;
+    }
+    .table-toolbar .toolbar-grow input {
+      width: 100%; height: 36px; border: 1px solid var(--input-border); border-radius: 8px;
+      padding: 0 12px 0 36px; font-size: 13px; color: var(--near-black); background: var(--white);
+    }
+    .table-toolbar .toolbar-grow .search-icon {
+      position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--graphite-plum);
+    }
+    .filter-field label {
+      display: block; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
+      color: var(--graphite-plum); margin-bottom: 4px;
+    }
+    .filter-select {
+      height: 36px; border: 1px solid var(--input-border); border-radius: 8px;
+      padding: 0 28px 0 10px; font-size: 12px; color: var(--near-black); background: var(--white);
+      min-width: 108px; flex-shrink: 0; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234E465E' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 8px center;
+    }
+    .filter-select:focus { outline: none; border-color: var(--ultraviolet); }
+    .date-pair { display: flex; gap: 8px; align-items: flex-end; }
+    .date-pair .filter-field input {
+      height: 36px; width: 140px; border: 1px solid var(--input-border); border-radius: 8px;
+      padding: 0 10px; font-size: 13px;
+    }
+    .table-toolbar .btn-primary { height: 36px; padding: 0 14px; margin-left: auto; }
+
+    .card {
+      background: var(--card-surface); border: 1px solid var(--card-surface); border-radius: 12px;
+      box-shadow: none;
+      flex: 1; min-height: 0; display: flex; flex-direction: column;
+    }
+    .table-card,
+    .screen-card {
+      background: var(--card-surface);
+      border: 1px solid var(--card-surface);
+      box-shadow: none;
+    }
+    .table-card { padding: 0; overflow: hidden; }
+    .table-scroll {
+      overflow-x: auto;
+      overflow-y: auto;
+      flex: 1;
+      max-height: calc(100vh - 240px);
+    }
+    .plans-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 12px;
+    }
+    .plans-table thead th {
+      position: sticky; top: 0; z-index: 2;
+      background: #F8F7FB;
+      text-align: left;
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.03em; color: var(--graphite-plum);
+      padding: 9px 6px;
+      border-bottom: 1px solid #F0EEF6;
+      vertical-align: top;
+    }
+    .plans-table tbody td {
+      padding: 9px 6px; font-size: 11px; color: var(--near-black);
+      border-bottom: 1px solid #F0EEF6; vertical-align: top;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      background: #FFFFFF;
+    }
+    .plans-table tbody td.actions-cell {
+      overflow: visible;
+    }
+    .plans-table tbody tr:hover td { background: #F8F7FB; }
+
+    /* Sticky Actions column — always visible on the right */
+    .plans-table th:last-child,
+    .plans-table td:last-child {
+      position: sticky;
+      right: 0;
+      z-index: 3;
+      box-shadow: -2px 0 6px rgba(0,0,0,0.06);
+    }
+    .plans-table thead th:last-child {
+      background: #F8F7FB;
+    }
+    .plans-table tbody tr.row-esc-normal      td:last-child { background: #FFFFFF; }
+    .plans-table tbody tr.row-esc-max-reminders td:last-child { background: #FFE8E7; }
+    .plans-table tbody tr.row-esc-max-bank-sub  td:last-child { background: #FEF3C7; }
+    .plans-table tbody tr.row-esc-escalated     td:last-child { background: #EDE9FE; }
+    .plans-table tbody tr.row-esc-closed        td:last-child { background: #F3F4F6; }
+    .link-mandate, .link-batch {
+      color: var(--ultraviolet); font-weight: 600; text-decoration: underline; text-underline-offset: 2px;
+      cursor: pointer;
+    }
+    .empty-hint { text-align: center; padding: 28px 12px; color: var(--graphite-plum); font-size: 13px; }
+
+    .badge {
+      display: inline-block; font-size: 10px; font-weight: 600; border-radius: 20px;
+      padding: 2px 8px; max-width: 100%; overflow: hidden; text-overflow: ellipsis;
+    }
+    .badge-pending-submission { background: #F3F0FF; color: #7A5CFF; }
+    .badge-submitted { background: #DBEAFE; color: #1D4ED8; }
+    .badge-pending-bank { background: #FEF3C7; color: #B45309; }
+    .badge-approved { background: #DCFCE7; color: #15803D; }
+    .badge-rejected { background: #FFE8E7; color: #FF6B68; }
+    .badge-batch-submitted { background: #DBEAFE; color: #1D4ED8; }
+    .badge-processing { background: #FEF3C7; color: #B45309; }
+    .badge-completed { background: #DCFCE7; color: #15803D; }
+    .badge-partial { background: #FFF7ED; color: #C2410C; }
+    .badge-draft { background: #F3F4F6; color: #6B7280; }
+    .badge-pending-sig { background: #EDE9FE; color: #7C3AED; }
+    .badge-cancel-pending { background: #FEF3C7; color: #D97706; }
+    .badge-cancelled { background: #F3F4F6; color: #374151; }
+    .badge-sent { background: #EDE9FE; color: #7C3AED; }
+    .badge-received { background: #DCFCE7; color: #15803D; }
+    .badge-bounced { background: #FFE8E7; color: #FF6B68; }
+
+    .collection-history-section {
+      margin-top: 28px;
+      background: var(--card-surface);
+      border: 1px solid var(--card-surface);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .collection-history-section .section-header {
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid #F0EEF6;
+    }
+
+    .collection-history-section .section-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #120C24;
+      margin: 0;
+    }
+
+    .collection-table-wrapper {
+      overflow-x: auto;
+    }
+
+    .collection-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .collection-table thead tr {
+      background: #F8F7FB;
+    }
+
+    .collection-table th {
+      padding: 10px 20px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #4E465E;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-align: left;
+      border-bottom: 1px solid #F0EEF6;
+    }
+
+    .collection-table td {
+      padding: 14px 20px;
+      font-size: 13px;
+      color: #120C24;
+      border-bottom: 1px solid #F0EEF6;
+    }
+
+    .collection-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .collection-table tbody tr:hover {
+      background: #F8F7FB;
+    }
+
+    .collection-expand-row {
+      padding: 12px 20px;
+      border-top: 1px solid #F0EEF6;
+      display: flex;
+      justify-content: center;
+    }
+
+    .btn-expand-collections {
+      background: none;
+      border: none;
+      color: #7A5CFF;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: Inter, sans-serif;
+      padding: 6px 16px;
+      border-radius: 8px;
+      transition: background 0.15s;
+    }
+
+    .btn-expand-collections:hover {
+      background: #F3F0FF;
+    }
+
+    .mandate-widgets {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .widget-card {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--card-surface);
+      border: 1px solid var(--card-surface);
+      border-radius: 12px;
+      padding: 20px;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .widget-card:hover {
+      border-color: #7A5CFF;
+      box-shadow: 0 4px 12px rgba(122,92,255,0.12);
+    }
+    .widget-icon {
+      width: 44px;
+      height: 44px;
+      background: #F3F0FF;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .widget-icon i {
+      width: 22px;
+      height: 22px;
+      color: #7A5CFF;
+    }
+    .widget-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #120C24;
+      margin-bottom: 3px;
+    }
+    .widget-desc {
+      font-size: 12px;
+      color: #4E465E;
+    }
+    .widget-arrow {
+      width: 18px;
+      height: 18px;
+      color: #9CA3AF;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    /* Accordion batch table */
+    .batch-main-row { cursor: pointer; }
+    .batch-main-row .chev { display: inline-block; color: var(--graphite-plum); font-size: 11px; }
+    .batch-detail-row td { background: #F8F7FB; padding: 0 !important; border-bottom: 1px solid #F0EEF6 !important; }
+    .batch-sub-wrap { padding: 12px 16px 16px 48px; }
+    .batch-sub-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .batch-sub-table th {
+      text-align: left; font-size: 11px; font-weight: 600; text-transform: uppercase;
+      color: var(--graphite-plum); padding: 6px 8px; background: #fff; border-radius: 6px 6px 0 0;
+    }
+    .batch-sub-table td { padding: 8px; border-bottom: 1px solid #F0EEF6; background: #fff; }
+
+    /* Mandate detail layout */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 65%) minmax(280px, 35%);
+      gap: 20px;
+      align-items: start;
+    }
+    @media (max-width: 1100px) { .detail-grid { grid-template-columns: 1fr; } }
+    #screen-rej002 .detail-grid,
+    #screen-rej002 .detail-main {
+      overflow: visible;
+    }
+    #screen-rej002 .info-card[aria-labelledby="p2-actions"] {
+      overflow: visible;
+      max-height: none;
+    }
+    .info-card {
+      background: var(--card-surface); border: 1px solid var(--card-surface); border-radius: 12px;
+      padding: 18px 20px; box-shadow: none; margin-bottom: 16px;
+    }
+    .info-card h3 {
+      margin: 0 0 14px; font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.04em; color: var(--graphite-plum);
+      padding-bottom: 8px; border-bottom: 1px solid var(--mist-lavender);
+    }
+    .kv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
+    @media (max-width: 720px) { .kv-grid { grid-template-columns: 1fr; } }
+    .kv-item .k { font-size: 11px; font-weight: 600; color: var(--graphite-plum); margin-bottom: 4px; }
+    .kv-item .v { font-size: 13px; font-weight: 500; color: var(--near-black); }
+
+    .timeline-card {
+      position: sticky; top: 72px;
+      background: var(--card-surface); border: 1px solid var(--card-surface); border-radius: 12px;
+      padding: 18px 20px; box-shadow: none;
+    }
+    .timeline-card h3 {
+      margin: 0 0 16px; font-size: 15px; font-weight: 600; color: var(--near-black);
+    }
+    .timeline { position: relative; padding-left: 20px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #EAE5F4;
+    }
+    .timeline-entry { position: relative; margin-bottom: 20px; }
+    .timeline-entry::before {
+      content: ''; position: absolute; left: -17px; top: 8px; width: 10px; height: 10px; border-radius: 50%;
+      background: #7A5CFF; border: 2px solid white; box-shadow: 0 0 0 2px #7A5CFF;
+    }
+    .timeline-meta { font-size: 11px; color: #4E465E; }
+
+    /* Toast */
+    .phase3-toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(120%);
+      z-index: 3000;
+      background: var(--near-black); color: #fff; padding: 12px 18px; border-radius: 10px;
+      font-size: 13px; box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      transition: transform 0.25s ease;
+      max-width: min(520px, calc(100vw - 48px));
+    }
+    .phase3-toast.show { transform: translateX(-50%) translateY(0); }
+    .phase3-toast a { color: #B36CFF; font-weight: 600; text-decoration: underline; }
+
+    .page-title-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; }
+    .page-title-code { font-size: 14px; font-weight: 600; color: var(--graphite-plum); }
+
+    .export-dropdown-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+    .export-menu {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      background: white;
+      border: 1px solid #EAE5F4;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      min-width: 160px;
+      z-index: 100;
+      overflow: hidden;
+    }
+    .export-menu button {
+      display: block;
+      width: 100%;
+      padding: 10px 16px;
+      text-align: left;
+      background: none;
+      border: none;
+      font-size: 13px;
+      font-family: Inter, sans-serif;
+      color: #120C24;
+      cursor: pointer;
+    }
+    .export-menu button:hover {
+      background: #F8F7FB;
+    }
+
+    .sort-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0 2px;
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+
+    .sort-arrow {
+      font-size: 11px;
+      color: #9CA3AF;
+      user-select: none;
+      transition: color 0.15s;
+    }
+
+    .sort-btn:hover .sort-arrow { color: #7A5CFF; }
+
+    .sort-dropdown {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      background: white;
+      border: 1px solid #EAE5F4;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+      min-width: 180px;
+      z-index: 500;
+      overflow: hidden;
+    }
+
+    .sort-dropdown button {
+      display: block;
+      width: 100%;
+      padding: 9px 16px;
+      text-align: left;
+      background: none;
+      border: none;
+      font-size: 13px;
+      font-family: Inter, sans-serif;
+      color: #120C24;
+      cursor: pointer;
+    }
+
+    .sort-dropdown button:hover { background: #F8F7FB; }
+
+    .sort-dropdown button:last-child {
+      border-top: 1px solid #F0EEF6;
+      color: #9CA3AF;
+      font-size: 12px;
+    }
+
+    .actions-cell {
+      white-space: nowrap;
+      overflow: visible;
+      position: relative;
+    }
+    .plans-table tbody td.actions-cell {
+      overflow: visible;
+    }
+
+    .action-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+    .three-dot-btn {
+      background: none;
+      border: 1px solid #EAE5F4;
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 18px;
+      cursor: pointer;
+      color: #4E465E;
+      line-height: 1;
+    }
+    .three-dot-btn:hover {
+      background: #F8F7FB;
+    }
+    .three-dot-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .action-menu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 4px);
+      background: white;
+      border: 1px solid #EAE5F4;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(18,12,36,0.10);
+      min-width: 200px;
+      z-index: 9999;
+      overflow: hidden;
+    }
+    .action-item {
+      display: block;
+      width: 100%;
+      padding: 10px 16px;
+      text-align: left;
+      background: none;
+      border: none;
+      font-size: 13px;
+      font-family: Inter, sans-serif;
+      color: #120C24;
+      cursor: pointer;
+    }
+    .action-item:hover {
+      background: #F8F7FB;
+    }
+    .action-item.danger {
+      color: #FF6B68;
+    }
+    .action-item.danger:hover {
+      background: #FFE8E7;
+    }
+    .action-divider {
+      height: 1px;
+      background: #F0EEF6;
+      margin: 2px 0;
+    }
+    .toast-notification {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #120C24;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-family: Inter, sans-serif;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 9999;
+    }
+    .toast-notification.visible { opacity: 1; }
+    .confirm-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(18,12,36,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .confirm-dialog {
+      background: white;
+      border-radius: 12px;
+      padding: 28px;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    }
+    .confirm-dialog p {
+      font-size: 14px;
+      color: #120C24;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .confirm-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+    .btn-danger {
+      background: #FF6B68;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 13px;
+      font-family: Inter, sans-serif;
+      cursor: pointer;
+    }
+    .btn-danger:hover { background: #e85e5b; }
+  
+    .phase4-screen-anchor { scroll-margin-top: 52px; }
+    .filters-panel { display: none; flex-wrap: wrap; gap: 10px 12px; margin-bottom: 12px; padding: 14px; background: #fff; border: 1px solid var(--mist-lavender); border-radius: 10px; }
+    .filters-panel.open { display: flex; }
+    .toolbar-actions-right { margin-left: auto; display: flex; gap: 10px; align-items: flex-end; }
+    .plans-table tbody tr.row-esc-normal td { background: #FFFFFF; }
+    .plans-table tbody tr.row-esc-max-reminders td { background: #FFE8E7; }
+    .plans-table tbody tr.row-esc-max-bank-sub td { background: #FEF3C7; }
+    .plans-table tbody tr.row-esc-escalated td { background: #EDE9FE; }
+    .plans-table tbody tr.row-esc-closed td { background: #F3F4F6; }
+    .plans-table tbody tr.row-esc-normal:hover td { background: #F8F7FB; }
+    .plans-table tbody tr.row-esc-max-reminders:hover td { background: #FFE0DE; }
+    .plans-table tbody tr.row-esc-max-bank-sub:hover td { background: #FDE68A; }
+    .plans-table tbody tr.row-esc-escalated:hover td { background: #E8E4FF; }
+    .plans-table tbody tr.row-esc-closed:hover td { background: #E5E7EB; }
+    .badge-grp-sig      { background: #EDE9FE; color: #7C3AED; } /* Signature Issues */
+    .badge-grp-accard   { background: #DBEAFE; color: #1D4ED8; } /* Account & Card Issues */
+    .badge-grp-blocked  { background: #FFE8E7; color: #FF6B68; } /* Blocked Accounts */
+    .badge-grp-title    { background: #FFF7ED; color: #C2410C; } /* Title Mismatch */
+    .badge-grp-identity { background: #DCFCE7; color: #15803D; } /* Identity Issues */
+    .badge-grp-contact  { background: #FEF9C3; color: #854D0E; } /* Contact Bank Required */
+    .badge-grp-noaction { background: #F3F4F6; color: #6B7280; } /* No Action */
+    .badge-grp-autoresub{ background: #EFF6FF; color: #1E40AF; } /* Auto-Resubmission */
+    .badge-rejected-status { background: #FFE8E7; color: #FF6B68; }
+    .badge-esc-none { background: #F3F4F6; color: #6B7280; }
+    /* Status badges */
+    .badge-status-pending-payer   { background:#F3F0FF; color:#7A5CFF; }
+    .badge-status-pending-sub     { background:#FEF3C7; color:#B45309; }
+    .badge-status-pending-bank    { background:#DBEAFE; color:#1D4ED8; }
+    .badge-status-max-reminders   { background:#FFE8E7; color:#FF6B68; }
+    .badge-status-max-bank-sub    { background:#FEF3C7; color:#B45309; }
+    .badge-status-escalated       { background:#EDE9FE; color:#6D28D9; }
+    .badge-status-noaction        { background:#F3F4F6; color:#6B7280; }
+
+    /* Row background colors by escalation state */
+    .row-esc-normal              { background:#FFFFFF; }
+    .row-esc-max-reminders       { background:#FFE8E7; }
+    .row-esc-max-bank-sub        { background:#FEF3C7; }
+    .row-esc-escalated           { background:#EDE9FE; }
+    .row-esc-closed              { background:#F3F4F6; }
+    #screen-rej002 .info-card,
+    #screen-rej002 .escalation-card { background: #FFFFFF !important; border: 1px solid var(--mist-lavender); border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; box-shadow: none; }
+    .progress-track { height: 8px; background: #EAE5F4; border-radius: 999px; overflow: hidden; margin: 8px 0 4px; }
+    .progress-fill { height: 100%; background: #7A5CFF; border-radius: 999px; }
+    .progress-caption { font-size: 12px; color: #4E465E; margin: 0 0 12px; }
+    .escalation-note { font-size: 12px; color: #4E465E; line-height: 1.5; margin: 12px 0 0; }
+    .confirm-dialog h2 { margin: 0 0 12px; font-size: 18px; font-weight: 700; color: #120C24; }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(18,12,36,0.4); display: flex; align-items: center; justify-content: center; z-index: 9999; }
+    .modal-card { background: white; border-radius: 12px; padding: 28px; max-width: 420px; width: 90%; box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+    .modal-card h2 { margin: 0 0 16px; font-size: 18px; font-weight: 700; }
+    .modal-card .segmented { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 5px; border-radius: 12px; background: var(--mist-lavender); margin-bottom: 14px; }
+    .modal-card .segmented button { min-height: 36px; border-radius: 9px; background: white; border: none; font-weight: 700; cursor: pointer; font-family: inherit; }
+    .modal-card .segmented button.active { background: var(--ultraviolet); color: white; }
+    .modal-field { margin-bottom: 14px; }
+    .modal-field label { display: block; font-size: 12px; font-weight: 700; color: var(--graphite-plum); margin-bottom: 6px; }
+    .modal-field input { width: 100%; min-height: 44px; border: 1.5px solid var(--mist-lavender); border-radius: 10px; padding: 0 12px; font-size: 14px; }
+    .modal-save { width: 100%; min-height: 48px; border-radius: 12px; background: #7A5CFF; color: white; font-weight: 700; border: none; cursor: pointer; margin-top: 8px; font-family: inherit; }
+    .modal-cancel { display: block; text-align: center; margin-top: 12px; color: #7A5CFF; font-weight: 600; background: none; border: none; cursor: pointer; width: 100%; font-family: inherit; }
+    .reminder-expand-row { padding: 12px 0 0; display: flex; justify-content: center; border-top: 1px solid #F0EEF6; margin-top: 8px; }
+    .btn-expand-reminders { background: none; border: none; color: #7A5CFF; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Inter, sans-serif; padding: 6px 16px; border-radius: 8px; }
+    .btn-expand-reminders:hover { background: #F3F0FF; }
+
+    /* Phase 4 — scrollable all-screens prototype */
+    .phase4-screen-anchor { scroll-margin-top: 52px; }
+    .phase4-desktop-screen { min-height: 100vh; }
+    .phase4-desktop-screen .app-shell { min-height: 100vh; }
+
+    /* Force text wrapping in Payer Name, Rejection Reason, Status columns */
+    .plans-table td.col-payer-name,
+    .plans-table td.col-rejection-reason,
+    .plans-table td.col-status,
+    .plans-table th.col-payer-name,
+    .plans-table th.col-rejection-reason,
+    .plans-table th.col-status {
+      white-space: normal !important;
+      overflow: visible !important;
+      text-overflow: unset !important;
+      word-break: break-word !important;
+      overflow-wrap: break-word !important;
+      max-width: 1px;
+    }
+
+    /* Badges inside status cells must wrap, not ellipsis */
+    .plans-table td.col-status .badge {
+      white-space: normal !important;
+      overflow: visible !important;
+      text-overflow: unset !important;
+      word-break: break-word !important;
+      overflow-wrap: break-word !important;
+    }
+
+    /* Vertical align top on ALL table cells in both tables */
+    .plans-table td,
+    .plans-table th {
+      vertical-align: top !important;
+    }
+    .phase5-desktop-screen { display: none; }
+    .phase5-desktop-screen.is-active { display: block; min-height: 100vh; }
+    .phase5-desktop-screen .app-shell { min-height: 100vh; }
+    .phase5-screen-anchor { scroll-margin-top: 52px; }
+    #screen-col001 .table-scroll, #screen-col002 .table-scroll, #screen-col003 .table-scroll, #screen-col004 .table-scroll { overflow-x: hidden; }
+    .badge-col-ready { background: #EFF6FF; color: #1D4ED8; }
+    .badge-col-sent { background: #FEF9C3; color: #854D0E; }
+    .badge-col-pending-bank { background: #F3F0FF; color: #6D28D9; }
+    .badge-col-bounced { background: #FFE4E6; color: #BE123C; }
+    .badge-col-future { background: #ECFEFF; color: #0E7490; }
+    .badge-col-received { background: #DCFCE7; color: #15803D; }
+    .badge-col-failed { background: #FFF1F2; color: #9F1239; }
+    .badge-col-stopped { background: #F1F5F9; color: #475569; }
+    .plans-table tbody tr.row-col-bounced td { background: #FFF5F5; }
+    .plans-table tbody tr.row-col-bounced:hover td { background: #FFEDED; }
+    .plans-table tbody tr.row-col-bounced td:last-child { background: #FFF5F5; }
+    .plans-table tbody tr.row-col-bounced:hover td:last-child { background: #FFEDED; }
+    .plans-table tbody tr.row-col-failed td { background: #FFF1F2; }
+    .plans-table tbody tr.row-col-failed:hover td { background: #FFE4E6; }
+    .plans-table tbody tr.row-col-failed td:last-child { background: #FFF1F2; }
+    .plans-table tbody tr.row-col-stopped td { background: #F8FAFC; }
+    .plans-table tbody tr.row-col-stopped:hover td { background: #F1F5F9; }
+    .plans-table tbody tr.row-col-stopped td:last-child { background: #F8FAFC; }
+    .plans-table td.col-payer-name, .plans-table td.col-status, .plans-table th.col-payer-name, .plans-table th.col-status {
+      white-space: normal !important; overflow: visible !important; text-overflow: unset !important;
+      word-break: break-word !important; overflow-wrap: break-word !important; max-width: 1px;
+    }
+    .plans-table td.col-status .badge {
+      white-space: normal !important; overflow: visible !important; text-overflow: unset !important; word-break: break-word !important;
+    }
+    .col-action-bar { display: flex; justify-content: flex-end; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+    .nav-sub-item { font-size: 12px !important; padding: 7px 12px !important; opacity: 0.85; }
+    .nav-sub-item.active { opacity: 1; background: rgba(122,92,255,0.18) !important; }
+    .nav-group-header { user-select: none; }
+</style>
+</head>
+<body>
+<nav class="prototype-nav" aria-label="Prototype screens">
+<span class="proto-label">Phase 5 — All Screens:</span>
+<a href="#screen-col001" data-screen="screen-col001" class="active">SCR-COL-001: Collections Dashboard</a>
+<a href="#screen-col002" data-screen="screen-col002">SCR-COL-002: Ready for Collection</a>
+<a href="#screen-col003" data-screen="screen-col003">SCR-COL-003: Future Collections</a>
+<a href="#screen-col004" data-screen="screen-col004">SCR-COL-004: Collection Log</a>
+</nav><section class="phase5-screen-anchor phase5-desktop-screen col-screen-section is-active" id="screen-col001" aria-label="Collections Dashboard">
+<div class="app-shell">
+<aside class="sidebar" aria-label="Main navigation"><div class="sidebar-inner">
+<div class="sidebar-brand"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="logoP5a" x1="4" y1="34" x2="30" y2="2" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#7A5CFF"/><stop offset="40%" stop-color="#9B6FFF"/><stop offset="70%" stop-color="#C96EE8"/><stop offset="100%" stop-color="#FF6B8A"/></linearGradient><linearGradient id="logoP5b" x1="19" y1="34" x2="34" y2="4" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#B36CFF"/><stop offset="100%" stop-color="#FF5B6B"/></linearGradient></defs><path d="M4 34 C4 34 10 20 19 4 C19 4 14 14 11 22 C9 27 8 30 8 34 Z" fill="url(#logoP5a)" opacity="0.95"/><path d="M34 34 C34 34 28 20 19 4 C19 4 24 14 27 22 C29 27 30 30 30 34 Z" fill="url(#logoP5b)" opacity="0.9"/><path d="M11 23 Q19 19 27 23" stroke="url(#logoP5a)" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/><path d="M19 4 C19 4 20 8 21 12 C22 16 22 18 22 20 L19 26 L16 20 C16 18 16 16 17 12 C18 8 19 4 19 4 Z" fill="rgba(255,255,255,0.12)"/></svg><div class="brand-text"><span class="brand-name">Direct Debit.cc</span><span class="brand-sub">DIRECT DEBIT PLATFORM</span></div></div>
+<nav class="sidebar-nav" aria-label="Primary">
+<a href="#" class="nav-item"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
+<a href="../phase-1/phase-1-all-screens.html#screen-pp002" class="nav-item"><i data-lucide="credit-card"></i><span>Payment Plans</span></a>
+<a href="../phase-3/phase-3-all-screens.html#screen-mandates" class="nav-item"><i data-lucide="file-text"></i><span>Mandates Management</span></a>
+<a href="../phase_4/phase-4-all-screens.html#screen-rej001" class="nav-item"><i data-lucide="x-circle"></i><span>Rejections</span></a>
+<div class="nav-group" id="nav-group-collections">
+  <div class="nav-group-header nav-item" onclick="toggleNavGroup('collections')" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between;">
+    <span style="display:flex; align-items:center; gap:10px;"><i data-lucide="banknote"></i>Collections</span>
+    <i data-lucide="chevron-down" id="nav-group-collections-chevron" style="width:14px; height:14px; transition:transform 0.2s; transform:rotate(180deg);"></i>
+  </div>
+  <div class="nav-sub-items" id="nav-sub-collections" style="display:flex; flex-direction:column; padding-left:20px;">
+    <a class="nav-item nav-sub-item active" href="#screen-col001" onclick="showColScreen('screen-col001'); return false;"><i data-lucide="layout-dashboard" style="width:15px; height:15px;"></i>Collections Dashboard</a>
+    <a class="nav-item nav-sub-item" href="#screen-col002" onclick="showColScreen('screen-col002'); return false;"><i data-lucide="clock" style="width:15px; height:15px;"></i>Ready for Collection</a>
+    <a class="nav-item nav-sub-item" href="#screen-col003" onclick="showColScreen('screen-col003'); return false;"><i data-lucide="calendar" style="width:15px; height:15px;"></i>Future Collections</a>
+    <a class="nav-item nav-sub-item" href="#screen-col004" onclick="showColScreen('screen-col004'); return false;"><i data-lucide="archive" style="width:15px; height:15px;"></i>Collection Log</a>
+  </div>
+</div>
+<a href="#" class="nav-item"><i data-lucide="alert-triangle"></i><span>Bounced</span></a>
+<a href="#" class="nav-item"><i data-lucide="bar-chart-2"></i><span>Reports</span></a>
+<a href="#" class="nav-item"><i data-lucide="settings"></i><span>Settings</span></a>
+</nav>
+<div class="sidebar-atmosphere" aria-hidden="true"></div>
+<div class="sidebar-footer"><div class="merchant-card"><div class="merchant-avatar">DM</div><div class="merchant-meta"><div class="merchant-name">Demo Merchant LLC</div><div class="merchant-id">MID-UAE-10294</div></div></div></div>
+</div></aside>
+<div class="main-wrap">
+<header class="topbar phase3-topbar">
+<div class="topbar-search-wrap"><div class="search-field"><i data-lucide="search" class="search-icon"></i>
+<input type="search" id="col-search" placeholder="Search by Collection Reference or Payer Name..." autocomplete="off" aria-label="Search collections" oninput="applyColFilters()"/></div></div>
+<div class="topbar-actions"><button type="button" class="btn btn-ghost" aria-label="Notifications"><i data-lucide="bell" style="width:20px;height:20px"></i></button>
+<div class="user-pill"><div class="user-avatar">AK</div><span class="user-name">Amira K.</span></div></div>
+</header>
+<main class="content">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="#">Overview</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-current">Collections</span></nav>
+<div class="page-header"><h1 class="page-title">Collections Dashboard</h1></div>
+<div style="background:white; border-radius:12px; box-shadow:0 1px 4px rgba(0,0,0,.06); margin-bottom:20px; overflow:hidden;">
+  <div style="display:grid; grid-template-columns:repeat(4,1fr);">
+    <div style="padding:14px 16px; border-right:1px solid #EAE5F4;">
+      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#1D4ED8; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#4E465E; text-transform:uppercase; letter-spacing:.05em;">Ready for Collection</span></div>
+      <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:6px;">
+        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">3</div></div>
+        <div style="width:1px; height:28px; background:#EAE5F4; flex-shrink:0;"></div>
+        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">AED 10,000</div></div>
+      </div>
+      <div style="display:flex; align-items:center; gap:4px; margin-bottom:8px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg><span style="font-size:11px; font-weight:600; color:#16A34A;">+15% vs last month</span></div>
+      <div style="display:flex; align-items:flex-end; gap:3px; height:28px;"><div style="flex:1; background:#BFDBFE; border-radius:2px 2px 0 0; height:40%;"></div><div style="flex:1; background:#BFDBFE; border-radius:2px 2px 0 0; height:60%;"></div><div style="flex:1; background:#BFDBFE; border-radius:2px 2px 0 0; height:50%;"></div><div style="flex:1; background:#BFDBFE; border-radius:2px 2px 0 0; height:70%;"></div><div style="flex:1; background:#BFDBFE; border-radius:2px 2px 0 0; height:80%;"></div><div style="flex:1; background:#1D4ED8; border-radius:2px 2px 0 0; height:100%;"></div></div>
+    </div>
+    <div style="padding:14px 16px; border-right:1px solid #EAE5F4;">
+      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#854D0E; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#4E465E; text-transform:uppercase; letter-spacing:.05em;">Sent for Collection</span></div>
+      <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:6px;">
+        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">1</div></div>
+        <div style="width:1px; height:28px; background:#EAE5F4; flex-shrink:0;"></div>
+        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">AED 1,800</div></div>
+      </div>
+      <div style="display:flex; align-items:center; gap:4px; margin-bottom:8px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span style="font-size:11px; font-weight:600; color:#DC2626;">-5% vs last month</span></div>
+      <div style="display:flex; align-items:flex-end; gap:3px; height:28px;"><div style="flex:1; background:#FDE68A; border-radius:2px 2px 0 0; height:55%;"></div><div style="flex:1; background:#FDE68A; border-radius:2px 2px 0 0; height:70%;"></div><div style="flex:1; background:#FDE68A; border-radius:2px 2px 0 0; height:45%;"></div><div style="flex:1; background:#FDE68A; border-radius:2px 2px 0 0; height:60%;"></div><div style="flex:1; background:#FDE68A; border-radius:2px 2px 0 0; height:75%;"></div><div style="flex:1; background:#854D0E; border-radius:2px 2px 0 0; height:100%;"></div></div>
+    </div>
+    <div style="padding:14px 16px; border-right:1px solid #EAE5F4;">
+      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#6D28D9; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#4E465E; text-transform:uppercase; letter-spacing:.05em;">Pending Bank Response</span></div>
+      <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:6px;">
+        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">1</div></div>
+        <div style="width:1px; height:28px; background:#EAE5F4; flex-shrink:0;"></div>
+        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">AED 12,000</div></div>
+      </div>
+      <div style="display:flex; align-items:center; gap:4px; margin-bottom:8px;"><span style="font-size:13px; color:#6B7280; font-weight:700; line-height:1;">&#8594;</span><span style="font-size:11px; font-weight:600; color:#6B7280;">same as last month</span></div>
+      <div style="display:flex; align-items:flex-end; gap:3px; height:28px;"><div style="flex:1; background:#DDD6FE; border-radius:2px 2px 0 0; height:50%;"></div><div style="flex:1; background:#DDD6FE; border-radius:2px 2px 0 0; height:65%;"></div><div style="flex:1; background:#DDD6FE; border-radius:2px 2px 0 0; height:55%;"></div><div style="flex:1; background:#DDD6FE; border-radius:2px 2px 0 0; height:70%;"></div><div style="flex:1; background:#DDD6FE; border-radius:2px 2px 0 0; height:75%;"></div><div style="flex:1; background:#6D28D9; border-radius:2px 2px 0 0; height:100%;"></div></div>
+    </div>
+    <div style="padding:14px 16px;">
+      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#BE123C; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#4E465E; text-transform:uppercase; letter-spacing:.05em;">Bounced</span></div>
+      <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:6px;">
+        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">2</div></div>
+        <div style="width:1px; height:28px; background:#EAE5F4; flex-shrink:0;"></div>
+        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">AED 11,200</div></div>
+      </div>
+      <div style="display:flex; align-items:center; gap:4px; margin-bottom:8px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg><span style="font-size:11px; font-weight:600; color:#DC2626;">+8% vs last month</span></div>
+      <div style="display:flex; align-items:flex-end; gap:3px; height:28px;"><div style="flex:1; background:#FECACA; border-radius:2px 2px 0 0; height:45%;"></div><div style="flex:1; background:#FECACA; border-radius:2px 2px 0 0; height:55%;"></div><div style="flex:1; background:#FECACA; border-radius:2px 2px 0 0; height:50%;"></div><div style="flex:1; background:#FECACA; border-radius:2px 2px 0 0; height:65%;"></div><div style="flex:1; background:#FECACA; border-radius:2px 2px 0 0; height:80%;"></div><div style="flex:1; background:#BE123C; border-radius:2px 2px 0 0; height:100%;"></div></div>
+    </div>
+  </div>
+  <div style="background:#F8FAFC; border-top:1px solid #EAE5F4; padding:10px 16px; display:flex; align-items:center; gap:24px;">
+    <span style="font-size:11px; font-weight:700; color:#4E465E; text-transform:uppercase; letter-spacing:.04em;">Total</span>
+    <span style="font-size:12px; font-weight:600; color:#120C24;">7 collections</span>
+    <span style="font-size:12px; font-weight:600; color:#120C24;">AED 35,000</span>
+  </div>
+</div>
+<div style="display:flex; flex-wrap:wrap; align-items:flex-end; gap:10px 12px; margin-bottom:12px;">
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Collection Reference</label><input type="text" id="filter-col-ref" placeholder="e.g. COL-00850-1" oninput="applyColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Mandate Reference</label><input type="text" id="filter-col-mandate" placeholder="e.g. MND-00850" oninput="applyColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Payer Name</label><input type="text" id="filter-col-payer" placeholder="e.g. Ahmed Al Marzouqi" oninput="applyColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Status</label>
+    <select id="filter-col-status" onchange="applyColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234E465E' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; padding-right:28px; width:185px;">
+      <option value="all">All Statuses</option><option value="ready">Ready for Collection</option><option value="sent">Sent for Collection</option>
+      <option value="pending-bank">Pending Bank Response</option><option value="bounced">Bounced</option>
+    </select></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Collection Date</label>
+    <div style="display:flex; align-items:center; gap:6px;">
+      <select id="filter-col-date-mode" onchange="handleColDateModeChange()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234E465E' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; padding-right:28px; width:130px;">
+        <option value="none">Any date</option><option value="after">After</option><option value="before">Before</option><option value="between">Between</option><option value="except">Except the period</option>
+      </select>
+      <input type="date" id="filter-col-date-a" onchange="applyColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
+      <span id="filter-col-date-sep" style="display:none; font-size:12px; color:#4E465E; font-weight:600;">and</span>
+      <input type="date" id="filter-col-date-b" onchange="applyColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
+    </div></div>
+  <div style="display:flex; flex-direction:column; gap:4px;">
+    <label style="font-size:11px; font-weight:600; color:#4E465E;">Submitted On</label>
+    <div style="display:flex; align-items:center; gap:6px;">
+      <select id="filter-submitted-mode" onchange="handleColSubmittedModeChange()"
+        style="height:34px; padding:0 28px 0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234E465E' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; width:130px;">
+        <option value="none">Any date</option>
+        <option value="after">After</option>
+        <option value="before">Before</option>
+        <option value="between">Between</option>
+        <option value="except">Except the period</option>
+      </select>
+      <input type="date" id="filter-submitted-a" onchange="applyColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
+      <span id="filter-submitted-sep" style="display:none; font-size:12px; color:#4E465E; font-weight:600;">and</span>
+      <input type="date" id="filter-submitted-b" onchange="applyColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
+    </div>
+  </div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:transparent;">Clear</label><button type="button" onclick="clearColFilters()" style="height:34px; padding:0 14px; background:white; color:#4E465E; border:1.5px solid #EAE5F4; border-radius:8px; font-size:12px; font-weight:600; font-family:Inter,sans-serif; cursor:pointer;">Clear</button></div>
+</div>
+<div style="display:flex; align-items:center; gap:12px; margin-bottom:16px; flex-wrap:wrap;">
+  <a href="#screen-col002" onclick="showColScreen('screen-col002'); return false;" style="display:inline-flex; align-items:center; gap:8px; background:#EFF6FF; border:1.5px solid #BFDBFE; border-radius:10px; padding:8px 14px; text-decoration:none; flex:1; min-width:180px;">
+    <div style="width:24px; height:24px; background:#1D4ED8; border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+    <div><span id="ready-count-badge" style="font-size:13px; font-weight:700; color:#120C24;">3 Ready for Collection</span><span style="font-size:11px; color:#4E465E; display:block;">Open Ready for Collection â†’</span></div>
+  </a>
+  <a href="#screen-col003" onclick="showColScreen('screen-col003'); return false;" style="display:inline-flex; align-items:center; gap:8px; background:#ECFEFF; border:1.5px solid #A5F3FC; border-radius:10px; padding:8px 14px; text-decoration:none; flex:1; min-width:180px;">
+    <div style="width:24px; height:24px; background:#0E7490; border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+    <div><span style="font-size:13px; font-weight:700; color:#120C24;">5 Upcoming Collections</span><span style="font-size:11px; color:#4E465E; display:block;">Open Future Collections â†’</span></div>
+  </a>
+  <a href="#screen-col004" onclick="showColScreen('screen-col004'); return false;" style="display:inline-flex; align-items:center; gap:8px; background:#F8FAFC; border:1.5px solid #CBD5E1; border-radius:10px; padding:8px 14px; text-decoration:none; flex:1; min-width:180px;">
+    <div style="width:24px; height:24px; background:#475569; border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg></div>
+    <div><span style="font-size:13px; font-weight:700; color:#120C24;">4 in Collection Log</span><span style="font-size:11px; color:#4E465E; display:block;">Open Collection Log â†’</span></div>
+  </a>
+  <div style="margin-left:auto;" id="col-export-wrapper"><div style="position:relative;" data-export-wrap="col" id="col-export-wrapper">
+<button onclick="toggleColExport('col')" style="display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 14px; background:white; color:#120C24; border:1.5px solid #EAE5F4; border-radius:8px; font-size:13px; font-weight:600; font-family:Inter,sans-serif; cursor:pointer;">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
+<div id="col-export-menu" class="col-export-menu" style="display:none; position:absolute; right:0; top:calc(100% + 4px); background:white; border:1px solid #EAE5F4; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.08); min-width:150px; z-index:200; overflow:hidden;">
+<button type="button" onclick="closeColExport('col')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as CSV</button>
+<button type="button" onclick="closeColExport('col')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as Excel</button>
+<button type="button" onclick="closeColExport('col')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as PDF</button>
+</div></div></div>
+</div>
+<div class="card table-card"><div class="table-scroll">
+<table class="plans-table" aria-label="Collections">
+<colgroup><col style="width:145px"/><col style="width:130px"/><col style="width:130px"/><col style="width:95px"/><col style="width:95px"/><col style="width:100px"/><col style="width:130px"/><col style="width:52px"/></colgroup>
+<thead><tr>
+  <th scope="col">Collection Reference</th><th scope="col">Mandate Reference</th>
+  <th scope="col" class="col-payer-name">Payer Name</th><th scope="col">Amount (AED)</th>
+  <th scope="col">Collection Date</th><th scope="col">Submitted On</th>
+  <th scope="col" class="col-status">Status</th><th scope="col">Actions</th>
+</tr></thead>
+<tbody id="colTableBody"><tr data-search="COL-00850-1 MND-00850 Ahmed Al Marzouqi" data-status="ready" data-collection-date="2026-06-01" data-submitted="">
+  <td><a class="link-mandate" href="#">COL-00850-1</a></td>
+  <td><a class="link-mandate" href="#">MND-00850</a></td>
+  <td class="col-payer-name">Ahmed Al Marzouqi</td>
+  <td>AED 2,500</td><td>01/06/2026</td><td>—</td>
+  <td class="col-status"><span class="badge badge-col-ready">Ready for Collection</span></td>
+  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
+</tr><tr data-search="COL-00851-2 MND-00851 Sara Al Hamdan" data-status="ready" data-collection-date="2026-06-01" data-submitted="">
+  <td><a class="link-mandate" href="#">COL-00851-2</a></td>
+  <td><a class="link-mandate" href="#">MND-00851</a></td>
+  <td class="col-payer-name">Sara Al Hamdan</td>
+  <td>AED 5,000</td><td>01/06/2026</td><td>—</td>
+  <td class="col-status"><span class="badge badge-col-ready">Ready for Collection</span></td>
+  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
+</tr><tr data-search="COL-00850-8 MND-00850 Ahmed Al Marzouqi" data-status="ready" data-collection-date="2026-05-25" data-submitted="">
+  <td><a class="link-mandate" href="#">COL-00850-8</a></td>
+  <td><a class="link-mandate" href="#">MND-00850</a></td>
+  <td class="col-payer-name">Ahmed Al Marzouqi</td>
+  <td>AED 2,500</td><td>25/05/2026</td><td>—</td>
+  <td class="col-status"><span class="badge badge-col-ready">Ready for Collection</span></td>
+  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
+</tr><tr data-search="COL-00852-3 MND-00852 Mohammed Al Rashidi" data-status="sent" data-collection-date="2026-05-30" data-submitted="2026-05-31">
+  <td><a class="link-mandate" href="#">COL-00852-3</a></td>
+  <td><a class="link-mandate" href="#">MND-00852</a></td>
+  <td class="col-payer-name">Mohammed Al Rashidi</td>
+  <td>AED 1,800</td><td>30/05/2026</td><td>31/05/2026</td>
+  <td class="col-status"><span class="badge badge-col-sent">Sent for Collection</span></td>
+  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" disabled aria-disabled="true">&#8942;</button></div></td>
+</tr><tr data-search="COL-00853-4 MND-00853 Fatima Al Zaabi" data-status="pending-bank" data-collection-date="2026-05-30" data-submitted="2026-05-31">
+  <td><a class="link-mandate" href="#">COL-00853-4</a></td>
+  <td><a class="link-mandate" href="#">MND-00853</a></td>
+  <td class="col-payer-name">Fatima Al Zaabi</td>
+  <td>AED 12,000</td><td>30/05/2026</td><td>31/05/2026</td>
+  <td class="col-status"><span class="badge badge-col-pending-bank">Pending Bank Response</span></td>
+  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" disabled aria-disabled="true">&#8942;</button></div></td>
+</tr><tr data-search="COL-00855-6 MND-00855 Reem Al Mansoori" data-status="bounced" data-collection-date="2026-05-28" data-submitted="2026-05-29" class="row-col-bounced">
+  <td><a class="link-mandate" href="#">COL-00855-6</a></td>
+  <td><a class="link-mandate" href="#">MND-00855</a></td>
+  <td class="col-payer-name">Reem Al Mansoori</td>
+  <td>AED 3,200</td><td>28/05/2026</td><td>29/05/2026</td>
+  <td class="col-status"><span class="badge badge-col-bounced">Bounced</span></td>
+  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
+</tr><tr data-search="COL-00856-7 MND-00856 Omar Al Shamsi" data-status="bounced" data-collection-date="2026-05-25" data-submitted="2026-05-26" class="row-col-bounced">
+  <td><a class="link-mandate" href="#">COL-00856-7</a></td>
+  <td><a class="link-mandate" href="#">MND-00856</a></td>
+  <td class="col-payer-name">Omar Al Shamsi</td>
+  <td>AED 8,000</td><td>25/05/2026</td><td>26/05/2026</td>
+  <td class="col-status"><span class="badge badge-col-bounced">Bounced</span></td>
+  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
+</tr></tbody>
+</table>
+<p id="col-empty" class="empty-hint" style="display:none;">No collections match your filters.</p>
+</div></div>
+</main></div></div></section><section class="phase5-screen-anchor phase5-desktop-screen col-screen-section" id="screen-col002" aria-label="Ready for Collection">
+<div class="app-shell">
+<aside class="sidebar" aria-label="Main navigation"><div class="sidebar-inner">
+<div class="sidebar-brand"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="logoP5c" x1="4" y1="34" x2="30" y2="2" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#7A5CFF"/><stop offset="40%" stop-color="#9B6FFF"/><stop offset="70%" stop-color="#C96EE8"/><stop offset="100%" stop-color="#FF6B8A"/></linearGradient><linearGradient id="logoP5d" x1="19" y1="34" x2="34" y2="4" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#B36CFF"/><stop offset="100%" stop-color="#FF5B6B"/></linearGradient></defs><path d="M4 34 C4 34 10 20 19 4 C19 4 14 14 11 22 C9 27 8 30 8 34 Z" fill="url(#logoP5c)" opacity="0.95"/><path d="M34 34 C34 34 28 20 19 4 C19 4 24 14 27 22 C29 27 30 30 30 34 Z" fill="url(#logoP5d)" opacity="0.9"/><path d="M11 23 Q19 19 27 23" stroke="url(#logoP5c)" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/><path d="M19 4 C19 4 20 8 21 12 C22 16 22 18 22 20 L19 26 L16 20 C16 18 16 16 17 12 C18 8 19 4 19 4 Z" fill="rgba(255,255,255,0.12)"/></svg><div class="brand-text"><span class="brand-name">Direct Debit.cc</span><span class="brand-sub">DIRECT DEBIT PLATFORM</span></div></div>
+<nav class="sidebar-nav" aria-label="Primary">
+<a href="#" class="nav-item"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
+<a href="../phase-1/phase-1-all-screens.html#screen-pp002" class="nav-item"><i data-lucide="credit-card"></i><span>Payment Plans</span></a>
+<a href="../phase-3/phase-3-all-screens.html#screen-mandates" class="nav-item"><i data-lucide="file-text"></i><span>Mandates Management</span></a>
+<a href="../phase_4/phase-4-all-screens.html#screen-rej001" class="nav-item"><i data-lucide="x-circle"></i><span>Rejections</span></a>
+<div class="nav-group" id="nav-group-collections">
+  <div class="nav-group-header nav-item" onclick="toggleNavGroup('collections')" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between;">
+    <span style="display:flex; align-items:center; gap:10px;"><i data-lucide="banknote"></i>Collections</span>
+    <i data-lucide="chevron-down" id="nav-group-collections-chevron" style="width:14px; height:14px; transition:transform 0.2s; transform:rotate(180deg);"></i>
+  </div>
+  <div class="nav-sub-items" id="nav-sub-collections" style="display:flex; flex-direction:column; padding-left:20px;">
+    <a class="nav-item nav-sub-item" href="#screen-col001" onclick="showColScreen('screen-col001'); return false;"><i data-lucide="layout-dashboard" style="width:15px; height:15px;"></i>Collections Dashboard</a>
+    <a class="nav-item nav-sub-item active" href="#screen-col002" onclick="showColScreen('screen-col002'); return false;"><i data-lucide="clock" style="width:15px; height:15px;"></i>Ready for Collection</a>
+    <a class="nav-item nav-sub-item" href="#screen-col003" onclick="showColScreen('screen-col003'); return false;"><i data-lucide="calendar" style="width:15px; height:15px;"></i>Future Collections</a>
+    <a class="nav-item nav-sub-item" href="#screen-col004" onclick="showColScreen('screen-col004'); return false;"><i data-lucide="archive" style="width:15px; height:15px;"></i>Collection Log</a>
+  </div>
+</div>
+<a href="#" class="nav-item"><i data-lucide="alert-triangle"></i><span>Bounced</span></a>
+<a href="#" class="nav-item"><i data-lucide="bar-chart-2"></i><span>Reports</span></a>
+<a href="#" class="nav-item"><i data-lucide="settings"></i><span>Settings</span></a>
+</nav>
+<div class="sidebar-atmosphere" aria-hidden="true"></div>
+<div class="sidebar-footer"><div class="merchant-card"><div class="merchant-avatar">DM</div><div class="merchant-meta"><div class="merchant-name">Demo Merchant LLC</div><div class="merchant-id">MID-UAE-10294</div></div></div></div>
+</div></aside>
+<div class="main-wrap">
+<header class="topbar phase3-topbar">
+<div class="topbar-search-wrap"><div class="search-field"><i data-lucide="search" class="search-icon"></i>
+<input type="search" id="due-col-search" placeholder="Search by Collection Reference or Payer Name..." autocomplete="off" aria-label="Search ready collections" oninput="applyDueColFilters()"/></div></div>
+<div class="topbar-actions"><button type="button" class="btn btn-ghost" aria-label="Notifications"><i data-lucide="bell" style="width:20px;height:20px"></i></button>
+<div class="user-pill"><div class="user-avatar">AK</div><span class="user-name">Amira K.</span></div></div>
+</header>
+<main class="content">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="#">Overview</a><span class="breadcrumb-sep">/</span>
+<a href="#screen-col001" onclick="showColScreen('screen-col001'); return false;">Collections</a><span class="breadcrumb-sep">/</span>
+<span class="breadcrumb-current">Ready for Collection</span></nav>
+<div class="page-header"><h1 class="page-title">Ready for Collection</h1></div>
+<div style="background:#EFF6FF; border:1.5px solid #BFDBFE; border-radius:10px; padding:12px 16px; font-size:12px; color:#1D4ED8; margin-bottom:16px; line-height:1.7;">
+  These are payments due to be sent to the bank. Select the ones you want and click <strong>Send Selected for Collection</strong>.
+</div>
+<div class="col-action-bar">
+  <button id="due-send-selected-btn" onclick="sendSelectedCollections()" disabled style="display:inline-flex; align-items:center; gap:8px; height:36px; padding:0 16px; background:#C4B5FD; color:white; border:none; border-radius:8px; font-size:13px; font-weight:600; font-family:Inter,sans-serif; cursor:not-allowed;">
+    Send Selected for Collection <span id="due-selected-count" style="background:rgba(255,255,255,0.3); border-radius:12px; padding:1px 8px; font-size:12px;">0</span>
+  </button>
+  <div style="position:relative;" data-export-wrap="due" id="due-export-wrapper">
+<button onclick="toggleColExport('due')" style="display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 14px; background:white; color:#120C24; border:1.5px solid #EAE5F4; border-radius:8px; font-size:13px; font-weight:600; font-family:Inter,sans-serif; cursor:pointer;">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
+<div id="due-export-menu" class="col-export-menu" style="display:none; position:absolute; right:0; top:calc(100% + 4px); background:white; border:1px solid #EAE5F4; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.08); min-width:150px; z-index:200; overflow:hidden;">
+<button type="button" onclick="closeColExport('due')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as CSV</button>
+<button type="button" onclick="closeColExport('due')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as Excel</button>
+<button type="button" onclick="closeColExport('due')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as PDF</button>
+</div></div>
+</div>
+<div style="display:flex; flex-wrap:wrap; align-items:flex-end; gap:10px 12px; margin-bottom:12px;">
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Collection Reference</label><input type="text" id="filter-due-ref" placeholder="e.g. COL-00850-1" oninput="applyDueColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Mandate Reference</label><input type="text" id="filter-due-mandate" placeholder="e.g. MND-00850" oninput="applyDueColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Payer Name</label><input type="text" id="filter-due-payer" placeholder="e.g. Ahmed Al Marzouqi" oninput="applyDueColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Collection Date</label>
+    <div style="display:flex; align-items:center; gap:6px;">
+      <select id="filter-due-date-mode" onchange="handleDueColDateModeChange()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234E465E' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; padding-right:28px; width:130px;">
+        <option value="none">Any date</option><option value="after">After</option><option value="before">Before</option><option value="between">Between</option><option value="except">Except the period</option>
+      </select>
+      <input type="date" id="filter-due-date-a" onchange="applyDueColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
+      <span id="filter-due-date-sep" style="display:none; font-size:12px; color:#4E465E; font-weight:600;">and</span>
+      <input type="date" id="filter-due-date-b" onchange="applyDueColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
+    </div></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:transparent;">Clear</label><button type="button" onclick="clearDueColFilters()" style="height:34px; padding:0 14px; background:white; color:#4E465E; border:1.5px solid #EAE5F4; border-radius:8px; font-size:12px; font-weight:600; font-family:Inter,sans-serif; cursor:pointer;">Clear</button></div>
+</div>
+<div class="card table-card"><div class="table-scroll">
+<table class="plans-table" aria-label="Ready for collection">
+<colgroup><col style="width:40px"/><col style="width:145px"/><col style="width:130px"/><col style="width:130px"/><col style="width:95px"/><col style="width:95px"/><col style="width:100px"/><col style="width:52px"/></colgroup>
+<thead><tr>
+  <th scope="col" style="text-align:center; vertical-align:top;"><input type="checkbox" id="due-select-all" onchange="toggleDueSelectAll(this)" style="width:15px; height:15px; cursor:pointer; accent-color:#7A5CFF;"/></th>
+  <th scope="col">Collection Reference</th><th scope="col">Mandate Reference</th>
+  <th scope="col" class="col-payer-name">Payer Name</th><th scope="col">Amount (AED)</th>
+  <th scope="col">Collection Date</th><th scope="col">Submitted On</th><th scope="col">Actions</th>
+</tr></thead>
+<tbody id="dueColTableBody"><tr data-search="COL-00850-1 MND-00850 Ahmed Al Marzouqi" data-status="ready" data-collection-date="2026-06-01">
+  <td style="text-align:center; vertical-align:top; padding-top:11px;"><input type="checkbox" class="due-row-check" onchange="onDueRowCheck()" style="width:15px; height:15px; cursor:pointer; accent-color:#7A5CFF;"/></td>
+  <td><a class="link-mandate" href="#">COL-00850-1</a></td>
+  <td><a class="link-mandate" href="#">MND-00850</a></td>
+  <td class="col-payer-name">Ahmed Al Marzouqi</td>
+  <td>AED 2,500</td><td>01/06/2026</td><td>—</td>
+  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
+</tr><tr data-search="COL-00851-2 MND-00851 Sara Al Hamdan" data-status="ready" data-collection-date="2026-06-01">
+  <td style="text-align:center; vertical-align:top; padding-top:11px;"><input type="checkbox" class="due-row-check" onchange="onDueRowCheck()" style="width:15px; height:15px; cursor:pointer; accent-color:#7A5CFF;"/></td>
+  <td><a class="link-mandate" href="#">COL-00851-2</a></td>
+  <td><a class="link-mandate" href="#">MND-00851</a></td>
+  <td class="col-payer-name">Sara Al Hamdan</td>
+  <td>AED 5,000</td><td>01/06/2026</td><td>—</td>
+  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
+</tr><tr data-search="COL-00850-8 MND-00850 Ahmed Al Marzouqi" data-status="ready" data-collection-date="2026-05-25">
+  <td style="text-align:center; vertical-align:top; padding-top:11px;"><input type="checkbox" class="due-row-check" onchange="onDueRowCheck()" style="width:15px; height:15px; cursor:pointer; accent-color:#7A5CFF;"/></td>
+  <td><a class="link-mandate" href="#">COL-00850-8</a></td>
+  <td><a class="link-mandate" href="#">MND-00850</a></td>
+  <td class="col-payer-name">Ahmed Al Marzouqi</td>
+  <td>AED 2,500</td><td>25/05/2026</td><td>—</td>
+  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
+</tr></tbody>
+</table>
+<p id="due-col-empty" class="empty-hint" style="display:none;">No collections match your filters.</p>
+</div></div>
+</main></div></div></section><section class="phase5-screen-anchor phase5-desktop-screen col-screen-section" id="screen-col003" aria-label="Future Collections">
+<div class="app-shell">
+<aside class="sidebar" aria-label="Main navigation"><div class="sidebar-inner">
+<div class="sidebar-brand"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="logoP5e" x1="4" y1="34" x2="30" y2="2" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#7A5CFF"/><stop offset="40%" stop-color="#9B6FFF"/><stop offset="70%" stop-color="#C96EE8"/><stop offset="100%" stop-color="#FF6B8A"/></linearGradient><linearGradient id="logoP5f" x1="19" y1="34" x2="34" y2="4" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#B36CFF"/><stop offset="100%" stop-color="#FF5B6B"/></linearGradient></defs><path d="M4 34 C4 34 10 20 19 4 C19 4 14 14 11 22 C9 27 8 30 8 34 Z" fill="url(#logoP5e)" opacity="0.95"/><path d="M34 34 C34 34 28 20 19 4 C19 4 24 14 27 22 C29 27 30 30 30 34 Z" fill="url(#logoP5f)" opacity="0.9"/><path d="M11 23 Q19 19 27 23" stroke="url(#logoP5e)" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/><path d="M19 4 C19 4 20 8 21 12 C22 16 22 18 22 20 L19 26 L16 20 C16 18 16 16 17 12 C18 8 19 4 19 4 Z" fill="rgba(255,255,255,0.12)"/></svg><div class="brand-text"><span class="brand-name">Direct Debit.cc</span><span class="brand-sub">DIRECT DEBIT PLATFORM</span></div></div>
+<nav class="sidebar-nav" aria-label="Primary">
+<a href="#" class="nav-item"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
+<a href="../phase-1/phase-1-all-screens.html#screen-pp002" class="nav-item"><i data-lucide="credit-card"></i><span>Payment Plans</span></a>
+<a href="../phase-3/phase-3-all-screens.html#screen-mandates" class="nav-item"><i data-lucide="file-text"></i><span>Mandates Management</span></a>
+<a href="../phase_4/phase-4-all-screens.html#screen-rej001" class="nav-item"><i data-lucide="x-circle"></i><span>Rejections</span></a>
+<div class="nav-group" id="nav-group-collections">
+  <div class="nav-group-header nav-item" onclick="toggleNavGroup('collections')" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between;">
+    <span style="display:flex; align-items:center; gap:10px;"><i data-lucide="banknote"></i>Collections</span>
+    <i data-lucide="chevron-down" id="nav-group-collections-chevron" style="width:14px; height:14px; transition:transform 0.2s; transform:rotate(180deg);"></i>
+  </div>
+  <div class="nav-sub-items" id="nav-sub-collections" style="display:flex; flex-direction:column; padding-left:20px;">
+    <a class="nav-item nav-sub-item" href="#screen-col001" onclick="showColScreen('screen-col001'); return false;"><i data-lucide="layout-dashboard" style="width:15px; height:15px;"></i>Collections Dashboard</a>
+    <a class="nav-item nav-sub-item" href="#screen-col002" onclick="showColScreen('screen-col002'); return false;"><i data-lucide="clock" style="width:15px; height:15px;"></i>Ready for Collection</a>
+    <a class="nav-item nav-sub-item active" href="#screen-col003" onclick="showColScreen('screen-col003'); return false;"><i data-lucide="calendar" style="width:15px; height:15px;"></i>Future Collections</a>
+    <a class="nav-item nav-sub-item" href="#screen-col004" onclick="showColScreen('screen-col004'); return false;"><i data-lucide="archive" style="width:15px; height:15px;"></i>Collection Log</a>
+  </div>
+</div>
+<a href="#" class="nav-item"><i data-lucide="alert-triangle"></i><span>Bounced</span></a>
+<a href="#" class="nav-item"><i data-lucide="bar-chart-2"></i><span>Reports</span></a>
+<a href="#" class="nav-item"><i data-lucide="settings"></i><span>Settings</span></a>
+</nav>
+<div class="sidebar-atmosphere" aria-hidden="true"></div>
+<div class="sidebar-footer"><div class="merchant-card"><div class="merchant-avatar">DM</div><div class="merchant-meta"><div class="merchant-name">Demo Merchant LLC</div><div class="merchant-id">MID-UAE-10294</div></div></div></div>
+</div></aside>
+<div class="main-wrap">
+<header class="topbar phase3-topbar">
+<div class="topbar-search-wrap"><div class="search-field"><i data-lucide="search" class="search-icon"></i>
+<input type="search" id="future-col-search" placeholder="Search by Mandate Reference or Payer Name..." autocomplete="off" aria-label="Search future collections" oninput="applyFutureColFilters()"/></div></div>
+<div class="topbar-actions"><button type="button" class="btn btn-ghost" aria-label="Notifications"><i data-lucide="bell" style="width:20px;height:20px"></i></button>
+<div class="user-pill"><div class="user-avatar">AK</div><span class="user-name">Amira K.</span></div></div>
+</header>
+<main class="content">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="#">Overview</a><span class="breadcrumb-sep">/</span>
+<a href="#screen-col001" onclick="showColScreen('screen-col001'); return false;">Collections</a><span class="breadcrumb-sep">/</span>
+<span class="breadcrumb-current">Future Collections</span></nav>
+<div class="page-header"><h1 class="page-title">Future Collections</h1></div>
+<div style="background:white; border-radius:12px; box-shadow:0 1px 4px rgba(0,0,0,.06); margin-bottom:20px; overflow:hidden;">
+  <div style="padding:14px 20px; display:flex; align-items:center; gap:32px; flex-wrap:wrap;">
+    <div style="display:flex; align-items:center; gap:6px;">
+      <div style="width:8px; height:8px; border-radius:50%; background:#0E7490; flex-shrink:0;"></div>
+      <span style="font-size:10px; font-weight:700; color:#4E465E; text-transform:uppercase; letter-spacing:.05em;">Future Collections</span>
+    </div>
+    <div style="display:flex; align-items:baseline; gap:12px;">
+      <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">5</div></div>
+      <div style="width:1px; height:28px; background:#EAE5F4; flex-shrink:0;"></div>
+      <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Scheduled Amount</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">AED 27,000</div></div>
+    </div>
+    <div style="display:flex; align-items:center; gap:4px;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+      <span style="font-size:11px; font-weight:600; color:#16A34A;">+10% vs last month</span>
+    </div>
+    <div style="display:flex; align-items:flex-end; gap:3px; height:28px; margin-left:auto;">
+      <div style="width:12px; background:#A5F3FC; border-radius:2px 2px 0 0; height:50%;"></div>
+      <div style="width:12px; background:#A5F3FC; border-radius:2px 2px 0 0; height:65%;"></div>
+      <div style="width:12px; background:#A5F3FC; border-radius:2px 2px 0 0; height:75%;"></div>
+      <div style="width:12px; background:#A5F3FC; border-radius:2px 2px 0 0; height:80%;"></div>
+      <div style="width:12px; background:#A5F3FC; border-radius:2px 2px 0 0; height:90%;"></div>
+      <div style="width:12px; background:#0E7490; border-radius:2px 2px 0 0; height:100%;"></div>
+    </div>
+  </div>
+  <div style="background:#F8FAFC; border-top:1px solid #EAE5F4; padding:8px 20px;">
+    <span style="font-size:11px; color:#4E465E;">Showing collections within the next <strong>30 days</strong> from active mandate payment schedules</span>
+  </div>
+</div>
+<div style="background:#ECFEFF; border:1.5px solid #A5F3FC; border-radius:10px; padding:12px 16px; font-size:12px; color:#0E7490; margin-bottom:16px; line-height:1.7;">
+  These are upcoming scheduled collections pulled from active mandate payment schedules. They will automatically become <strong>Ready for Collection</strong> on their collection date at midnight.
+</div>
+<div style="display:flex; flex-wrap:wrap; align-items:flex-end; gap:10px 12px; margin-bottom:12px;">
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Mandate Reference</label><input type="text" id="filter-future-mandate" placeholder="e.g. MND-00850" oninput="applyFutureColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Payer Name</label><input type="text" id="filter-future-payer" placeholder="e.g. Ahmed Al Marzouqi" oninput="applyFutureColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Collection Date</label>
+    <div style="display:flex; align-items:center; gap:6px;">
+      <select id="filter-future-date-mode" onchange="handleFutureColDateModeChange()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234E465E' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; padding-right:28px; width:130px;">
+        <option value="none">Any date</option><option value="after">After</option><option value="before">Before</option><option value="between" selected>Between</option><option value="except">Except the period</option>
+      </select>
+      <input type="date" id="filter-future-date-a" onchange="applyFutureColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
+      <span id="filter-future-date-sep" style="font-size:12px; color:#4E465E; font-weight:600;">and</span>
+      <input type="date" id="filter-future-date-b" onchange="applyFutureColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
+    </div></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:transparent;">Clear</label><button type="button" onclick="clearFutureColFilters()" style="height:34px; padding:0 14px; background:white; color:#4E465E; border:1.5px solid #EAE5F4; border-radius:8px; font-size:12px; font-weight:600; font-family:Inter,sans-serif; cursor:pointer;">Clear</button></div>
+</div>
+<div style="display:flex; justify-content:flex-end; margin-bottom:10px;"><div style="position:relative;" data-export-wrap="future" id="future-export-wrapper">
+<button onclick="toggleColExport('future')" style="display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 14px; background:white; color:#120C24; border:1.5px solid #EAE5F4; border-radius:8px; font-size:13px; font-weight:600; font-family:Inter,sans-serif; cursor:pointer;">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
+<div id="future-export-menu" class="col-export-menu" style="display:none; position:absolute; right:0; top:calc(100% + 4px); background:white; border:1px solid #EAE5F4; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.08); min-width:150px; z-index:200; overflow:hidden;">
+<button type="button" onclick="closeColExport('future')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as CSV</button>
+<button type="button" onclick="closeColExport('future')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as Excel</button>
+<button type="button" onclick="closeColExport('future')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as PDF</button>
+</div></div></div>
+<div class="card table-card"><div class="table-scroll">
+<table class="plans-table" aria-label="Future collections">
+<colgroup><col style="width:155px"/><col style="width:155px"/><col style="width:100px"/><col style="width:120px"/><col style="width:140px"/></colgroup>
+<thead><tr>
+  <th scope="col">Mandate Reference</th><th scope="col" class="col-payer-name">Payer Name</th>
+  <th scope="col">Amount (AED)</th><th scope="col">Collection Date</th><th scope="col" class="col-status">Status</th>
+</tr></thead>
+<tbody id="futureColTableBody"><tr data-search="MND-00850 Ahmed Al Marzouqi" data-status="future" data-collection-date="2026-07-01">
+  <td><a class="link-mandate" href="#">MND-00850</a></td>
+  <td class="col-payer-name">Ahmed Al Marzouqi</td>
+  <td>AED 2,500</td><td>01/07/2026</td>
+  <td class="col-status"><span class="badge badge-col-future">Future Collection</span></td>
+</tr><tr data-search="MND-00851 Sara Al Hamdan" data-status="future" data-collection-date="2026-07-01">
+  <td><a class="link-mandate" href="#">MND-00851</a></td>
+  <td class="col-payer-name">Sara Al Hamdan</td>
+  <td>AED 5,000</td><td>01/07/2026</td>
+  <td class="col-status"><span class="badge badge-col-future">Future Collection</span></td>
+</tr><tr data-search="MND-00852 Mohammed Al Rashidi" data-status="future" data-collection-date="2026-07-05">
+  <td><a class="link-mandate" href="#">MND-00852</a></td>
+  <td class="col-payer-name">Mohammed Al Rashidi</td>
+  <td>AED 1,800</td><td>05/07/2026</td>
+  <td class="col-status"><span class="badge badge-col-future">Future Collection</span></td>
+</tr><tr data-search="MND-00853 Fatima Al Zaabi" data-status="future" data-collection-date="2026-07-10">
+  <td><a class="link-mandate" href="#">MND-00853</a></td>
+  <td class="col-payer-name">Fatima Al Zaabi</td>
+  <td>AED 12,000</td><td>10/07/2026</td>
+  <td class="col-status"><span class="badge badge-col-future">Future Collection</span></td>
+</tr><tr data-search="MND-00855 Reem Al Mansoori" data-status="future" data-collection-date="2026-07-15">
+  <td><a class="link-mandate" href="#">MND-00855</a></td>
+  <td class="col-payer-name">Reem Al Mansoori</td>
+  <td>AED 5,700</td><td>15/07/2026</td>
+  <td class="col-status"><span class="badge badge-col-future">Future Collection</span></td>
+</tr></tbody>
+</table>
+<p id="future-col-empty" class="empty-hint" style="display:none;">No collections match your filters.</p>
+</div></div>
+</main></div></div></section><section class="phase5-screen-anchor phase5-desktop-screen col-screen-section" id="screen-col004" aria-label="Collection Log">
+<div class="app-shell">
+<aside class="sidebar" aria-label="Main navigation"><div class="sidebar-inner">
+<div class="sidebar-brand"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="logoP5g" x1="4" y1="34" x2="30" y2="2" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#7A5CFF"/><stop offset="40%" stop-color="#9B6FFF"/><stop offset="70%" stop-color="#C96EE8"/><stop offset="100%" stop-color="#FF6B8A"/></linearGradient><linearGradient id="logoP5h" x1="19" y1="34" x2="34" y2="4" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#B36CFF"/><stop offset="100%" stop-color="#FF5B6B"/></linearGradient></defs><path d="M4 34 C4 34 10 20 19 4 C19 4 14 14 11 22 C9 27 8 30 8 34 Z" fill="url(#logoP5g)" opacity="0.95"/><path d="M34 34 C34 34 28 20 19 4 C19 4 24 14 27 22 C29 27 30 30 30 34 Z" fill="url(#logoP5h)" opacity="0.9"/><path d="M11 23 Q19 19 27 23" stroke="url(#logoP5g)" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/><path d="M19 4 C19 4 20 8 21 12 C22 16 22 18 22 20 L19 26 L16 20 C16 18 16 16 17 12 C18 8 19 4 19 4 Z" fill="rgba(255,255,255,0.12)"/></svg><div class="brand-text"><span class="brand-name">Direct Debit.cc</span><span class="brand-sub">DIRECT DEBIT PLATFORM</span></div></div>
+<nav class="sidebar-nav" aria-label="Primary">
+<a href="#" class="nav-item"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
+<a href="../phase-1/phase-1-all-screens.html#screen-pp002" class="nav-item"><i data-lucide="credit-card"></i><span>Payment Plans</span></a>
+<a href="../phase-3/phase-3-all-screens.html#screen-mandates" class="nav-item"><i data-lucide="file-text"></i><span>Mandates Management</span></a>
+<a href="../phase_4/phase-4-all-screens.html#screen-rej001" class="nav-item"><i data-lucide="x-circle"></i><span>Rejections</span></a>
+<div class="nav-group" id="nav-group-collections">
+  <div class="nav-group-header nav-item" onclick="toggleNavGroup('collections')" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between;">
+    <span style="display:flex; align-items:center; gap:10px;"><i data-lucide="banknote"></i>Collections</span>
+    <i data-lucide="chevron-down" id="nav-group-collections-chevron" style="width:14px; height:14px; transition:transform 0.2s; transform:rotate(180deg);"></i>
+  </div>
+  <div class="nav-sub-items" id="nav-sub-collections" style="display:flex; flex-direction:column; padding-left:20px;">
+    <a class="nav-item nav-sub-item" href="#screen-col001" onclick="showColScreen('screen-col001'); return false;"><i data-lucide="layout-dashboard" style="width:15px; height:15px;"></i>Collections Dashboard</a>
+    <a class="nav-item nav-sub-item" href="#screen-col002" onclick="showColScreen('screen-col002'); return false;"><i data-lucide="clock" style="width:15px; height:15px;"></i>Ready for Collection</a>
+    <a class="nav-item nav-sub-item" href="#screen-col003" onclick="showColScreen('screen-col003'); return false;"><i data-lucide="calendar" style="width:15px; height:15px;"></i>Future Collections</a>
+    <a class="nav-item nav-sub-item active" href="#screen-col004" onclick="showColScreen('screen-col004'); return false;"><i data-lucide="archive" style="width:15px; height:15px;"></i>Collection Log</a>
+  </div>
+</div>
+<a href="#" class="nav-item"><i data-lucide="alert-triangle"></i><span>Bounced</span></a>
+<a href="#" class="nav-item"><i data-lucide="bar-chart-2"></i><span>Reports</span></a>
+<a href="#" class="nav-item"><i data-lucide="settings"></i><span>Settings</span></a>
+</nav>
+<div class="sidebar-atmosphere" aria-hidden="true"></div>
+<div class="sidebar-footer"><div class="merchant-card"><div class="merchant-avatar">DM</div><div class="merchant-meta"><div class="merchant-name">Demo Merchant LLC</div><div class="merchant-id">MID-UAE-10294</div></div></div></div>
+</div></aside>
+<div class="main-wrap">
+<header class="topbar phase3-topbar">
+<div class="topbar-search-wrap"><div class="search-field"><i data-lucide="search" class="search-icon"></i>
+<input type="search" id="log-col-search" placeholder="Search by Collection Reference or Payer Name..." autocomplete="off" aria-label="Search collection log" oninput="applyLogColFilters()"/></div></div>
+<div class="topbar-actions"><button type="button" class="btn btn-ghost" aria-label="Notifications"><i data-lucide="bell" style="width:20px;height:20px"></i></button>
+<div class="user-pill"><div class="user-avatar">AK</div><span class="user-name">Amira K.</span></div></div>
+</header>
+<main class="content">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="#">Overview</a><span class="breadcrumb-sep">/</span>
+<a href="#screen-col001" onclick="showColScreen('screen-col001'); return false;">Collections</a><span class="breadcrumb-sep">/</span>
+<span class="breadcrumb-current">Collection Log</span></nav>
+<div class="page-header"><h1 class="page-title">Collection Log</h1></div>
+<div style="background:white; border-radius:12px; box-shadow:0 1px 4px rgba(0,0,0,.06); margin-bottom:20px; overflow:hidden;">
+  <div style="display:grid; grid-template-columns:repeat(3,1fr);">
+    <div style="padding:14px 16px; border-right:1px solid #EAE5F4;">
+      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#15803D; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#4E465E; text-transform:uppercase; letter-spacing:.05em;">Received</span></div>
+      <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:6px;">
+        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">2</div></div>
+        <div style="width:1px; height:28px; background:#EAE5F4; flex-shrink:0;"></div>
+        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">AED 6,500</div></div>
+      </div>
+      <div style="display:flex; align-items:center; gap:4px; margin-bottom:8px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg><span style="font-size:11px; font-weight:600; color:#16A34A;">+20% vs last month</span></div>
+      <div style="display:flex; align-items:flex-end; gap:3px; height:28px;"><div style="flex:1; background:#BBF7D0; border-radius:2px 2px 0 0; height:45%;"></div><div style="flex:1; background:#BBF7D0; border-radius:2px 2px 0 0; height:55%;"></div><div style="flex:1; background:#BBF7D0; border-radius:2px 2px 0 0; height:50%;"></div><div style="flex:1; background:#BBF7D0; border-radius:2px 2px 0 0; height:70%;"></div><div style="flex:1; background:#BBF7D0; border-radius:2px 2px 0 0; height:85%;"></div><div style="flex:1; background:#15803D; border-radius:2px 2px 0 0; height:100%;"></div></div>
+    </div>
+    <div style="padding:14px 16px; border-right:1px solid #EAE5F4;">
+      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#9F1239; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#4E465E; text-transform:uppercase; letter-spacing:.05em;">Failed</span></div>
+      <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:6px;">
+        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">1</div></div>
+        <div style="width:1px; height:28px; background:#EAE5F4; flex-shrink:0;"></div>
+        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">AED 4,500</div></div>
+      </div>
+      <div style="display:flex; align-items:center; gap:4px; margin-bottom:8px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span style="font-size:11px; font-weight:600; color:#16A34A;">-10% vs last month</span></div>
+      <div style="display:flex; align-items:flex-end; gap:3px; height:28px;"><div style="flex:1; background:#FECDD3; border-radius:2px 2px 0 0; height:60%;"></div><div style="flex:1; background:#FECDD3; border-radius:2px 2px 0 0; height:75%;"></div><div style="flex:1; background:#FECDD3; border-radius:2px 2px 0 0; height:55%;"></div><div style="flex:1; background:#FECDD3; border-radius:2px 2px 0 0; height:70%;"></div><div style="flex:1; background:#FECDD3; border-radius:2px 2px 0 0; height:65%;"></div><div style="flex:1; background:#9F1239; border-radius:2px 2px 0 0; height:100%;"></div></div>
+    </div>
+    <div style="padding:14px 16px;">
+      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#475569; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#4E465E; text-transform:uppercase; letter-spacing:.05em;">Stopped</span></div>
+      <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:6px;">
+        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">1</div></div>
+        <div style="width:1px; height:28px; background:#EAE5F4; flex-shrink:0;"></div>
+        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">AED 2,000</div></div>
+      </div>
+      <div style="display:flex; align-items:center; gap:4px; margin-bottom:8px;"><span style="font-size:13px; color:#6B7280; font-weight:700; line-height:1;">&#8594;</span><span style="font-size:11px; font-weight:600; color:#6B7280;">same as last month</span></div>
+      <div style="display:flex; align-items:flex-end; gap:3px; height:28px;"><div style="flex:1; background:#E2E8F0; border-radius:2px 2px 0 0; height:50%;"></div><div style="flex:1; background:#E2E8F0; border-radius:2px 2px 0 0; height:55%;"></div><div style="flex:1; background:#E2E8F0; border-radius:2px 2px 0 0; height:50%;"></div><div style="flex:1; background:#E2E8F0; border-radius:2px 2px 0 0; height:52%;"></div><div style="flex:1; background:#E2E8F0; border-radius:2px 2px 0 0; height:50%;"></div><div style="flex:1; background:#475569; border-radius:2px 2px 0 0; height:100%;"></div></div>
+    </div>
+  </div>
+  <div style="background:#F8FAFC; border-top:1px solid #EAE5F4; padding:10px 16px; display:flex; align-items:center; gap:24px;">
+    <span style="font-size:11px; font-weight:700; color:#4E465E; text-transform:uppercase; letter-spacing:.04em;">Total</span>
+    <span style="font-size:12px; font-weight:600; color:#120C24;">4 collections</span>
+    <span style="font-size:12px; font-weight:600; color:#120C24;">AED 13,000</span>
+  </div>
+</div>
+<div style="display:flex; flex-wrap:wrap; align-items:flex-end; gap:10px 12px; margin-bottom:12px;">
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Collection Reference</label><input type="text" id="filter-log-ref" placeholder="e.g. COL-00854-5" oninput="applyLogColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Mandate Reference</label><input type="text" id="filter-log-mandate" placeholder="e.g. MND-00854" oninput="applyLogColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Payer Name</label><input type="text" id="filter-log-payer" placeholder="e.g. Khalid Al Nuaimi" oninput="applyLogColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Status</label>
+    <select id="filter-log-status" onchange="applyLogColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234E465E' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; padding-right:28px; width:185px;">
+      <option value="all">All Statuses</option><option value="received">Received</option><option value="failed">Failed</option><option value="stopped">Stopped</option>
+    </select></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Collection Date</label>
+    <div style="display:flex; align-items:center; gap:6px;">
+      <select id="filter-log-date-mode" onchange="handleLogColDateModeChange()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234E465E' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; padding-right:28px; width:130px;">
+        <option value="none">Any date</option><option value="after">After</option><option value="before">Before</option><option value="between">Between</option><option value="except">Except the period</option>
+      </select>
+      <input type="date" id="filter-log-date-a" onchange="applyLogColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
+      <span id="filter-log-date-sep" style="display:none; font-size:12px; color:#4E465E; font-weight:600;">and</span>
+      <input type="date" id="filter-log-date-b" onchange="applyLogColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
+    </div></div>
+  <div style="display:flex; flex-direction:column; gap:4px;">
+    <label style="font-size:11px; font-weight:600; color:#4E465E;">Submitted On</label>
+    <div style="display:flex; align-items:center; gap:6px;">
+      <select id="log-filter-submitted-mode" onchange="handleLogSubmittedModeChange()"
+        style="height:34px; padding:0 28px 0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234E465E' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; width:130px;">
+        <option value="none">Any date</option>
+        <option value="after">After</option>
+        <option value="before">Before</option>
+        <option value="between">Between</option>
+        <option value="except">Except the period</option>
+      </select>
+      <input type="date" id="log-filter-submitted-a" onchange="applyLogColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
+      <span id="log-filter-submitted-sep" style="display:none; font-size:12px; color:#4E465E; font-weight:600;">and</span>
+      <input type="date" id="log-filter-submitted-b" onchange="applyLogColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
+    </div>
+  </div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:transparent;">Clear</label><button type="button" onclick="clearLogColFilters()" style="height:34px; padding:0 14px; background:white; color:#4E465E; border:1.5px solid #EAE5F4; border-radius:8px; font-size:12px; font-weight:600; font-family:Inter,sans-serif; cursor:pointer;">Clear</button></div>
+</div>
+<div style="display:flex; justify-content:flex-end; margin-bottom:10px;"><div style="position:relative;" data-export-wrap="log" id="log-export-wrapper">
+<button onclick="toggleColExport('log')" style="display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 14px; background:white; color:#120C24; border:1.5px solid #EAE5F4; border-radius:8px; font-size:13px; font-weight:600; font-family:Inter,sans-serif; cursor:pointer;">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
+<div id="log-export-menu" class="col-export-menu" style="display:none; position:absolute; right:0; top:calc(100% + 4px); background:white; border:1px solid #EAE5F4; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.08); min-width:150px; z-index:200; overflow:hidden;">
+<button type="button" onclick="closeColExport('log')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as CSV</button>
+<button type="button" onclick="closeColExport('log')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as Excel</button>
+<button type="button" onclick="closeColExport('log')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as PDF</button>
+</div></div></div>
+<div class="card table-card"><div class="table-scroll">
+<table class="plans-table" aria-label="Collection log">
+<colgroup><col style="width:155px"/><col style="width:140px"/><col style="width:140px"/><col style="width:100px"/><col style="width:100px"/><col style="width:110px"/><col style="width:142px"/></colgroup>
+<thead><tr>
+  <th scope="col">Collection Reference</th><th scope="col">Mandate Reference</th>
+  <th scope="col" class="col-payer-name">Payer Name</th><th scope="col">Amount (AED)</th>
+  <th scope="col">Collection Date</th><th scope="col">Submitted On</th>
+  <th scope="col" class="col-status">Status</th>
+</tr></thead>
+<tbody id="logColTableBody"><tr data-search="COL-00854-5 MND-00854 Khalid Al Nuaimi" data-status="received" data-collection-date="2026-05-28" data-submitted="2026-05-29">
+  <td><a class="link-mandate" href="#">COL-00854-5</a></td>
+  <td><a class="link-mandate" href="#">MND-00854</a></td>
+  <td class="col-payer-name">Khalid Al Nuaimi</td>
+  <td>AED 3,500</td><td>28/05/2026</td><td>29/05/2026</td>
+  <td class="col-status"><span class="badge badge-col-received">Received</span></td>
+</tr><tr data-search="COL-00857-9 MND-00857 Hamad Al Dhaheri" data-status="received" data-collection-date="2026-05-20" data-submitted="2026-05-21">
+  <td><a class="link-mandate" href="#">COL-00857-9</a></td>
+  <td><a class="link-mandate" href="#">MND-00857</a></td>
+  <td class="col-payer-name">Hamad Al Dhaheri</td>
+  <td>AED 3,000</td><td>20/05/2026</td><td>21/05/2026</td>
+  <td class="col-status"><span class="badge badge-col-received">Received</span></td>
+</tr><tr data-search="COL-00858-10 MND-00858 Nora Al Kaabi" data-status="failed" data-collection-date="2026-05-15" data-submitted="2026-05-16" class="row-col-failed">
+  <td><a class="link-mandate" href="#">COL-00858-10</a></td>
+  <td><a class="link-mandate" href="#">MND-00858</a></td>
+  <td class="col-payer-name">Nora Al Kaabi</td>
+  <td>AED 4,500</td><td>15/05/2026</td><td>16/05/2026</td>
+  <td class="col-status"><span class="badge badge-col-failed">Failed</span></td>
+</tr><tr data-search="COL-00859-11 MND-00859 Saeed Al Marri" data-status="stopped" data-collection-date="2026-05-10" data-submitted="2026-05-11" class="row-col-stopped">
+  <td><a class="link-mandate" href="#">COL-00859-11</a></td>
+  <td><a class="link-mandate" href="#">MND-00859</a></td>
+  <td class="col-payer-name">Saeed Al Marri</td>
+  <td>AED 2,000</td><td>10/05/2026</td><td>11/05/2026</td>
+  <td class="col-status"><span class="badge badge-col-stopped">Stopped</span></td>
+</tr></tbody>
+</table>
+<p id="log-col-empty" class="empty-hint" style="display:none;">No collections match your filters.</p>
+</div></div>
+</main></div></div></section><script>
+let activeMenu = null;
+const COL_ACTION_LABELS = { send:"Send for Collection", stop:"Stop Collection", archive:"Archive", reminder:"Send Reminder to Payer", resend:"Resend to Bank", "reset-bank":"Reset Bank Submissions Count", "reset-payer":"Reset Payer Reminders Count", escalate:"Escalate" };
+const COL_ACTION_CONFIRM = {
+  send:{title:"Send for Collection",msg:"Are you sure you want to send this collection to the bank?",confirmLabel:"Send",toast:"Collection sent to the bank."},
+  stop:{title:"Stop Collection",msg:"Are you sure you want to stop this collection? This action cannot be undone.",confirmLabel:"Stop Collection",toast:"Collection stopped."},
+  "stop-bounced":{title:"Stop Collection",msg:"Are you sure you want to stop this collection permanently? No further retries or reminders will be sent.",confirmLabel:"Stop Collection",toast:"Collection stopped permanently."},
+  archive:{title:"Archive",msg:"Are you sure you want to archive this collection?",confirmLabel:"Archive",toast:"Collection archived successfully."},
+  reminder:{title:"Send Reminder to Payer",msg:"Are you sure you want to send a reminder to this payer?",confirmLabel:"Send Reminder",toast:"Reminder sent to payer successfully."},
+  resend:{title:"Resend to Bank",msg:"Are you sure you want to resend this collection to the bank?",confirmLabel:"Resend to Bank",toast:"Collection resubmitted to bank successfully."},
+  "reset-bank":{title:"Reset Bank Submissions Count",msg:"Are you sure you want to reset the bank submissions count for this collection to zero?",confirmLabel:"Reset Count",toast:"Bank submissions count reset to 0."},
+  "reset-payer":{title:"Reset Payer Reminders Count",msg:"Are you sure you want to reset the payer reminders count for this collection to zero?",confirmLabel:"Reset Count",toast:"Payer reminders count reset to 0."},
+  escalate:{title:"Escalate Collection",msg:"Are you sure you want to escalate this collection?",confirmLabel:"Escalate",toast:"Collection escalated successfully."}
+};
+function getColActions(status){ if(status==="ready")return["send","stop"]; if(status==="received"||status==="failed"||status==="stopped")return["archive"]; if(status==="bounced")return["reminder","resend","reset-bank","reset-payer","escalate","stop"]; return[]; }
+function rebuildColActionMenu(tr){ const menu=tr.querySelector(".action-menu"); if(!menu)return; const status=tr.getAttribute("data-status")||""; const actions=getColActions(status); menu.innerHTML=actions.map((act,i)=>{ let divider=act==="stop"&&i>0?'<div class="action-divider"></div>':""; const danger=act==="stop"?" danger":""; return divider+'<button type="button" class="action-item'+danger+'" data-action="'+act+'">'+COL_ACTION_LABELS[act]+"</button>"; }).join(""); }
+function closeActionMenu(){ if(!activeMenu)return; activeMenu.style.display="none"; activeMenu.style.position=""; activeMenu.style.left=""; activeMenu.style.top=""; activeMenu.style.right=""; activeMenu.style.zIndex=""; activeMenu=null; }
+function positionActionMenu(btn,menu){ const rect=btn.getBoundingClientRect(); menu.style.position="fixed"; menu.style.top=(rect.bottom+4)+"px"; menu.style.right=(window.innerWidth-rect.right)+"px"; menu.style.left="auto"; menu.style.bottom="auto"; menu.style.zIndex="9999"; menu.style.display="block"; }
+function toggleActionMenu(btn,event){ event.stopPropagation(); if(btn.disabled)return; const menu=btn.nextElementSibling; if(!menu||!menu.classList.contains("action-menu"))return; const tr=btn.closest("tr"); if(tr&&!menu.innerHTML.trim())rebuildColActionMenu(tr); if(activeMenu&&activeMenu!==menu)closeActionMenu(); if(activeMenu===menu){closeActionMenu();return;} positionActionMenu(btn,menu); activeMenu=menu; }
+document.addEventListener("click",function(e){ if(activeMenu&&!e.target.closest(".action-wrapper"))closeActionMenu(); });
+function showToast(message){ const toast=document.createElement("div"); toast.className="toast-notification"; toast.textContent=message; document.body.appendChild(toast); setTimeout(()=>toast.classList.add("visible"),10); setTimeout(()=>{toast.classList.remove("visible"); setTimeout(()=>toast.remove(),300);},3000); }
+function showConfirmDialog(title,message,confirmLabel,onConfirm){ const overlay=document.createElement("div"); overlay.className="confirm-overlay"; overlay.innerHTML='<div class="confirm-dialog"><h2>'+title+"</h2><p>"+message+'</p><div class="confirm-buttons"><button type="button" class="btn btn-secondary" data-cancel>Cancel</button><button type="button" class="btn-danger" data-confirm>'+confirmLabel+"</button></div></div>"; document.body.appendChild(overlay); overlay.querySelector("[data-cancel]").addEventListener("click",()=>overlay.remove()); overlay.querySelector("[data-confirm]").addEventListener("click",()=>{onConfirm();overlay.remove();}); }
+function handleColAction(btn,tr){ const action=btn.getAttribute("data-action"); closeActionMenu(); const status=tr?.getAttribute("data-status")||""; let conf=COL_ACTION_CONFIRM[action]; if(action==="stop"&&status==="bounced")conf=COL_ACTION_CONFIRM["stop-bounced"]; if(!conf)return; showConfirmDialog(conf.title,conf.msg,conf.confirmLabel,()=>{showToast(conf.toast||conf.title+" completed.");}); }
+function parseIsoDate(iso){ if(!iso)return null; const d=new Date(iso+"T12:00:00"); return isNaN(d.getTime())?null:d; }
+function matchColDate(mode,dateA,dateB,iso){ const d=parseIsoDate(iso); if(!d||mode==="none")return true; if(mode==="after"&&dateA)return d>new Date(dateA+"T00:00:00"); if(mode==="before"&&dateA)return d<new Date(dateA+"T00:00:00"); if(mode==="between"&&dateA&&dateB)return d>=new Date(dateA+"T00:00:00")&&d<=new Date(dateB+"T23:59:59"); if(mode==="except"&&dateA&&dateB)return d<new Date(dateA+"T00:00:00")||d>new Date(dateB+"T23:59:59"); return true; }
+function matchSubmittedDate(mode,dateA,dateB,iso){ if(mode==="none")return true; if(!iso)return false; return matchColDate(mode,dateA,dateB,iso); }
+function handleDateModeChange(prefix,applyFn){ const mode=document.getElementById("filter-"+prefix+"-date-mode")?.value; const a=document.getElementById("filter-"+prefix+"-date-a"); const b=document.getElementById("filter-"+prefix+"-date-b"); const sep=document.getElementById("filter-"+prefix+"-date-sep"); if(!a||!b||!sep)return; if(mode==="none"){a.style.display="none";b.style.display="none";sep.style.display="none";} else if(mode==="after"||mode==="before"){a.style.display="";b.style.display="none";sep.style.display="none";} else {a.style.display="";b.style.display="";sep.style.display="";} applyFn(); }
+function handleColDateModeChange(){ const mode=document.getElementById("filter-col-date-mode")?.value; const a=document.getElementById("filter-col-date-a"); const b=document.getElementById("filter-col-date-b"); const sep=document.getElementById("filter-col-date-sep"); if(!a||!b||!sep)return; if(mode!=="between"&&mode!=="except"){a.value="";b.value="";} if(mode==="none"){a.style.display="none";b.style.display="none";sep.style.display="none";} else if(mode==="after"||mode==="before"){a.style.display="";b.style.display="none";sep.style.display="none";} else {a.style.display="";b.style.display="";sep.style.display="";} applyColFilters(); }
+function handleColSubmittedModeChange(){ const mode=document.getElementById("filter-submitted-mode")?.value; const a=document.getElementById("filter-submitted-a"); const b=document.getElementById("filter-submitted-b"); const sep=document.getElementById("filter-submitted-sep"); if(!a||!b||!sep)return; a.value=""; b.value=""; if(mode==="none"){a.style.display="none"; b.style.display="none"; sep.style.display="none";} else if(mode==="after"||mode==="before"){a.style.display=""; b.style.display="none"; sep.style.display="none";} else {a.style.display=""; b.style.display=""; sep.style.display="";} applyColFilters(); }
+function handleLogSubmittedModeChange(){ const mode=document.getElementById("log-filter-submitted-mode")?.value; const a=document.getElementById("log-filter-submitted-a"); const b=document.getElementById("log-filter-submitted-b"); const sep=document.getElementById("log-filter-submitted-sep"); if(!a||!b||!sep)return; a.value=""; b.value=""; if(mode==="none"){a.style.display="none"; b.style.display="none"; sep.style.display="none";} else if(mode==="after"||mode==="before"){a.style.display=""; b.style.display="none"; sep.style.display="none";} else {a.style.display=""; b.style.display=""; sep.style.display="";} applyLogColFilters(); }
+function applyColFilters(){ const q=(document.getElementById("col-search")?.value||"").toLowerCase().trim(); const ref=(document.getElementById("filter-col-ref")?.value||"").toLowerCase().trim(); const mnd=(document.getElementById("filter-col-mandate")?.value||"").toLowerCase().trim(); const payer=(document.getElementById("filter-col-payer")?.value||"").toLowerCase().trim(); const status=document.getElementById("filter-col-status")?.value||"all"; const mode=document.getElementById("filter-col-date-mode")?.value||"none"; const dateA=document.getElementById("filter-col-date-a")?.value||""; const dateB=document.getElementById("filter-col-date-b")?.value||""; const subMode=document.getElementById("filter-submitted-mode")?.value||"none"; const subA=document.getElementById("filter-submitted-a")?.value||""; const subB=document.getElementById("filter-submitted-b")?.value||""; let visible=0; document.querySelectorAll("#colTableBody tr").forEach(tr=>{ const searchStr=(tr.getAttribute("data-search")||"").toLowerCase(); const st=tr.getAttribute("data-status")||""; const iso=tr.getAttribute("data-collection-date")||""; const submittedIso=tr.getAttribute("data-submitted")||""; const show=(!q||searchStr.includes(q))&&(!ref||searchStr.includes(ref))&&(!mnd||searchStr.includes(mnd))&&(!payer||searchStr.includes(payer))&&(status==="all"||st===status)&&matchColDate(mode,dateA,dateB,iso)&&matchSubmittedDate(subMode,subA,subB,submittedIso); tr.style.display=show?"":"none"; if(show)visible++; }); const empty=document.getElementById("col-empty"); if(empty)empty.style.display=visible===0?"block":"none"; updateReadyCount(); }
+function updateReadyCount(){ let count=0; document.querySelectorAll("#colTableBody tr").forEach(tr=>{ if(tr.style.display!=="none"&&(tr.getAttribute("data-status")||"")==="ready")count++; }); const badge=document.getElementById("ready-count-badge"); if(badge)badge.textContent=count+" Ready for Collection"; }
+function clearColFilters(){ ["filter-col-ref","filter-col-mandate","filter-col-payer","filter-col-status","filter-col-date-mode","filter-col-date-a","filter-col-date-b","filter-submitted-mode","filter-submitted-a","filter-submitted-b","col-search"].forEach(id=>{ const el=document.getElementById(id); if(!el)return; if(el.tagName==="SELECT")el.value=el.id==="filter-col-status"?"all":"none"; else el.value=""; }); handleColDateModeChange(); handleColSubmittedModeChange(); }
+function handleDueColDateModeChange(){ handleDateModeChange("due",applyDueColFilters); }
+function applyDueColFilters(){ const q=(document.getElementById("due-col-search")?.value||"").toLowerCase().trim(); const ref=(document.getElementById("filter-due-ref")?.value||"").toLowerCase().trim(); const mnd=(document.getElementById("filter-due-mandate")?.value||"").toLowerCase().trim(); const payer=(document.getElementById("filter-due-payer")?.value||"").toLowerCase().trim(); const mode=document.getElementById("filter-due-date-mode")?.value||"none"; const dateA=document.getElementById("filter-due-date-a")?.value||""; const dateB=document.getElementById("filter-due-date-b")?.value||""; let visible=0; document.querySelectorAll("#dueColTableBody tr").forEach(tr=>{ const searchStr=(tr.getAttribute("data-search")||"").toLowerCase(); const iso=tr.getAttribute("data-collection-date")||""; const show=(!q||searchStr.includes(q))&&(!ref||searchStr.includes(ref))&&(!mnd||searchStr.includes(mnd))&&(!payer||searchStr.includes(payer))&&matchColDate(mode,dateA,dateB,iso); tr.style.display=show?"":"none"; if(show)visible++; }); const empty=document.getElementById("due-col-empty"); if(empty)empty.style.display=visible===0?"block":"none"; document.querySelectorAll(".due-row-check").forEach(cb=>cb.checked=false); const master=document.getElementById("due-select-all"); if(master){master.checked=false;master.indeterminate=false;} onDueRowCheck(); }
+function clearDueColFilters(){ ["filter-due-ref","filter-due-mandate","filter-due-payer","filter-due-date-mode","filter-due-date-a","filter-due-date-b","due-col-search"].forEach(id=>{ const el=document.getElementById(id); if(!el)return; if(el.tagName==="SELECT")el.value="none"; else el.value=""; }); handleDueColDateModeChange(); }
+function handleFutureColDateModeChange(){ handleDateModeChange("future",applyFutureColFilters); }
+function applyFutureColFilters(){ const q=(document.getElementById("future-col-search")?.value||"").toLowerCase().trim(); const mnd=(document.getElementById("filter-future-mandate")?.value||"").toLowerCase().trim(); const payer=(document.getElementById("filter-future-payer")?.value||"").toLowerCase().trim(); const mode=document.getElementById("filter-future-date-mode")?.value||"none"; const dateA=document.getElementById("filter-future-date-a")?.value||""; const dateB=document.getElementById("filter-future-date-b")?.value||""; let visible=0; document.querySelectorAll("#futureColTableBody tr").forEach(tr=>{ const searchStr=(tr.getAttribute("data-search")||"").toLowerCase(); const iso=tr.getAttribute("data-collection-date")||""; const show=(!q||searchStr.includes(q))&&(!mnd||searchStr.includes(mnd))&&(!payer||searchStr.includes(payer))&&matchColDate(mode,dateA,dateB,iso); tr.style.display=show?"":"none"; if(show)visible++; }); const empty=document.getElementById("future-col-empty"); if(empty)empty.style.display=visible===0?"block":"none"; }
+function clearFutureColFilters(){ ["filter-future-mandate","filter-future-payer","filter-future-date-mode","filter-future-date-a","filter-future-date-b","future-col-search"].forEach(id=>{ const el=document.getElementById(id); if(!el)return; if(el.tagName==="SELECT")el.value="between"; else el.value=""; }); initFutureDateDefaults(); applyFutureColFilters(); }
+function handleLogColDateModeChange(){ handleDateModeChange("log",applyLogColFilters); }
+function applyLogColFilters(){ const q=(document.getElementById("log-col-search")?.value||"").toLowerCase().trim(); const ref=(document.getElementById("filter-log-ref")?.value||"").toLowerCase().trim(); const mnd=(document.getElementById("filter-log-mandate")?.value||"").toLowerCase().trim(); const payer=(document.getElementById("filter-log-payer")?.value||"").toLowerCase().trim(); const status=document.getElementById("filter-log-status")?.value||"all"; const mode=document.getElementById("filter-log-date-mode")?.value||"none"; const dateA=document.getElementById("filter-log-date-a")?.value||""; const dateB=document.getElementById("filter-log-date-b")?.value||""; const subMode=document.getElementById("log-filter-submitted-mode")?.value||"none"; const subA=document.getElementById("log-filter-submitted-a")?.value||""; const subB=document.getElementById("log-filter-submitted-b")?.value||""; let visible=0; document.querySelectorAll("#logColTableBody tr").forEach(tr=>{ const searchStr=(tr.getAttribute("data-search")||"").toLowerCase(); const st=tr.getAttribute("data-status")||""; const iso=tr.getAttribute("data-collection-date")||""; const submittedIso=tr.getAttribute("data-submitted")||""; const show=(!q||searchStr.includes(q))&&(!ref||searchStr.includes(ref))&&(!mnd||searchStr.includes(mnd))&&(!payer||searchStr.includes(payer))&&(status==="all"||st===status)&&matchColDate(mode,dateA,dateB,iso)&&matchSubmittedDate(subMode,subA,subB,submittedIso); tr.style.display=show?"":"none"; if(show)visible++; }); const empty=document.getElementById("log-col-empty"); if(empty)empty.style.display=visible===0?"block":"none"; }
+function clearLogColFilters(){ ["filter-log-ref","filter-log-mandate","filter-log-payer","filter-log-status","filter-log-date-mode","filter-log-date-a","filter-log-date-b","log-filter-submitted-mode","log-filter-submitted-a","log-filter-submitted-b","log-col-search"].forEach(id=>{ const el=document.getElementById(id); if(!el)return; if(el.tagName==="SELECT")el.value=el.id==="filter-log-status"?"all":"none"; else el.value=""; }); handleLogColDateModeChange(); handleLogSubmittedModeChange(); }
+function toggleColExport(id){ const m=document.getElementById(id+"-export-menu"); if(!m)return; const open=m.style.display==="block"; document.querySelectorAll(".col-export-menu").forEach(x=>x.style.display="none"); if(!open)m.style.display="block"; }
+function closeColExport(id){ const m=document.getElementById(id+"-export-menu"); if(m)m.style.display="none"; }
+document.addEventListener("click",function(e){ if(!e.target.closest("[data-export-wrap]"))document.querySelectorAll(".col-export-menu").forEach(x=>x.style.display="none"); });
+function toggleDueSelectAll(master){ document.querySelectorAll(".due-row-check").forEach(cb=>{cb.checked=master.checked;}); onDueRowCheck(); }
+function onDueRowCheck(){ const all=document.querySelectorAll(".due-row-check"); const checked=document.querySelectorAll(".due-row-check:checked"); const master=document.getElementById("due-select-all"); const btn=document.getElementById("due-send-selected-btn"); const countBadge=document.getElementById("due-selected-count"); if(master){master.checked=checked.length===all.length&&all.length>0;master.indeterminate=checked.length>0&&checked.length<all.length;} const hasSelection=checked.length>0; if(btn){btn.disabled=!hasSelection;btn.style.background=hasSelection?"#7A5CFF":"#C4B5FD";btn.style.cursor=hasSelection?"pointer":"not-allowed";} if(countBadge)countBadge.textContent=checked.length; }
+function sendSelectedCollections(){ const checked=document.querySelectorAll(".due-row-check:checked"); if(checked.length===0)return; showConfirmDialog("Send Selected for Collection","Are you sure you want to send "+checked.length+" selected collection"+(checked.length>1?"s":"")+" to the bank?","Send for Collection",function(){ showToast(checked.length+" collection"+(checked.length>1?"s":"")+" sent for collection successfully."); document.querySelectorAll(".due-row-check").forEach(cb=>cb.checked=false); const master=document.getElementById("due-select-all"); if(master){master.checked=false;master.indeterminate=false;} onDueRowCheck(); }); }
+function toggleNavGroup(name){ document.querySelectorAll("#nav-sub-"+name).forEach(sub=>{ const open=sub.style.display!=="none"; sub.style.display=open?"none":"flex"; }); document.querySelectorAll("#nav-group-"+name+"-chevron").forEach(chevron=>{ const sub=document.querySelector("#nav-sub-"+name); const open=sub&&sub.style.display!=="none"; chevron.style.transform=open?"rotate(180deg)":""; }); }
+function showColScreen(id){ document.querySelectorAll(".phase5-desktop-screen").forEach(s=>s.classList.remove("is-active")); const el=document.getElementById(id); if(el)el.classList.add("is-active"); document.querySelectorAll(".prototype-nav a[data-screen]").forEach(a=>{a.classList.toggle("active",a.getAttribute("data-screen")===id);}); document.querySelectorAll(".nav-sub-item").forEach(a=>a.classList.remove("active")); document.querySelectorAll('.nav-sub-item[href="#'+id+'"]').forEach(a=>a.classList.add("active")); document.querySelectorAll("#nav-sub-collections").forEach(sub=>{sub.style.display="flex";}); document.querySelectorAll("#nav-group-collections-chevron").forEach(c=>{c.style.transform="rotate(180deg)";}); closeActionMenu(); try{history.replaceState(null,"","#"+id);}catch(e){} if(window.lucide)lucide.createIcons(); if(id==="screen-col001")applyColFilters(); if(id==="screen-col002")applyDueColFilters(); if(id==="screen-col003")applyFutureColFilters(); if(id==="screen-col004")applyLogColFilters(); }
+function initColTables(){ ["colTableBody","dueColTableBody"].forEach(tid=>{ const tbody=document.getElementById(tid); if(!tbody)return; tbody.querySelectorAll("tr").forEach(rebuildColActionMenu); tbody.addEventListener("click",e=>{ const btn=e.target.closest("[data-action]"); if(!btn)return; const tr=btn.closest("tr"); if(tr)handleColAction(btn,tr); }); }); applyColFilters(); applyDueColFilters(); applyFutureColFilters(); applyLogColFilters(); }
+function initFutureDateDefaults(){ const today=new Date(); const end=new Date(today); end.setDate(end.getDate()+30); const fmt=d=>d.toISOString().slice(0,10); const a=document.getElementById("filter-future-date-a"); const b=document.getElementById("filter-future-date-b"); const mode=document.getElementById("filter-future-date-mode"); if(mode)mode.value="between"; if(a){a.value=fmt(today);a.style.display="";} if(b){b.value=fmt(end);b.style.display="";} const sep=document.getElementById("filter-future-date-sep"); if(sep)sep.style.display=""; }
+function bootPhase5(){ initFutureDateDefaults(); const hash=(location.hash||"#screen-col001").replace("#",""); const id=document.getElementById(hash)?hash:"screen-col001"; showColScreen(id); initColTables(); document.querySelectorAll(".prototype-nav a[data-screen]").forEach(a=>{a.addEventListener("click",e=>{e.preventDefault();showColScreen(a.getAttribute("data-screen"));});}); if(window.lucide)lucide.createIcons(); }
+window.addEventListener("load",bootPhase5);
+window.addEventListener("hashchange",()=>{ const id=(location.hash||"#screen-col001").replace("#",""); if(document.getElementById(id))showColScreen(id); });
+</script>
+</body></html>
