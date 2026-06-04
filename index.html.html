@@ -6,38 +6,53 @@
 <title>Direct Debit.cc — Phase 5 (All Screens)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 /* Phase 3 — design tokens aligned with Phase 1 */
     :root {
-      --midnight-plum: #120C24;
-      --ultraviolet: #7A5CFF;
-      --luminous-orchid: #B36CFF;
-      --solar-coral: #FF6B68;
-      --warm-sand: #F6EFE8;
-      --mist-lavender: #EAE5F4;
-      --graphite-plum: #4E465E;
-      --white: #ffffff;
-      --rgb-midnight-plum: 18, 12, 36;
-      --rgb-ultraviolet: 122, 92, 255;
-      --rgb-white: 255, 255, 255;
-      --near-black: #1A1A2E;
-      --input-border: color-mix(in srgb, var(--mist-lavender) 78%, var(--graphite-plum) 22%);
-      --shadow-card: rgba(0, 0, 0, 0.06);
+  --dark-blue:    #172B4D;
+  --dark-blue-2:  #0F1F38;
+  --dark-blue-3:  #1E3A62;
+  --teal:         #00A3A3;
+  --teal-mid:     #00BFBF;
+  --teal-pale:    #E6F7F7;
+  --teal-light:   #CCEFEF;
+  --mint:         #4ADE80;
+  --mint-mid:     #22C55E;
+  --mint-light:   #DCFCE7;
+  --white:        #FFFFFF;
+  --bg:           #F4F6F9;
+  --border:       #E2E8F0;
+  --border-lt:    #EEF2F7;
+  --txt-head:     #0F1F38;
+  --txt-body:     #2D3F5C;
+  --txt-muted:    #64748B;
+  --txt-faint:    #94A3B8;
+  --amber:        #D97706;
+  --amber-lt:     #FEF3C7;
+  --red:          #DC2626;
+  --red-lt:       #FEE2E2;
+  --purple:       #7C3AED;
+  --purple-lt:    #EDE9FE;
+  --row-hover:    #F8FFFE;
+  --table-header-bg: var(--bg);
+  --shadow-card:  rgba(15, 31, 56, 0.06);
+  --focus-ring:   rgba(0, 163, 163, 0.22);
       --sidebar-width: 248px;
       --topbar-height: 56px;
       --min-page-width: 1280px;
-      --page-bg: #FFFFFF;
-      --card-surface: #F8F7FB;
+      --input-border: color-mix(in srgb, var(--border) 78%, var(--txt-muted) 22%);
+      --page-bg: var(--bg);
+      --card-surface: var(--white);
     }
     *, *::before, *::after { box-sizing: border-box; }
     html, body {
       margin: 0;
       min-width: var(--min-page-width);
-      font-family: "Inter", system-ui, sans-serif;
+      font-family: "DM Sans", system-ui, sans-serif;
       background: var(--page-bg);
-      color: var(--near-black);
+      color: var(--txt-head);
       font-size: 14px;
       line-height: 1.45;
     }
@@ -59,24 +74,24 @@
       position: sticky; top: 0; z-index: 1000;
       display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
       padding: 10px 16px;
-      background: var(--midnight-plum);
+      background: var(--dark-blue);
       color: var(--white);
       font-size: 13px;
-      border-bottom: 1px solid rgba(var(--rgb-ultraviolet), 0.35);
-      box-shadow: 0 4px 16px rgba(var(--rgb-midnight-plum), 0.25);
+      border-bottom: 1px solid rgba(0, 163, 163, 0.35);
+      box-shadow: 0 4px 16px rgba(15, 31, 56, 0.25);
     }
     .proto-label { font-weight: 600; margin-right: 8px; }
     .prototype-nav a {
       display: inline-flex; align-items: center; gap: 6px;
       padding: 6px 12px; border-radius: 8px;
-      background: rgba(var(--rgb-white), 0.08);
+      background: rgba(255, 255, 255, 0.07);
       color: var(--white); text-decoration: none; font-weight: 500;
       border: 1px solid transparent;
     }
-    .prototype-nav a:hover { background: rgba(var(--rgb-ultraviolet), 0.45); }
+    .prototype-nav a:hover { background: rgba(0, 163, 163, 0.45); }
     .prototype-nav a.active {
-      background: #7A5CFF;
-      border-color: rgba(var(--rgb-white), 0.2);
+      background: #00A3A3;
+      border-color: rgba(255, 255, 255, 0.2);
     }
 
     .phase3-screen-anchor { scroll-margin-top: 52px; }
@@ -84,7 +99,7 @@
     .app-shell { display: flex; min-height: 100vh; }
     .sidebar {
       width: var(--sidebar-width); flex-shrink: 0;
-      background: #120C24 !important;
+      background: var(--dark-blue) !important;
       color: var(--white); display: flex; flex-direction: column; min-height: 100vh;
       position: relative; overflow: hidden;
     }
@@ -96,7 +111,7 @@
       transform: translateX(-50%);
       width: 180px;
       height: 220px;
-      background: radial-gradient(ellipse at center, rgba(122,92,255,0.45) 0%, rgba(179,108,255,0.2) 40%, transparent 70%);
+      background: radial-gradient(ellipse at center, rgba(0,163,163,0.45) 0%, rgba(0,163,163,0.12) 40%, transparent 70%);
       pointer-events: none;
       z-index: 0;
       border-radius: 50%;
@@ -114,7 +129,7 @@
       margin-bottom: 8px;
       color: inherit;
     }
-    .sidebar-brand svg { flex-shrink: 0; display: block; filter: drop-shadow(0 2px 14px rgba(122, 92, 255, 0.35)); }
+    .sidebar-brand svg { flex-shrink: 0; display: block; filter: drop-shadow(0 2px 14px rgba(0, 163, 163, 0.35)); }
     .brand-text { display: flex; flex-direction: column; min-width: 0; }
     .brand-name {
       display: block;
@@ -126,7 +141,7 @@
     }
     .brand-sub {
       display: block;
-      color: #B36CFF;
+      color: var(--teal-mid);
       font-size: 7px;
       font-weight: 500;
       letter-spacing: 0.14em;
@@ -141,11 +156,11 @@
       transition: background 0.15s ease;
       border-right: 3px solid transparent;
     }
-    .nav-item:hover { background: rgba(var(--rgb-white), 0.08); }
+    .nav-item:hover { background: rgba(255, 255, 255, 0.07); }
     .nav-item.active {
-      background: #7A5CFF !important;
+      background: #00A3A3 !important;
       color: #ffffff !important;
-      border-right: 3px solid #7A5CFF !important;
+      border-right: 3px solid var(--teal-mid) !important;
     }
     .nav-item svg {
       width: 18px; height: 18px; flex-shrink: 0;
@@ -155,11 +170,11 @@
     .sidebar-footer { margin-top: 0; padding-top: 24px; flex-shrink: 0; position: relative; z-index: 2; }
     .merchant-card {
       display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 10px;
-      background: rgba(var(--rgb-white), 0.08);
+      background: rgba(255, 255, 255, 0.07);
     }
     .merchant-avatar {
       width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
-      background: linear-gradient(135deg, var(--ultraviolet), var(--luminous-orchid));
+      background: linear-gradient(135deg, var(--teal), var(--teal-mid));
       display: grid; place-items: center; font-size: 12px; font-weight: 600;
       color: var(--white);
     }
@@ -168,7 +183,7 @@
       font-size: 13px; font-weight: 600; color: var(--white);
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
-    .merchant-id { font-size: 11px; color: rgba(var(--rgb-white), 0.78); }
+    .merchant-id { font-size: 11px; color: rgba(255, 255, 255, 0.5); }
 
     .main-wrap {
       flex: 1; display: flex; flex-direction: column; min-width: 0;
@@ -180,7 +195,7 @@
     .phase3-topbar {
       height: var(--topbar-height);
       background: var(--page-bg);
-      border-bottom: 1px solid var(--mist-lavender);
+      border-bottom: 1px solid var(--border);
       display: flex; align-items: center; gap: 12px;
       padding: 0 24px; flex-shrink: 0; min-width: 0;
     }
@@ -196,13 +211,13 @@
     }
     .phase3-topbar .search-field input {
       width: 100%; height: 40px; border: 1px solid var(--input-border); border-radius: 8px;
-      padding: 0 14px 0 40px; font-size: 14px; color: var(--near-black); background: var(--white);
+      padding: 0 14px 0 40px; font-size: 14px; color: var(--txt-head); background: var(--white);
     }
-    .phase3-topbar .search-field input::placeholder { color: var(--graphite-plum); font-size: 13px; }
-    .phase3-topbar .search-field input:focus { outline: none; border-color: var(--ultraviolet); }
+    .phase3-topbar .search-field input::placeholder { color: var(--txt-muted); font-size: 13px; }
+    .phase3-topbar .search-field input:focus { outline: none; border-color: var(--teal); }
     .phase3-topbar .search-field .search-icon {
       position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
-      color: var(--graphite-plum); width: 18px; height: 18px;
+      color: var(--txt-muted); width: 18px; height: 18px;
     }
     .phase3-topbar .topbar-actions {
       display: flex; align-items: center; gap: 12px; flex-shrink: 0;
@@ -216,23 +231,23 @@
       padding: 8px 14px; line-height: 1; white-space: nowrap;
     }
     .btn-primary {
-      background: #7A5CFF !important;
+      background: #00A3A3 !important;
       color: #ffffff !important;
       border: none !important;
     }
-    .btn-primary:hover:not(:disabled) { background: #6a4ee8 !important; }
-    .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; background: #a39bb8 !important; color: #fff !important; }
+    .btn-primary:hover:not(:disabled) { background: #00BFBF !important; }
+    .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; background: var(--txt-faint) !important; color: #fff !important; }
     .btn-secondary {
-      background: var(--white); border-color: var(--input-border); color: var(--graphite-plum);
+      background: var(--white); border-color: var(--input-border); color: var(--txt-muted);
       font-weight: 500; padding: 8px 12px; font-size: 13px;
     }
-    .btn-ghost { background: transparent; border: none; padding: 8px; color: var(--graphite-plum); }
+    .btn-ghost { background: transparent; border: none; padding: 8px; color: var(--txt-muted); }
     .user-pill { display: flex; align-items: center; gap: 8px; }
     .user-avatar {
-      width: 36px; height: 36px; border-radius: 50%; background: var(--mist-lavender);
-      display: grid; place-items: center; font-size: 13px; font-weight: 600; color: var(--ultraviolet);
+      width: 36px; height: 36px; border-radius: 50%; background: var(--border);
+      display: grid; place-items: center; font-size: 13px; font-weight: 600; color: var(--teal);
     }
-    .user-name { font-size: 13px; font-weight: 500; color: var(--near-black); }
+    .user-name { font-size: 13px; font-weight: 500; color: var(--txt-head); }
 
     .content {
       padding: 20px 20px 40px; flex: 1; min-width: 0;
@@ -240,18 +255,18 @@
       background: var(--page-bg);
     }
     .breadcrumb {
-      font-size: 12px; font-weight: 500; color: var(--graphite-plum); margin-bottom: 8px;
+      font-size: 12px; font-weight: 500; color: var(--txt-muted); margin-bottom: 8px;
       display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
     }
-    .breadcrumb a { color: var(--graphite-plum); text-decoration: underline; text-underline-offset: 2px; }
+    .breadcrumb a { color: var(--txt-muted); text-decoration: underline; text-underline-offset: 2px; }
     .breadcrumb-sep { opacity: 0.6; }
-    .breadcrumb-current { color: var(--near-black); text-decoration: none; }
+    .breadcrumb-current { color: var(--txt-head); text-decoration: none; }
     .page-header { margin-bottom: 14px; flex-shrink: 0; }
     .page-title {
-      font-size: 22px; font-weight: 700; color: var(--near-black); margin: 0 0 4px;
+      font-size: 22px; font-weight: 700; color: var(--txt-head); margin: 0 0 4px;
       letter-spacing: -0.02em;
     }
-    .page-subtitle { margin: 0; font-size: 13px; color: var(--graphite-plum); font-weight: 400; max-width: 860px; }
+    .page-subtitle { margin: 0; font-size: 13px; color: var(--txt-muted); font-weight: 400; max-width: 860px; }
 
     .table-toolbar {
       display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 12px; margin-bottom: 12px;
@@ -261,23 +276,23 @@
     }
     .table-toolbar .toolbar-grow input {
       width: 100%; height: 36px; border: 1px solid var(--input-border); border-radius: 8px;
-      padding: 0 12px 0 36px; font-size: 13px; color: var(--near-black); background: var(--white);
+      padding: 0 12px 0 36px; font-size: 13px; color: var(--txt-head); background: var(--white);
     }
     .table-toolbar .toolbar-grow .search-icon {
-      position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--graphite-plum);
+      position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--txt-muted);
     }
     .filter-field label {
       display: block; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
-      color: var(--graphite-plum); margin-bottom: 4px;
+      color: var(--txt-muted); margin-bottom: 4px;
     }
     .filter-select {
       height: 36px; border: 1px solid var(--input-border); border-radius: 8px;
-      padding: 0 28px 0 10px; font-size: 12px; color: var(--near-black); background: var(--white);
+      padding: 0 28px 0 10px; font-size: 12px; color: var(--txt-head); background: var(--white);
       min-width: 108px; flex-shrink: 0; appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234E465E' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
       background-repeat: no-repeat; background-position: right 8px center;
     }
-    .filter-select:focus { outline: none; border-color: var(--ultraviolet); }
+    .filter-select:focus { outline: none; border-color: var(--teal); }
     .date-pair { display: flex; gap: 8px; align-items: flex-end; }
     .date-pair .filter-field input {
       height: 36px; width: 140px; border: 1px solid var(--input-border); border-radius: 8px;
@@ -311,24 +326,24 @@
     }
     .plans-table thead th {
       position: sticky; top: 0; z-index: 2;
-      background: #F8F7FB;
+      background: #F4F6F9;
       text-align: left;
       font-size: 11px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.03em; color: var(--graphite-plum);
+      letter-spacing: 0.03em; color: var(--txt-muted);
       padding: 9px 6px;
-      border-bottom: 1px solid #F0EEF6;
+      border-bottom: 1px solid var(--border-lt);
       vertical-align: top;
     }
     .plans-table tbody td {
-      padding: 9px 6px; font-size: 11px; color: var(--near-black);
-      border-bottom: 1px solid #F0EEF6; vertical-align: top;
+      padding: 9px 6px; font-size: 11px; color: var(--txt-head);
+      border-bottom: 1px solid var(--border-lt); vertical-align: top;
       overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
       background: #FFFFFF;
     }
     .plans-table tbody td.actions-cell {
       overflow: visible;
     }
-    .plans-table tbody tr:hover td { background: #F8F7FB; }
+    .plans-table tbody tr:hover td { background: #F4F6F9; }
 
     /* Sticky Actions column — always visible on the right */
     .plans-table th:last-child,
@@ -339,28 +354,28 @@
       box-shadow: -2px 0 6px rgba(0,0,0,0.06);
     }
     .plans-table thead th:last-child {
-      background: #F8F7FB;
+      background: #F4F6F9;
     }
     .plans-table tbody tr.row-esc-normal      td:last-child { background: #FFFFFF; }
-    .plans-table tbody tr.row-esc-max-reminders td:last-child { background: #FFE8E7; }
+    .plans-table tbody tr.row-esc-max-reminders td:last-child { background: #FEE2E2; }
     .plans-table tbody tr.row-esc-max-bank-sub  td:last-child { background: #FEF3C7; }
     .plans-table tbody tr.row-esc-escalated     td:last-child { background: #EDE9FE; }
     .plans-table tbody tr.row-esc-closed        td:last-child { background: #F3F4F6; }
     .link-mandate, .link-batch {
-      color: var(--ultraviolet); font-weight: 600; text-decoration: underline; text-underline-offset: 2px;
+      color: var(--teal); font-weight: 600; text-decoration: underline; text-underline-offset: 2px;
       cursor: pointer;
     }
-    .empty-hint { text-align: center; padding: 28px 12px; color: var(--graphite-plum); font-size: 13px; }
+    .empty-hint { text-align: center; padding: 28px 12px; color: var(--txt-muted); font-size: 13px; }
 
     .badge {
       display: inline-block; font-size: 10px; font-weight: 600; border-radius: 20px;
       padding: 2px 8px; max-width: 100%; overflow: hidden; text-overflow: ellipsis;
     }
-    .badge-pending-submission { background: #F3F0FF; color: #7A5CFF; }
+    .badge-pending-submission { background: #E6F7F7; color: #00A3A3; }
     .badge-submitted { background: #DBEAFE; color: #1D4ED8; }
     .badge-pending-bank { background: #FEF3C7; color: #B45309; }
     .badge-approved { background: #DCFCE7; color: #15803D; }
-    .badge-rejected { background: #FFE8E7; color: #FF6B68; }
+    .badge-rejected { background: #FEE2E2; color: #DC2626; }
     .badge-batch-submitted { background: #DBEAFE; color: #1D4ED8; }
     .badge-processing { background: #FEF3C7; color: #B45309; }
     .badge-completed { background: #DCFCE7; color: #15803D; }
@@ -371,7 +386,7 @@
     .badge-cancelled { background: #F3F4F6; color: #374151; }
     .badge-sent { background: #EDE9FE; color: #7C3AED; }
     .badge-received { background: #DCFCE7; color: #15803D; }
-    .badge-bounced { background: #FFE8E7; color: #FF6B68; }
+    .badge-bounced { background: #FEE2E2; color: #DC2626; }
 
     .collection-history-section {
       margin-top: 28px;
@@ -383,13 +398,13 @@
 
     .collection-history-section .section-header {
       padding: 20px 24px 16px;
-      border-bottom: 1px solid #F0EEF6;
+      border-bottom: 1px solid var(--border-lt);
     }
 
     .collection-history-section .section-title {
       font-size: 15px;
       font-weight: 600;
-      color: #120C24;
+      color: #172B4D;
       margin: 0;
     }
 
@@ -403,25 +418,25 @@
     }
 
     .collection-table thead tr {
-      background: #F8F7FB;
+      background: #F4F6F9;
     }
 
     .collection-table th {
       padding: 10px 20px;
       font-size: 11px;
       font-weight: 600;
-      color: #4E465E;
+      color: #2D3F5C;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       text-align: left;
-      border-bottom: 1px solid #F0EEF6;
+      border-bottom: 1px solid var(--border-lt);
     }
 
     .collection-table td {
       padding: 14px 20px;
       font-size: 13px;
-      color: #120C24;
-      border-bottom: 1px solid #F0EEF6;
+      color: #172B4D;
+      border-bottom: 1px solid var(--border-lt);
     }
 
     .collection-table tbody tr:last-child td {
@@ -429,12 +444,12 @@
     }
 
     .collection-table tbody tr:hover {
-      background: #F8F7FB;
+      background: #F4F6F9;
     }
 
     .collection-expand-row {
       padding: 12px 20px;
-      border-top: 1px solid #F0EEF6;
+      border-top: 1px solid var(--border-lt);
       display: flex;
       justify-content: center;
     }
@@ -442,18 +457,18 @@
     .btn-expand-collections {
       background: none;
       border: none;
-      color: #7A5CFF;
+      color: #00A3A3;
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
-      font-family: Inter, sans-serif;
+      font-family: DM Sans, sans-serif;
       padding: 6px 16px;
       border-radius: 8px;
       transition: background 0.15s;
     }
 
     .btn-expand-collections:hover {
-      background: #F3F0FF;
+      background: #E6F7F7;
     }
 
     .mandate-widgets {
@@ -476,13 +491,13 @@
       transition: border-color 0.15s, box-shadow 0.15s;
     }
     .widget-card:hover {
-      border-color: #7A5CFF;
-      box-shadow: 0 4px 12px rgba(122,92,255,0.12);
+      border-color: #00A3A3;
+      box-shadow: 0 2px 10px rgba(0,163,163,0.35);
     }
     .widget-icon {
       width: 44px;
       height: 44px;
-      background: #F3F0FF;
+      background: #E6F7F7;
       border-radius: 10px;
       display: flex;
       align-items: center;
@@ -492,17 +507,17 @@
     .widget-icon i {
       width: 22px;
       height: 22px;
-      color: #7A5CFF;
+      color: #00A3A3;
     }
     .widget-title {
       font-size: 14px;
       font-weight: 600;
-      color: #120C24;
+      color: #172B4D;
       margin-bottom: 3px;
     }
     .widget-desc {
       font-size: 12px;
-      color: #4E465E;
+      color: #2D3F5C;
     }
     .widget-arrow {
       width: 18px;
@@ -514,15 +529,15 @@
 
     /* Accordion batch table */
     .batch-main-row { cursor: pointer; }
-    .batch-main-row .chev { display: inline-block; color: var(--graphite-plum); font-size: 11px; }
-    .batch-detail-row td { background: #F8F7FB; padding: 0 !important; border-bottom: 1px solid #F0EEF6 !important; }
+    .batch-main-row .chev { display: inline-block; color: var(--txt-muted); font-size: 11px; }
+    .batch-detail-row td { background: #F4F6F9; padding: 0 !important; border-bottom: 1px solid var(--border-lt) !important; }
     .batch-sub-wrap { padding: 12px 16px 16px 48px; }
     .batch-sub-table { width: 100%; border-collapse: collapse; font-size: 12px; }
     .batch-sub-table th {
       text-align: left; font-size: 11px; font-weight: 600; text-transform: uppercase;
-      color: var(--graphite-plum); padding: 6px 8px; background: #fff; border-radius: 6px 6px 0 0;
+      color: var(--txt-muted); padding: 6px 8px; background: #fff; border-radius: 6px 6px 0 0;
     }
-    .batch-sub-table td { padding: 8px; border-bottom: 1px solid #F0EEF6; background: #fff; }
+    .batch-sub-table td { padding: 8px; border-bottom: 1px solid var(--border-lt); background: #fff; }
 
     /* Mandate detail layout */
     .detail-grid {
@@ -546,13 +561,13 @@
     }
     .info-card h3 {
       margin: 0 0 14px; font-size: 12px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.04em; color: var(--graphite-plum);
-      padding-bottom: 8px; border-bottom: 1px solid var(--mist-lavender);
+      letter-spacing: 0.04em; color: var(--txt-muted);
+      padding-bottom: 8px; border-bottom: 1px solid var(--border);
     }
     .kv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
     @media (max-width: 720px) { .kv-grid { grid-template-columns: 1fr; } }
-    .kv-item .k { font-size: 11px; font-weight: 600; color: var(--graphite-plum); margin-bottom: 4px; }
-    .kv-item .v { font-size: 13px; font-weight: 500; color: var(--near-black); }
+    .kv-item .k { font-size: 11px; font-weight: 600; color: var(--txt-muted); margin-bottom: 4px; }
+    .kv-item .v { font-size: 13px; font-weight: 500; color: var(--txt-head); }
 
     .timeline-card {
       position: sticky; top: 72px;
@@ -560,33 +575,33 @@
       padding: 18px 20px; box-shadow: none;
     }
     .timeline-card h3 {
-      margin: 0 0 16px; font-size: 15px; font-weight: 600; color: var(--near-black);
+      margin: 0 0 16px; font-size: 15px; font-weight: 600; color: var(--txt-head);
     }
     .timeline { position: relative; padding-left: 20px; }
     .timeline::before {
-      content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #EAE5F4;
+      content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #E2E8F0;
     }
     .timeline-entry { position: relative; margin-bottom: 20px; }
     .timeline-entry::before {
       content: ''; position: absolute; left: -17px; top: 8px; width: 10px; height: 10px; border-radius: 50%;
-      background: #7A5CFF; border: 2px solid white; box-shadow: 0 0 0 2px #7A5CFF;
+      background: #00A3A3; border: 2px solid white; box-shadow: 0 0 0 2px #00A3A3;
     }
-    .timeline-meta { font-size: 11px; color: #4E465E; }
+    .timeline-meta { font-size: 11px; color: #2D3F5C; }
 
     /* Toast */
     .phase3-toast {
       position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(120%);
       z-index: 3000;
-      background: var(--near-black); color: #fff; padding: 12px 18px; border-radius: 10px;
+      background: var(--txt-head); color: #fff; padding: 12px 18px; border-radius: 10px;
       font-size: 13px; box-shadow: 0 8px 32px rgba(0,0,0,0.2);
       transition: transform 0.25s ease;
       max-width: min(520px, calc(100vw - 48px));
     }
     .phase3-toast.show { transform: translateX(-50%) translateY(0); }
-    .phase3-toast a { color: #B36CFF; font-weight: 600; text-decoration: underline; }
+    .phase3-toast a { color: #00BFBF; font-weight: 600; text-decoration: underline; }
 
     .page-title-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; }
-    .page-title-code { font-size: 14px; font-weight: 600; color: var(--graphite-plum); }
+    .page-title-code { font-size: 14px; font-weight: 600; color: var(--txt-muted); }
 
     .export-dropdown-wrapper {
       position: relative;
@@ -597,7 +612,7 @@
       top: calc(100% + 6px);
       right: 0;
       background: white;
-      border: 1px solid #EAE5F4;
+      border: 1px solid #E2E8F0;
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       min-width: 160px;
@@ -612,12 +627,12 @@
       background: none;
       border: none;
       font-size: 13px;
-      font-family: Inter, sans-serif;
-      color: #120C24;
+      font-family: DM Sans, sans-serif;
+      color: #172B4D;
       cursor: pointer;
     }
     .export-menu button:hover {
-      background: #F8F7FB;
+      background: #F4F6F9;
     }
 
     .sort-btn {
@@ -636,14 +651,14 @@
       transition: color 0.15s;
     }
 
-    .sort-btn:hover .sort-arrow { color: #7A5CFF; }
+    .sort-btn:hover .sort-arrow { color: #00A3A3; }
 
     .sort-dropdown {
       position: absolute;
       top: calc(100% + 4px);
       left: 0;
       background: white;
-      border: 1px solid #EAE5F4;
+      border: 1px solid #E2E8F0;
       border-radius: 8px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.10);
       min-width: 180px;
@@ -659,15 +674,15 @@
       background: none;
       border: none;
       font-size: 13px;
-      font-family: Inter, sans-serif;
-      color: #120C24;
+      font-family: DM Sans, sans-serif;
+      color: #172B4D;
       cursor: pointer;
     }
 
-    .sort-dropdown button:hover { background: #F8F7FB; }
+    .sort-dropdown button:hover { background: #F4F6F9; }
 
     .sort-dropdown button:last-child {
-      border-top: 1px solid #F0EEF6;
+      border-top: 1px solid var(--border-lt);
       color: #9CA3AF;
       font-size: 12px;
     }
@@ -687,16 +702,16 @@
     }
     .three-dot-btn {
       background: none;
-      border: 1px solid #EAE5F4;
+      border: 1px solid #E2E8F0;
       border-radius: 6px;
       padding: 4px 12px;
       font-size: 18px;
       cursor: pointer;
-      color: #4E465E;
+      color: #2D3F5C;
       line-height: 1;
     }
     .three-dot-btn:hover {
-      background: #F8F7FB;
+      background: #F4F6F9;
     }
     .three-dot-btn:disabled {
       opacity: 0.3;
@@ -707,9 +722,9 @@
       right: 0;
       top: calc(100% + 4px);
       background: white;
-      border: 1px solid #EAE5F4;
+      border: 1px solid #E2E8F0;
       border-radius: 8px;
-      box-shadow: 0 4px 16px rgba(18,12,36,0.10);
+      box-shadow: 0 4px 16px rgba(15,31,56,0.10);
       min-width: 200px;
       z-index: 9999;
       overflow: hidden;
@@ -722,34 +737,34 @@
       background: none;
       border: none;
       font-size: 13px;
-      font-family: Inter, sans-serif;
-      color: #120C24;
+      font-family: DM Sans, sans-serif;
+      color: #172B4D;
       cursor: pointer;
     }
     .action-item:hover {
-      background: #F8F7FB;
+      background: #F4F6F9;
     }
     .action-item.danger {
-      color: #FF6B68;
+      color: #DC2626;
     }
     .action-item.danger:hover {
-      background: #FFE8E7;
+      background: #FEE2E2;
     }
     .action-divider {
       height: 1px;
-      background: #F0EEF6;
+      background: var(--border-lt);
       margin: 2px 0;
     }
     .toast-notification {
       position: fixed;
       bottom: 24px;
       right: 24px;
-      background: #120C24;
+      background: #172B4D;
       color: white;
       padding: 12px 20px;
       border-radius: 10px;
       font-size: 13px;
-      font-family: Inter, sans-serif;
+      font-family: DM Sans, sans-serif;
       opacity: 0;
       transition: opacity 0.3s;
       z-index: 9999;
@@ -758,7 +773,7 @@
     .confirm-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(18,12,36,0.4);
+      background: rgba(15,31,56,0.4);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -774,7 +789,7 @@
     }
     .confirm-dialog p {
       font-size: 14px;
-      color: #120C24;
+      color: #172B4D;
       margin-bottom: 20px;
       line-height: 1.5;
     }
@@ -784,77 +799,77 @@
       justify-content: flex-end;
     }
     .btn-danger {
-      background: #FF6B68;
+      background: #DC2626;
       color: white;
       border: none;
       border-radius: 8px;
       padding: 8px 18px;
       font-size: 13px;
-      font-family: Inter, sans-serif;
+      font-family: DM Sans, sans-serif;
       cursor: pointer;
     }
     .btn-danger:hover { background: #e85e5b; }
   
     .phase4-screen-anchor { scroll-margin-top: 52px; }
-    .filters-panel { display: none; flex-wrap: wrap; gap: 10px 12px; margin-bottom: 12px; padding: 14px; background: #fff; border: 1px solid var(--mist-lavender); border-radius: 10px; }
+    .filters-panel { display: none; flex-wrap: wrap; gap: 10px 12px; margin-bottom: 12px; padding: 14px; background: #fff; border: 1px solid var(--border); border-radius: 10px; }
     .filters-panel.open { display: flex; }
     .toolbar-actions-right { margin-left: auto; display: flex; gap: 10px; align-items: flex-end; }
     .plans-table tbody tr.row-esc-normal td { background: #FFFFFF; }
-    .plans-table tbody tr.row-esc-max-reminders td { background: #FFE8E7; }
+    .plans-table tbody tr.row-esc-max-reminders td { background: #FEE2E2; }
     .plans-table tbody tr.row-esc-max-bank-sub td { background: #FEF3C7; }
     .plans-table tbody tr.row-esc-escalated td { background: #EDE9FE; }
     .plans-table tbody tr.row-esc-closed td { background: #F3F4F6; }
-    .plans-table tbody tr.row-esc-normal:hover td { background: #F8F7FB; }
+    .plans-table tbody tr.row-esc-normal:hover td { background: #F4F6F9; }
     .plans-table tbody tr.row-esc-max-reminders:hover td { background: #FFE0DE; }
     .plans-table tbody tr.row-esc-max-bank-sub:hover td { background: #FDE68A; }
     .plans-table tbody tr.row-esc-escalated:hover td { background: #E8E4FF; }
     .plans-table tbody tr.row-esc-closed:hover td { background: #E5E7EB; }
     .badge-grp-sig      { background: #EDE9FE; color: #7C3AED; } /* Signature Issues */
     .badge-grp-accard   { background: #DBEAFE; color: #1D4ED8; } /* Account & Card Issues */
-    .badge-grp-blocked  { background: #FFE8E7; color: #FF6B68; } /* Blocked Accounts */
+    .badge-grp-blocked  { background: #FEE2E2; color: #DC2626; } /* Blocked Accounts */
     .badge-grp-title    { background: #FFF7ED; color: #C2410C; } /* Title Mismatch */
     .badge-grp-identity { background: #DCFCE7; color: #15803D; } /* Identity Issues */
     .badge-grp-contact  { background: #FEF9C3; color: #854D0E; } /* Contact Bank Required */
     .badge-grp-noaction { background: #F3F4F6; color: #6B7280; } /* No Action */
     .badge-grp-autoresub{ background: #EFF6FF; color: #1E40AF; } /* Auto-Resubmission */
-    .badge-rejected-status { background: #FFE8E7; color: #FF6B68; }
+    .badge-rejected-status { background: #FEE2E2; color: #DC2626; }
     .badge-esc-none { background: #F3F4F6; color: #6B7280; }
     /* Status badges */
     .badge-status-pending-payer   { background:#F3F0FF; color:#7A5CFF; }
     .badge-status-pending-sub     { background:#FEF3C7; color:#B45309; }
     .badge-status-pending-bank    { background:#DBEAFE; color:#1D4ED8; }
-    .badge-status-max-reminders   { background:#FFE8E7; color:#FF6B68; }
+    .badge-status-max-reminders   { background:#FEE2E2; color:#DC2626; }
     .badge-status-max-bank-sub    { background:#FEF3C7; color:#B45309; }
     .badge-status-escalated       { background:#EDE9FE; color:#6D28D9; }
     .badge-status-noaction        { background:#F3F4F6; color:#6B7280; }
 
     /* Row background colors by escalation state */
     .row-esc-normal              { background:#FFFFFF; }
-    .row-esc-max-reminders       { background:#FFE8E7; }
+    .row-esc-max-reminders       { background:#FEE2E2; }
     .row-esc-max-bank-sub        { background:#FEF3C7; }
     .row-esc-escalated           { background:#EDE9FE; }
     .row-esc-closed              { background:#F3F4F6; }
     #screen-rej002 .info-card,
-    #screen-rej002 .escalation-card { background: #FFFFFF !important; border: 1px solid var(--mist-lavender); border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; box-shadow: none; }
-    .progress-track { height: 8px; background: #EAE5F4; border-radius: 999px; overflow: hidden; margin: 8px 0 4px; }
-    .progress-fill { height: 100%; background: #7A5CFF; border-radius: 999px; }
-    .progress-caption { font-size: 12px; color: #4E465E; margin: 0 0 12px; }
-    .escalation-note { font-size: 12px; color: #4E465E; line-height: 1.5; margin: 12px 0 0; }
-    .confirm-dialog h2 { margin: 0 0 12px; font-size: 18px; font-weight: 700; color: #120C24; }
-    .modal-overlay { position: fixed; inset: 0; background: rgba(18,12,36,0.4); display: flex; align-items: center; justify-content: center; z-index: 9999; }
+    #screen-rej002 .escalation-card { background: #FFFFFF !important; border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; box-shadow: none; }
+    .progress-track { height: 8px; background: #E2E8F0; border-radius: 999px; overflow: hidden; margin: 8px 0 4px; }
+    .progress-fill { height: 100%; background: #00A3A3; border-radius: 999px; }
+    .progress-caption { font-size: 12px; color: #2D3F5C; margin: 0 0 12px; }
+    .escalation-note { font-size: 12px; color: #2D3F5C; line-height: 1.5; margin: 12px 0 0; }
+    .confirm-dialog h2 { margin: 0 0 12px; font-size: 18px; font-weight: 700; color: #172B4D; }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(15,31,56,0.4); display: flex; align-items: center; justify-content: center; z-index: 9999; }
     .modal-card { background: white; border-radius: 12px; padding: 28px; max-width: 420px; width: 90%; box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
     .modal-card h2 { margin: 0 0 16px; font-size: 18px; font-weight: 700; }
-    .modal-card .segmented { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 5px; border-radius: 12px; background: var(--mist-lavender); margin-bottom: 14px; }
+    .modal-card .segmented { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 5px; border-radius: 12px; background: var(--border); margin-bottom: 14px; }
     .modal-card .segmented button { min-height: 36px; border-radius: 9px; background: white; border: none; font-weight: 700; cursor: pointer; font-family: inherit; }
-    .modal-card .segmented button.active { background: var(--ultraviolet); color: white; }
+    .modal-card .segmented button.active { background: var(--teal); color: white; }
     .modal-field { margin-bottom: 14px; }
-    .modal-field label { display: block; font-size: 12px; font-weight: 700; color: var(--graphite-plum); margin-bottom: 6px; }
-    .modal-field input { width: 100%; min-height: 44px; border: 1.5px solid var(--mist-lavender); border-radius: 10px; padding: 0 12px; font-size: 14px; }
-    .modal-save { width: 100%; min-height: 48px; border-radius: 12px; background: #7A5CFF; color: white; font-weight: 700; border: none; cursor: pointer; margin-top: 8px; font-family: inherit; }
-    .modal-cancel { display: block; text-align: center; margin-top: 12px; color: #7A5CFF; font-weight: 600; background: none; border: none; cursor: pointer; width: 100%; font-family: inherit; }
-    .reminder-expand-row { padding: 12px 0 0; display: flex; justify-content: center; border-top: 1px solid #F0EEF6; margin-top: 8px; }
-    .btn-expand-reminders { background: none; border: none; color: #7A5CFF; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Inter, sans-serif; padding: 6px 16px; border-radius: 8px; }
-    .btn-expand-reminders:hover { background: #F3F0FF; }
+    .modal-field label { display: block; font-size: 12px; font-weight: 700; color: var(--txt-muted); margin-bottom: 6px; }
+    .modal-field input { width: 100%; min-height: 44px; border: 1.5px solid var(--border); border-radius: 10px; padding: 0 12px; font-size: 14px; }
+    .modal-save { width: 100%; min-height: 48px; border-radius: 12px; background: #00A3A3; color: white; font-weight: 700; border: none; cursor: pointer; margin-top: 8px; font-family: inherit; }
+    .modal-cancel { display: block; text-align: center; margin-top: 12px; color: #00A3A3; font-weight: 600; background: none; border: none; cursor: pointer; width: 100%; font-family: inherit; }
+    .reminder-expand-row { padding: 12px 0 0; display: flex; justify-content: center; border-top: 1px solid var(--border-lt); margin-top: 8px; }
+    .btn-expand-reminders { background: none; border: none; color: #00A3A3; font-size: 13px; font-weight: 600; cursor: pointer; font-family: DM Sans, sans-serif; padding: 6px 16px; border-radius: 8px; }
+    .btn-expand-reminders:hover { background: #E6F7F7; }
 
     /* Phase 4 — scrollable all-screens prototype */
     .phase4-screen-anchor { scroll-margin-top: 52px; }
@@ -894,10 +909,10 @@
     .phase5-desktop-screen.is-active { display: block; min-height: 100vh; }
     .phase5-desktop-screen .app-shell { min-height: 100vh; }
     .phase5-screen-anchor { scroll-margin-top: 52px; }
-    #screen-col001 .table-scroll, #screen-col002 .table-scroll, #screen-col003 .table-scroll, #screen-col004 .table-scroll { overflow-x: hidden; }
+    #screen-col001 .table-scroll, #screen-col002 .table-scroll, #screen-col003 .table-scroll, #screen-col004 .table-scroll, #screen-col005 .table-scroll { overflow-x: hidden; }
     .badge-col-ready { background: #EFF6FF; color: #1D4ED8; }
     .badge-col-sent { background: #FEF9C3; color: #854D0E; }
-    .badge-col-pending-bank { background: #F3F0FF; color: #6D28D9; }
+    .badge-col-pending-bank { background: #E6F7F7; color: #6D28D9; }
     .badge-col-bounced { background: #FFE4E6; color: #BE123C; }
     .badge-col-future { background: #ECFEFF; color: #0E7490; }
     .badge-col-received { background: #DCFCE7; color: #15803D; }
@@ -922,7 +937,7 @@
     }
     .col-action-bar { display: flex; justify-content: flex-end; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
     .nav-sub-item { font-size: 12px !important; padding: 7px 12px !important; opacity: 0.85; }
-    .nav-sub-item.active { opacity: 1; background: rgba(122,92,255,0.18) !important; }
+    .nav-sub-item.active { opacity: 1; background: var(--teal) !important; }
     .nav-group-header { user-select: none; }
 </style>
 </head>
@@ -933,10 +948,11 @@
 <a href="#screen-col002" data-screen="screen-col002">SCR-COL-002: Ready for Collection</a>
 <a href="#screen-col003" data-screen="screen-col003">SCR-COL-003: Future Collections</a>
 <a href="#screen-col004" data-screen="screen-col004">SCR-COL-004: Collection Log</a>
+<a href="#screen-col005" data-screen="screen-col005">SCR-COL-005: Collection Statement Validation</a>
 </nav><section class="phase5-screen-anchor phase5-desktop-screen col-screen-section is-active" id="screen-col001" aria-label="Collections Dashboard">
 <div class="app-shell">
 <aside class="sidebar" aria-label="Main navigation"><div class="sidebar-inner">
-<div class="sidebar-brand"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="logoP5a" x1="4" y1="34" x2="30" y2="2" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#7A5CFF"/><stop offset="40%" stop-color="#9B6FFF"/><stop offset="70%" stop-color="#C96EE8"/><stop offset="100%" stop-color="#FF6B8A"/></linearGradient><linearGradient id="logoP5b" x1="19" y1="34" x2="34" y2="4" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#B36CFF"/><stop offset="100%" stop-color="#FF5B6B"/></linearGradient></defs><path d="M4 34 C4 34 10 20 19 4 C19 4 14 14 11 22 C9 27 8 30 8 34 Z" fill="url(#logoP5a)" opacity="0.95"/><path d="M34 34 C34 34 28 20 19 4 C19 4 24 14 27 22 C29 27 30 30 30 34 Z" fill="url(#logoP5b)" opacity="0.9"/><path d="M11 23 Q19 19 27 23" stroke="url(#logoP5a)" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/><path d="M19 4 C19 4 20 8 21 12 C22 16 22 18 22 20 L19 26 L16 20 C16 18 16 16 17 12 C18 8 19 4 19 4 Z" fill="rgba(255,255,255,0.12)"/></svg><div class="brand-text"><span class="brand-name">Direct Debit.cc</span><span class="brand-sub">DIRECT DEBIT PLATFORM</span></div></div>
+<div class="sidebar-brand"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="logoP5a" x1="4" y1="34" x2="30" y2="2" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00A3A3"/><stop offset="50%" stop-color="#00BFBF"/><stop offset="100%" stop-color="#4ADE80"/></linearGradient><linearGradient id="logoP5b" x1="19" y1="34" x2="34" y2="4" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00BFBF"/><stop offset="100%" stop-color="#4ADE80"/></linearGradient></defs><path d="M4 34 C4 34 10 20 19 4 C19 4 14 14 11 22 C9 27 8 30 8 34 Z" fill="url(#logoP5a)" opacity="0.95"/><path d="M34 34 C34 34 28 20 19 4 C19 4 24 14 27 22 C29 27 30 30 30 34 Z" fill="url(#logoP5b)" opacity="0.9"/><path d="M11 23 Q19 19 27 23" stroke="url(#logoP5a)" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/><path d="M19 4 C19 4 20 8 21 12 C22 16 22 18 22 20 L19 26 L16 20 C16 18 16 16 17 12 C18 8 19 4 19 4 Z" fill="rgba(255,255,255,0.12)"/></svg><div class="brand-text"><span class="brand-name">Direct Debit.cc</span><span class="brand-sub">DIRECT DEBIT PLATFORM</span></div></div>
 <nav class="sidebar-nav" aria-label="Primary">
 <a href="#" class="nav-item"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
 <a href="../phase-1/phase-1-all-screens.html#screen-pp002" class="nav-item"><i data-lucide="credit-card"></i><span>Payment Plans</span></a>
@@ -973,109 +989,109 @@
 <div class="page-header"><h1 class="page-title">Collections Dashboard</h1></div>
 <div style="background:white; border-radius:12px; box-shadow:0 1px 4px rgba(0,0,0,.06); margin-bottom:20px; overflow:hidden;">
   <div style="display:grid; grid-template-columns:repeat(4,1fr);">
-    <div style="padding:14px 16px; border-right:1px solid #EAE5F4;">
-      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#1D4ED8; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#4E465E; text-transform:uppercase; letter-spacing:.05em;">Ready for Collection</span></div>
+    <div style="padding:14px 16px; border-right:1px solid #E2E8F0;">
+      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#1D4ED8; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#2D3F5C; text-transform:uppercase; letter-spacing:.05em;">Ready for Collection</span></div>
       <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:6px;">
-        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">3</div></div>
-        <div style="width:1px; height:28px; background:#EAE5F4; flex-shrink:0;"></div>
-        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">AED 10,000</div></div>
+        <div><div style="font-size:11px; color:#2D3F5C; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#172B4D; line-height:1;">3</div></div>
+        <div style="width:1px; height:28px; background:#E2E8F0; flex-shrink:0;"></div>
+        <div><div style="font-size:11px; color:#2D3F5C; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#172B4D; line-height:1;">AED 10,000</div></div>
       </div>
       <div style="display:flex; align-items:center; gap:4px; margin-bottom:8px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg><span style="font-size:11px; font-weight:600; color:#16A34A;">+15% vs last month</span></div>
       <div style="display:flex; align-items:flex-end; gap:3px; height:28px;"><div style="flex:1; background:#BFDBFE; border-radius:2px 2px 0 0; height:40%;"></div><div style="flex:1; background:#BFDBFE; border-radius:2px 2px 0 0; height:60%;"></div><div style="flex:1; background:#BFDBFE; border-radius:2px 2px 0 0; height:50%;"></div><div style="flex:1; background:#BFDBFE; border-radius:2px 2px 0 0; height:70%;"></div><div style="flex:1; background:#BFDBFE; border-radius:2px 2px 0 0; height:80%;"></div><div style="flex:1; background:#1D4ED8; border-radius:2px 2px 0 0; height:100%;"></div></div>
     </div>
-    <div style="padding:14px 16px; border-right:1px solid #EAE5F4;">
-      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#854D0E; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#4E465E; text-transform:uppercase; letter-spacing:.05em;">Sent for Collection</span></div>
+    <div style="padding:14px 16px; border-right:1px solid #E2E8F0;">
+      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#854D0E; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#2D3F5C; text-transform:uppercase; letter-spacing:.05em;">Sent for Collection</span></div>
       <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:6px;">
-        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">1</div></div>
-        <div style="width:1px; height:28px; background:#EAE5F4; flex-shrink:0;"></div>
-        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">AED 1,800</div></div>
+        <div><div style="font-size:11px; color:#2D3F5C; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#172B4D; line-height:1;">1</div></div>
+        <div style="width:1px; height:28px; background:#E2E8F0; flex-shrink:0;"></div>
+        <div><div style="font-size:11px; color:#2D3F5C; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#172B4D; line-height:1;">AED 1,800</div></div>
       </div>
       <div style="display:flex; align-items:center; gap:4px; margin-bottom:8px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span style="font-size:11px; font-weight:600; color:#DC2626;">-5% vs last month</span></div>
       <div style="display:flex; align-items:flex-end; gap:3px; height:28px;"><div style="flex:1; background:#FDE68A; border-radius:2px 2px 0 0; height:55%;"></div><div style="flex:1; background:#FDE68A; border-radius:2px 2px 0 0; height:70%;"></div><div style="flex:1; background:#FDE68A; border-radius:2px 2px 0 0; height:45%;"></div><div style="flex:1; background:#FDE68A; border-radius:2px 2px 0 0; height:60%;"></div><div style="flex:1; background:#FDE68A; border-radius:2px 2px 0 0; height:75%;"></div><div style="flex:1; background:#854D0E; border-radius:2px 2px 0 0; height:100%;"></div></div>
     </div>
-    <div style="padding:14px 16px; border-right:1px solid #EAE5F4;">
-      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#6D28D9; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#4E465E; text-transform:uppercase; letter-spacing:.05em;">Pending Bank Response</span></div>
+    <div style="padding:14px 16px; border-right:1px solid #E2E8F0;">
+      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#6D28D9; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#2D3F5C; text-transform:uppercase; letter-spacing:.05em;">Pending Bank Response</span></div>
       <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:6px;">
-        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">1</div></div>
-        <div style="width:1px; height:28px; background:#EAE5F4; flex-shrink:0;"></div>
-        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">AED 12,000</div></div>
+        <div><div style="font-size:11px; color:#2D3F5C; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#172B4D; line-height:1;">1</div></div>
+        <div style="width:1px; height:28px; background:#E2E8F0; flex-shrink:0;"></div>
+        <div><div style="font-size:11px; color:#2D3F5C; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#172B4D; line-height:1;">AED 12,000</div></div>
       </div>
       <div style="display:flex; align-items:center; gap:4px; margin-bottom:8px;"><span style="font-size:13px; color:#6B7280; font-weight:700; line-height:1;">&#8594;</span><span style="font-size:11px; font-weight:600; color:#6B7280;">same as last month</span></div>
       <div style="display:flex; align-items:flex-end; gap:3px; height:28px;"><div style="flex:1; background:#DDD6FE; border-radius:2px 2px 0 0; height:50%;"></div><div style="flex:1; background:#DDD6FE; border-radius:2px 2px 0 0; height:65%;"></div><div style="flex:1; background:#DDD6FE; border-radius:2px 2px 0 0; height:55%;"></div><div style="flex:1; background:#DDD6FE; border-radius:2px 2px 0 0; height:70%;"></div><div style="flex:1; background:#DDD6FE; border-radius:2px 2px 0 0; height:75%;"></div><div style="flex:1; background:#6D28D9; border-radius:2px 2px 0 0; height:100%;"></div></div>
     </div>
     <div style="padding:14px 16px;">
-      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#BE123C; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#4E465E; text-transform:uppercase; letter-spacing:.05em;">Bounced</span></div>
+      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#BE123C; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#2D3F5C; text-transform:uppercase; letter-spacing:.05em;">Bounced</span></div>
       <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:6px;">
-        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">2</div></div>
-        <div style="width:1px; height:28px; background:#EAE5F4; flex-shrink:0;"></div>
-        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">AED 11,200</div></div>
+        <div><div style="font-size:11px; color:#2D3F5C; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#172B4D; line-height:1;">2</div></div>
+        <div style="width:1px; height:28px; background:#E2E8F0; flex-shrink:0;"></div>
+        <div><div style="font-size:11px; color:#2D3F5C; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#172B4D; line-height:1;">AED 11,200</div></div>
       </div>
       <div style="display:flex; align-items:center; gap:4px; margin-bottom:8px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg><span style="font-size:11px; font-weight:600; color:#DC2626;">+8% vs last month</span></div>
       <div style="display:flex; align-items:flex-end; gap:3px; height:28px;"><div style="flex:1; background:#FECACA; border-radius:2px 2px 0 0; height:45%;"></div><div style="flex:1; background:#FECACA; border-radius:2px 2px 0 0; height:55%;"></div><div style="flex:1; background:#FECACA; border-radius:2px 2px 0 0; height:50%;"></div><div style="flex:1; background:#FECACA; border-radius:2px 2px 0 0; height:65%;"></div><div style="flex:1; background:#FECACA; border-radius:2px 2px 0 0; height:80%;"></div><div style="flex:1; background:#BE123C; border-radius:2px 2px 0 0; height:100%;"></div></div>
     </div>
   </div>
-  <div style="background:#F8FAFC; border-top:1px solid #EAE5F4; padding:10px 16px; display:flex; align-items:center; gap:24px;">
-    <span style="font-size:11px; font-weight:700; color:#4E465E; text-transform:uppercase; letter-spacing:.04em;">Total</span>
-    <span style="font-size:12px; font-weight:600; color:#120C24;">7 collections</span>
-    <span style="font-size:12px; font-weight:600; color:#120C24;">AED 35,000</span>
+  <div style="background:#F8FAFC; border-top:1px solid #E2E8F0; padding:10px 16px; display:flex; align-items:center; gap:24px;">
+    <span style="font-size:11px; font-weight:700; color:#2D3F5C; text-transform:uppercase; letter-spacing:.04em;">Total</span>
+    <span style="font-size:12px; font-weight:600; color:#172B4D;">7 collections</span>
+    <span style="font-size:12px; font-weight:600; color:#172B4D;">AED 35,000</span>
   </div>
 </div>
 <div style="display:flex; flex-wrap:wrap; align-items:flex-end; gap:10px 12px; margin-bottom:12px;">
-  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Collection Reference</label><input type="text" id="filter-col-ref" placeholder="e.g. COL-00850-1" oninput="applyColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
-  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Mandate Reference</label><input type="text" id="filter-col-mandate" placeholder="e.g. MND-00850" oninput="applyColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
-  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Payer Name</label><input type="text" id="filter-col-payer" placeholder="e.g. Ahmed Al Marzouqi" oninput="applyColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
-  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Status</label>
-    <select id="filter-col-status" onchange="applyColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234E465E' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; padding-right:28px; width:185px;">
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#2D3F5C;">Collection Reference</label><input type="text" id="filter-col-ref" placeholder="e.g. COL-00850-1" oninput="applyColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#2D3F5C;">Mandate Reference</label><input type="text" id="filter-col-mandate" placeholder="e.g. MND-00850" oninput="applyColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#2D3F5C;">Payer Name</label><input type="text" id="filter-col-payer" placeholder="e.g. Ahmed Al Marzouqi" oninput="applyColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#2D3F5C;">Status</label>
+    <select id="filter-col-status" onchange="applyColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; padding-right:28px; width:185px;">
       <option value="all">All Statuses</option><option value="ready">Ready for Collection</option><option value="sent">Sent for Collection</option>
       <option value="pending-bank">Pending Bank Response</option><option value="bounced">Bounced</option>
     </select></div>
-  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Collection Date</label>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#2D3F5C;">Collection Date</label>
     <div style="display:flex; align-items:center; gap:6px;">
-      <select id="filter-col-date-mode" onchange="handleColDateModeChange()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234E465E' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; padding-right:28px; width:130px;">
+      <select id="filter-col-date-mode" onchange="handleColDateModeChange()" style="height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; padding-right:28px; width:130px;">
         <option value="none">Any date</option><option value="after">After</option><option value="before">Before</option><option value="between">Between</option><option value="except">Except the period</option>
       </select>
-      <input type="date" id="filter-col-date-a" onchange="applyColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
-      <span id="filter-col-date-sep" style="display:none; font-size:12px; color:#4E465E; font-weight:600;">and</span>
-      <input type="date" id="filter-col-date-b" onchange="applyColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
+      <input type="date" id="filter-col-date-a" onchange="applyColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif;"/>
+      <span id="filter-col-date-sep" style="display:none; font-size:12px; color:#2D3F5C; font-weight:600;">and</span>
+      <input type="date" id="filter-col-date-b" onchange="applyColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif;"/>
     </div></div>
   <div style="display:flex; flex-direction:column; gap:4px;">
-    <label style="font-size:11px; font-weight:600; color:#4E465E;">Submitted On</label>
+    <label style="font-size:11px; font-weight:600; color:#2D3F5C;">Submitted On</label>
     <div style="display:flex; align-items:center; gap:6px;">
       <select id="filter-submitted-mode" onchange="handleColSubmittedModeChange()"
-        style="height:34px; padding:0 28px 0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234E465E' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; width:130px;">
+        style="height:34px; padding:0 28px 0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; width:130px;">
         <option value="none">Any date</option>
         <option value="after">After</option>
         <option value="before">Before</option>
         <option value="between">Between</option>
         <option value="except">Except the period</option>
       </select>
-      <input type="date" id="filter-submitted-a" onchange="applyColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
-      <span id="filter-submitted-sep" style="display:none; font-size:12px; color:#4E465E; font-weight:600;">and</span>
-      <input type="date" id="filter-submitted-b" onchange="applyColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
+      <input type="date" id="filter-submitted-a" onchange="applyColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif;"/>
+      <span id="filter-submitted-sep" style="display:none; font-size:12px; color:#2D3F5C; font-weight:600;">and</span>
+      <input type="date" id="filter-submitted-b" onchange="applyColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif;"/>
     </div>
   </div>
-  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:transparent;">Clear</label><button type="button" onclick="clearColFilters()" style="height:34px; padding:0 14px; background:white; color:#4E465E; border:1.5px solid #EAE5F4; border-radius:8px; font-size:12px; font-weight:600; font-family:Inter,sans-serif; cursor:pointer;">Clear</button></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:transparent;">Clear</label><button type="button" onclick="clearColFilters()" style="height:34px; padding:0 14px; background:white; color:#2D3F5C; border:1.5px solid #E2E8F0; border-radius:8px; font-size:12px; font-weight:600; font-family:DM Sans,sans-serif; cursor:pointer;">Clear</button></div>
 </div>
 <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px; flex-wrap:wrap;">
   <a href="#screen-col002" onclick="showColScreen('screen-col002'); return false;" style="display:inline-flex; align-items:center; gap:8px; background:#EFF6FF; border:1.5px solid #BFDBFE; border-radius:10px; padding:8px 14px; text-decoration:none; flex:1; min-width:180px;">
     <div style="width:24px; height:24px; background:#1D4ED8; border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-    <div><span id="ready-count-badge" style="font-size:13px; font-weight:700; color:#120C24;">3 Ready for Collection</span><span style="font-size:11px; color:#4E465E; display:block;">Open Ready for Collection â†’</span></div>
+    <div><span id="ready-count-badge" style="font-size:13px; font-weight:700; color:#172B4D;">3 Ready for Collection</span><span style="font-size:11px; color:#2D3F5C; display:block;">Open Ready for Collection â†’</span></div>
   </a>
   <a href="#screen-col003" onclick="showColScreen('screen-col003'); return false;" style="display:inline-flex; align-items:center; gap:8px; background:#ECFEFF; border:1.5px solid #A5F3FC; border-radius:10px; padding:8px 14px; text-decoration:none; flex:1; min-width:180px;">
     <div style="width:24px; height:24px; background:#0E7490; border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-    <div><span style="font-size:13px; font-weight:700; color:#120C24;">5 Upcoming Collections</span><span style="font-size:11px; color:#4E465E; display:block;">Open Future Collections â†’</span></div>
+    <div><span style="font-size:13px; font-weight:700; color:#172B4D;">5 Upcoming Collections</span><span style="font-size:11px; color:#2D3F5C; display:block;">Open Future Collections â†’</span></div>
   </a>
   <a href="#screen-col004" onclick="showColScreen('screen-col004'); return false;" style="display:inline-flex; align-items:center; gap:8px; background:#F8FAFC; border:1.5px solid #CBD5E1; border-radius:10px; padding:8px 14px; text-decoration:none; flex:1; min-width:180px;">
     <div style="width:24px; height:24px; background:#475569; border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg></div>
-    <div><span style="font-size:13px; font-weight:700; color:#120C24;">4 in Collection Log</span><span style="font-size:11px; color:#4E465E; display:block;">Open Collection Log â†’</span></div>
+    <div><span style="font-size:13px; font-weight:700; color:#172B4D;">4 in Collection Log</span><span style="font-size:11px; color:#2D3F5C; display:block;">Open Collection Log â†’</span></div>
   </a>
   <div style="margin-left:auto;" id="col-export-wrapper"><div style="position:relative;" data-export-wrap="col" id="col-export-wrapper">
-<button onclick="toggleColExport('col')" style="display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 14px; background:white; color:#120C24; border:1.5px solid #EAE5F4; border-radius:8px; font-size:13px; font-weight:600; font-family:Inter,sans-serif; cursor:pointer;">
+<button onclick="toggleColExport('col')" style="display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 14px; background:white; color:#172B4D; border:1.5px solid #E2E8F0; border-radius:8px; font-size:13px; font-weight:600; font-family:DM Sans,sans-serif; cursor:pointer;">
 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
-<div id="col-export-menu" class="col-export-menu" style="display:none; position:absolute; right:0; top:calc(100% + 4px); background:white; border:1px solid #EAE5F4; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.08); min-width:150px; z-index:200; overflow:hidden;">
-<button type="button" onclick="closeColExport('col')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as CSV</button>
-<button type="button" onclick="closeColExport('col')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as Excel</button>
-<button type="button" onclick="closeColExport('col')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as PDF</button>
+<div id="col-export-menu" class="col-export-menu" style="display:none; position:absolute; right:0; top:calc(100% + 4px); background:white; border:1px solid #E2E8F0; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.08); min-width:150px; z-index:200; overflow:hidden;">
+<button type="button" onclick="closeColExport('col')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:DM Sans,sans-serif;background:none;border:none;cursor:pointer;">Export as CSV</button>
+<button type="button" onclick="closeColExport('col')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:DM Sans,sans-serif;background:none;border:none;cursor:pointer;">Export as Excel</button>
+<button type="button" onclick="closeColExport('col')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:DM Sans,sans-serif;background:none;border:none;cursor:pointer;">Export as PDF</button>
 </div></div></div>
 </div>
 <div class="card table-card"><div class="table-scroll">
@@ -1143,7 +1159,7 @@
 </main></div></div></section><section class="phase5-screen-anchor phase5-desktop-screen col-screen-section" id="screen-col002" aria-label="Ready for Collection">
 <div class="app-shell">
 <aside class="sidebar" aria-label="Main navigation"><div class="sidebar-inner">
-<div class="sidebar-brand"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="logoP5c" x1="4" y1="34" x2="30" y2="2" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#7A5CFF"/><stop offset="40%" stop-color="#9B6FFF"/><stop offset="70%" stop-color="#C96EE8"/><stop offset="100%" stop-color="#FF6B8A"/></linearGradient><linearGradient id="logoP5d" x1="19" y1="34" x2="34" y2="4" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#B36CFF"/><stop offset="100%" stop-color="#FF5B6B"/></linearGradient></defs><path d="M4 34 C4 34 10 20 19 4 C19 4 14 14 11 22 C9 27 8 30 8 34 Z" fill="url(#logoP5c)" opacity="0.95"/><path d="M34 34 C34 34 28 20 19 4 C19 4 24 14 27 22 C29 27 30 30 30 34 Z" fill="url(#logoP5d)" opacity="0.9"/><path d="M11 23 Q19 19 27 23" stroke="url(#logoP5c)" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/><path d="M19 4 C19 4 20 8 21 12 C22 16 22 18 22 20 L19 26 L16 20 C16 18 16 16 17 12 C18 8 19 4 19 4 Z" fill="rgba(255,255,255,0.12)"/></svg><div class="brand-text"><span class="brand-name">Direct Debit.cc</span><span class="brand-sub">DIRECT DEBIT PLATFORM</span></div></div>
+<div class="sidebar-brand"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="logoP5c" x1="4" y1="34" x2="30" y2="2" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00A3A3"/><stop offset="50%" stop-color="#00BFBF"/><stop offset="100%" stop-color="#4ADE80"/></linearGradient><linearGradient id="logoP5d" x1="19" y1="34" x2="34" y2="4" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00BFBF"/><stop offset="100%" stop-color="#4ADE80"/></linearGradient></defs><path d="M4 34 C4 34 10 20 19 4 C19 4 14 14 11 22 C9 27 8 30 8 34 Z" fill="url(#logoP5c)" opacity="0.95"/><path d="M34 34 C34 34 28 20 19 4 C19 4 24 14 27 22 C29 27 30 30 30 34 Z" fill="url(#logoP5d)" opacity="0.9"/><path d="M11 23 Q19 19 27 23" stroke="url(#logoP5c)" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/><path d="M19 4 C19 4 20 8 21 12 C22 16 22 18 22 20 L19 26 L16 20 C16 18 16 16 17 12 C18 8 19 4 19 4 Z" fill="rgba(255,255,255,0.12)"/></svg><div class="brand-text"><span class="brand-name">Direct Debit.cc</span><span class="brand-sub">DIRECT DEBIT PLATFORM</span></div></div>
 <nav class="sidebar-nav" aria-label="Primary">
 <a href="#" class="nav-item"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
 <a href="../phase-1/phase-1-all-screens.html#screen-pp002" class="nav-item"><i data-lucide="credit-card"></i><span>Payment Plans</span></a>
@@ -1184,58 +1200,68 @@
   These are payments due to be sent to the bank. Select the ones you want and click <strong>Send Selected for Collection</strong>.
 </div>
 <div class="col-action-bar">
-  <button id="due-send-selected-btn" onclick="sendSelectedCollections()" disabled style="display:inline-flex; align-items:center; gap:8px; height:36px; padding:0 16px; background:#C4B5FD; color:white; border:none; border-radius:8px; font-size:13px; font-weight:600; font-family:Inter,sans-serif; cursor:not-allowed;">
+  <button onclick="openUploadStatementPicker()"
+  style="display:inline-flex; align-items:center; gap:8px; height:36px; padding:0 16px; background:white; color:var(--txt-head); border:1.5px solid var(--border); border-radius:8px; font-size:13px; font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer;">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+    <polyline points="17 8 12 3 7 8"/>
+    <line x1="12" y1="3" x2="12" y2="15"/>
+  </svg>
+  Upload Collection Statement
+</button>
+<input type="file" id="collection-statement-input" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleStatementUpload(this)"/>
+  <button id="due-send-selected-btn" onclick="sendSelectedCollections()" disabled style="display:inline-flex; align-items:center; gap:8px; height:36px; padding:0 16px; background:#94A3B8; color:white; border:none; border-radius:8px; font-size:13px; font-weight:600; font-family:DM Sans,sans-serif; cursor:not-allowed;">
     Send Selected for Collection <span id="due-selected-count" style="background:rgba(255,255,255,0.3); border-radius:12px; padding:1px 8px; font-size:12px;">0</span>
   </button>
   <div style="position:relative;" data-export-wrap="due" id="due-export-wrapper">
-<button onclick="toggleColExport('due')" style="display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 14px; background:white; color:#120C24; border:1.5px solid #EAE5F4; border-radius:8px; font-size:13px; font-weight:600; font-family:Inter,sans-serif; cursor:pointer;">
+<button onclick="toggleColExport('due')" style="display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 14px; background:white; color:#172B4D; border:1.5px solid #E2E8F0; border-radius:8px; font-size:13px; font-weight:600; font-family:DM Sans,sans-serif; cursor:pointer;">
 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
-<div id="due-export-menu" class="col-export-menu" style="display:none; position:absolute; right:0; top:calc(100% + 4px); background:white; border:1px solid #EAE5F4; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.08); min-width:150px; z-index:200; overflow:hidden;">
-<button type="button" onclick="closeColExport('due')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as CSV</button>
-<button type="button" onclick="closeColExport('due')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as Excel</button>
-<button type="button" onclick="closeColExport('due')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as PDF</button>
+<div id="due-export-menu" class="col-export-menu" style="display:none; position:absolute; right:0; top:calc(100% + 4px); background:white; border:1px solid #E2E8F0; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.08); min-width:150px; z-index:200; overflow:hidden;">
+<button type="button" onclick="closeColExport('due')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:DM Sans,sans-serif;background:none;border:none;cursor:pointer;">Export as CSV</button>
+<button type="button" onclick="closeColExport('due')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:DM Sans,sans-serif;background:none;border:none;cursor:pointer;">Export as Excel</button>
+<button type="button" onclick="closeColExport('due')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:DM Sans,sans-serif;background:none;border:none;cursor:pointer;">Export as PDF</button>
 </div></div>
 </div>
 <div style="display:flex; flex-wrap:wrap; align-items:flex-end; gap:10px 12px; margin-bottom:12px;">
-  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Collection Reference</label><input type="text" id="filter-due-ref" placeholder="e.g. COL-00850-1" oninput="applyDueColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
-  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Mandate Reference</label><input type="text" id="filter-due-mandate" placeholder="e.g. MND-00850" oninput="applyDueColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
-  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Payer Name</label><input type="text" id="filter-due-payer" placeholder="e.g. Ahmed Al Marzouqi" oninput="applyDueColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
-  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Collection Date</label>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#2D3F5C;">Collection Reference</label><input type="text" id="filter-due-ref" placeholder="e.g. COL-00850-1" oninput="applyDueColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#2D3F5C;">Mandate Reference</label><input type="text" id="filter-due-mandate" placeholder="e.g. MND-00850" oninput="applyDueColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#2D3F5C;">Payer Name</label><input type="text" id="filter-due-payer" placeholder="e.g. Ahmed Al Marzouqi" oninput="applyDueColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#2D3F5C;">Collection Date</label>
     <div style="display:flex; align-items:center; gap:6px;">
-      <select id="filter-due-date-mode" onchange="handleDueColDateModeChange()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234E465E' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; padding-right:28px; width:130px;">
+      <select id="filter-due-date-mode" onchange="handleDueColDateModeChange()" style="height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; padding-right:28px; width:130px;">
         <option value="none">Any date</option><option value="after">After</option><option value="before">Before</option><option value="between">Between</option><option value="except">Except the period</option>
       </select>
-      <input type="date" id="filter-due-date-a" onchange="applyDueColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
-      <span id="filter-due-date-sep" style="display:none; font-size:12px; color:#4E465E; font-weight:600;">and</span>
-      <input type="date" id="filter-due-date-b" onchange="applyDueColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
+      <input type="date" id="filter-due-date-a" onchange="applyDueColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif;"/>
+      <span id="filter-due-date-sep" style="display:none; font-size:12px; color:#2D3F5C; font-weight:600;">and</span>
+      <input type="date" id="filter-due-date-b" onchange="applyDueColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif;"/>
     </div></div>
-  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:transparent;">Clear</label><button type="button" onclick="clearDueColFilters()" style="height:34px; padding:0 14px; background:white; color:#4E465E; border:1.5px solid #EAE5F4; border-radius:8px; font-size:12px; font-weight:600; font-family:Inter,sans-serif; cursor:pointer;">Clear</button></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:transparent;">Clear</label><button type="button" onclick="clearDueColFilters()" style="height:34px; padding:0 14px; background:white; color:#2D3F5C; border:1.5px solid #E2E8F0; border-radius:8px; font-size:12px; font-weight:600; font-family:DM Sans,sans-serif; cursor:pointer;">Clear</button></div>
 </div>
 <div class="card table-card"><div class="table-scroll">
 <table class="plans-table" aria-label="Ready for collection">
 <colgroup><col style="width:40px"/><col style="width:145px"/><col style="width:130px"/><col style="width:130px"/><col style="width:95px"/><col style="width:95px"/><col style="width:100px"/><col style="width:52px"/></colgroup>
 <thead><tr>
-  <th scope="col" style="text-align:center; vertical-align:top;"><input type="checkbox" id="due-select-all" onchange="toggleDueSelectAll(this)" style="width:15px; height:15px; cursor:pointer; accent-color:#7A5CFF;"/></th>
+  <th scope="col" style="text-align:center; vertical-align:top;"><input type="checkbox" id="due-select-all" onchange="toggleDueSelectAll(this)" style="width:15px; height:15px; cursor:pointer; accent-color:#00A3A3;"/></th>
   <th scope="col">Collection Reference</th><th scope="col">Mandate Reference</th>
   <th scope="col" class="col-payer-name">Payer Name</th><th scope="col">Amount (AED)</th>
   <th scope="col">Collection Date</th><th scope="col">Submitted On</th><th scope="col">Actions</th>
 </tr></thead>
 <tbody id="dueColTableBody"><tr data-search="COL-00850-1 MND-00850 Ahmed Al Marzouqi" data-status="ready" data-collection-date="2026-06-01">
-  <td style="text-align:center; vertical-align:top; padding-top:11px;"><input type="checkbox" class="due-row-check" onchange="onDueRowCheck()" style="width:15px; height:15px; cursor:pointer; accent-color:#7A5CFF;"/></td>
+  <td style="text-align:center; vertical-align:top; padding-top:11px;"><input type="checkbox" class="due-row-check" onchange="onDueRowCheck()" style="width:15px; height:15px; cursor:pointer; accent-color:#00A3A3;"/></td>
   <td><a class="link-mandate" href="#">COL-00850-1</a></td>
   <td><a class="link-mandate" href="#">MND-00850</a></td>
   <td class="col-payer-name">Ahmed Al Marzouqi</td>
   <td>AED 2,500</td><td>01/06/2026</td><td>—</td>
   <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
 </tr><tr data-search="COL-00851-2 MND-00851 Sara Al Hamdan" data-status="ready" data-collection-date="2026-06-01">
-  <td style="text-align:center; vertical-align:top; padding-top:11px;"><input type="checkbox" class="due-row-check" onchange="onDueRowCheck()" style="width:15px; height:15px; cursor:pointer; accent-color:#7A5CFF;"/></td>
+  <td style="text-align:center; vertical-align:top; padding-top:11px;"><input type="checkbox" class="due-row-check" onchange="onDueRowCheck()" style="width:15px; height:15px; cursor:pointer; accent-color:#00A3A3;"/></td>
   <td><a class="link-mandate" href="#">COL-00851-2</a></td>
   <td><a class="link-mandate" href="#">MND-00851</a></td>
   <td class="col-payer-name">Sara Al Hamdan</td>
   <td>AED 5,000</td><td>01/06/2026</td><td>—</td>
   <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
 </tr><tr data-search="COL-00850-8 MND-00850 Ahmed Al Marzouqi" data-status="ready" data-collection-date="2026-05-25">
-  <td style="text-align:center; vertical-align:top; padding-top:11px;"><input type="checkbox" class="due-row-check" onchange="onDueRowCheck()" style="width:15px; height:15px; cursor:pointer; accent-color:#7A5CFF;"/></td>
+  <td style="text-align:center; vertical-align:top; padding-top:11px;"><input type="checkbox" class="due-row-check" onchange="onDueRowCheck()" style="width:15px; height:15px; cursor:pointer; accent-color:#00A3A3;"/></td>
   <td><a class="link-mandate" href="#">COL-00850-8</a></td>
   <td><a class="link-mandate" href="#">MND-00850</a></td>
   <td class="col-payer-name">Ahmed Al Marzouqi</td>
@@ -1248,7 +1274,7 @@
 </main></div></div></section><section class="phase5-screen-anchor phase5-desktop-screen col-screen-section" id="screen-col003" aria-label="Future Collections">
 <div class="app-shell">
 <aside class="sidebar" aria-label="Main navigation"><div class="sidebar-inner">
-<div class="sidebar-brand"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="logoP5e" x1="4" y1="34" x2="30" y2="2" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#7A5CFF"/><stop offset="40%" stop-color="#9B6FFF"/><stop offset="70%" stop-color="#C96EE8"/><stop offset="100%" stop-color="#FF6B8A"/></linearGradient><linearGradient id="logoP5f" x1="19" y1="34" x2="34" y2="4" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#B36CFF"/><stop offset="100%" stop-color="#FF5B6B"/></linearGradient></defs><path d="M4 34 C4 34 10 20 19 4 C19 4 14 14 11 22 C9 27 8 30 8 34 Z" fill="url(#logoP5e)" opacity="0.95"/><path d="M34 34 C34 34 28 20 19 4 C19 4 24 14 27 22 C29 27 30 30 30 34 Z" fill="url(#logoP5f)" opacity="0.9"/><path d="M11 23 Q19 19 27 23" stroke="url(#logoP5e)" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/><path d="M19 4 C19 4 20 8 21 12 C22 16 22 18 22 20 L19 26 L16 20 C16 18 16 16 17 12 C18 8 19 4 19 4 Z" fill="rgba(255,255,255,0.12)"/></svg><div class="brand-text"><span class="brand-name">Direct Debit.cc</span><span class="brand-sub">DIRECT DEBIT PLATFORM</span></div></div>
+<div class="sidebar-brand"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="logoP5e" x1="4" y1="34" x2="30" y2="2" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00A3A3"/><stop offset="50%" stop-color="#00BFBF"/><stop offset="100%" stop-color="#4ADE80"/></linearGradient><linearGradient id="logoP5f" x1="19" y1="34" x2="34" y2="4" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00BFBF"/><stop offset="100%" stop-color="#4ADE80"/></linearGradient></defs><path d="M4 34 C4 34 10 20 19 4 C19 4 14 14 11 22 C9 27 8 30 8 34 Z" fill="url(#logoP5e)" opacity="0.95"/><path d="M34 34 C34 34 28 20 19 4 C19 4 24 14 27 22 C29 27 30 30 30 34 Z" fill="url(#logoP5f)" opacity="0.9"/><path d="M11 23 Q19 19 27 23" stroke="url(#logoP5e)" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/><path d="M19 4 C19 4 20 8 21 12 C22 16 22 18 22 20 L19 26 L16 20 C16 18 16 16 17 12 C18 8 19 4 19 4 Z" fill="rgba(255,255,255,0.12)"/></svg><div class="brand-text"><span class="brand-name">Direct Debit.cc</span><span class="brand-sub">DIRECT DEBIT PLATFORM</span></div></div>
 <nav class="sidebar-nav" aria-label="Primary">
 <a href="#" class="nav-item"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
 <a href="../phase-1/phase-1-all-screens.html#screen-pp002" class="nav-item"><i data-lucide="credit-card"></i><span>Payment Plans</span></a>
@@ -1289,12 +1315,12 @@
   <div style="padding:14px 20px; display:flex; align-items:center; gap:32px; flex-wrap:wrap;">
     <div style="display:flex; align-items:center; gap:6px;">
       <div style="width:8px; height:8px; border-radius:50%; background:#0E7490; flex-shrink:0;"></div>
-      <span style="font-size:10px; font-weight:700; color:#4E465E; text-transform:uppercase; letter-spacing:.05em;">Future Collections</span>
+      <span style="font-size:10px; font-weight:700; color:#2D3F5C; text-transform:uppercase; letter-spacing:.05em;">Future Collections</span>
     </div>
     <div style="display:flex; align-items:baseline; gap:12px;">
-      <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">5</div></div>
-      <div style="width:1px; height:28px; background:#EAE5F4; flex-shrink:0;"></div>
-      <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Scheduled Amount</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">AED 27,000</div></div>
+      <div><div style="font-size:11px; color:#2D3F5C; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#172B4D; line-height:1;">5</div></div>
+      <div style="width:1px; height:28px; background:#E2E8F0; flex-shrink:0;"></div>
+      <div><div style="font-size:11px; color:#2D3F5C; margin-bottom:1px;">Scheduled Amount</div><div style="font-size:22px; font-weight:700; color:#172B4D; line-height:1;">AED 27,000</div></div>
     </div>
     <div style="display:flex; align-items:center; gap:4px;">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
@@ -1309,34 +1335,34 @@
       <div style="width:12px; background:#0E7490; border-radius:2px 2px 0 0; height:100%;"></div>
     </div>
   </div>
-  <div style="background:#F8FAFC; border-top:1px solid #EAE5F4; padding:8px 20px;">
-    <span style="font-size:11px; color:#4E465E;">Showing collections within the next <strong>30 days</strong> from active mandate payment schedules</span>
+  <div style="background:#F8FAFC; border-top:1px solid #E2E8F0; padding:8px 20px;">
+    <span style="font-size:11px; color:#2D3F5C;">Showing collections within the next <strong>30 days</strong> from active mandate payment schedules</span>
   </div>
 </div>
 <div style="background:#ECFEFF; border:1.5px solid #A5F3FC; border-radius:10px; padding:12px 16px; font-size:12px; color:#0E7490; margin-bottom:16px; line-height:1.7;">
   These are upcoming scheduled collections pulled from active mandate payment schedules. They will automatically become <strong>Ready for Collection</strong> on their collection date at midnight.
 </div>
 <div style="display:flex; flex-wrap:wrap; align-items:flex-end; gap:10px 12px; margin-bottom:12px;">
-  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Mandate Reference</label><input type="text" id="filter-future-mandate" placeholder="e.g. MND-00850" oninput="applyFutureColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
-  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Payer Name</label><input type="text" id="filter-future-payer" placeholder="e.g. Ahmed Al Marzouqi" oninput="applyFutureColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
-  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Collection Date</label>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#2D3F5C;">Mandate Reference</label><input type="text" id="filter-future-mandate" placeholder="e.g. MND-00850" oninput="applyFutureColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#2D3F5C;">Payer Name</label><input type="text" id="filter-future-payer" placeholder="e.g. Ahmed Al Marzouqi" oninput="applyFutureColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#2D3F5C;">Collection Date</label>
     <div style="display:flex; align-items:center; gap:6px;">
-      <select id="filter-future-date-mode" onchange="handleFutureColDateModeChange()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234E465E' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; padding-right:28px; width:130px;">
+      <select id="filter-future-date-mode" onchange="handleFutureColDateModeChange()" style="height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; padding-right:28px; width:130px;">
         <option value="none">Any date</option><option value="after">After</option><option value="before">Before</option><option value="between" selected>Between</option><option value="except">Except the period</option>
       </select>
-      <input type="date" id="filter-future-date-a" onchange="applyFutureColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
-      <span id="filter-future-date-sep" style="font-size:12px; color:#4E465E; font-weight:600;">and</span>
-      <input type="date" id="filter-future-date-b" onchange="applyFutureColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
+      <input type="date" id="filter-future-date-a" onchange="applyFutureColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif;"/>
+      <span id="filter-future-date-sep" style="font-size:12px; color:#2D3F5C; font-weight:600;">and</span>
+      <input type="date" id="filter-future-date-b" onchange="applyFutureColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif;"/>
     </div></div>
-  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:transparent;">Clear</label><button type="button" onclick="clearFutureColFilters()" style="height:34px; padding:0 14px; background:white; color:#4E465E; border:1.5px solid #EAE5F4; border-radius:8px; font-size:12px; font-weight:600; font-family:Inter,sans-serif; cursor:pointer;">Clear</button></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:transparent;">Clear</label><button type="button" onclick="clearFutureColFilters()" style="height:34px; padding:0 14px; background:white; color:#2D3F5C; border:1.5px solid #E2E8F0; border-radius:8px; font-size:12px; font-weight:600; font-family:DM Sans,sans-serif; cursor:pointer;">Clear</button></div>
 </div>
 <div style="display:flex; justify-content:flex-end; margin-bottom:10px;"><div style="position:relative;" data-export-wrap="future" id="future-export-wrapper">
-<button onclick="toggleColExport('future')" style="display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 14px; background:white; color:#120C24; border:1.5px solid #EAE5F4; border-radius:8px; font-size:13px; font-weight:600; font-family:Inter,sans-serif; cursor:pointer;">
+<button onclick="toggleColExport('future')" style="display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 14px; background:white; color:#172B4D; border:1.5px solid #E2E8F0; border-radius:8px; font-size:13px; font-weight:600; font-family:DM Sans,sans-serif; cursor:pointer;">
 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
-<div id="future-export-menu" class="col-export-menu" style="display:none; position:absolute; right:0; top:calc(100% + 4px); background:white; border:1px solid #EAE5F4; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.08); min-width:150px; z-index:200; overflow:hidden;">
-<button type="button" onclick="closeColExport('future')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as CSV</button>
-<button type="button" onclick="closeColExport('future')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as Excel</button>
-<button type="button" onclick="closeColExport('future')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as PDF</button>
+<div id="future-export-menu" class="col-export-menu" style="display:none; position:absolute; right:0; top:calc(100% + 4px); background:white; border:1px solid #E2E8F0; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.08); min-width:150px; z-index:200; overflow:hidden;">
+<button type="button" onclick="closeColExport('future')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:DM Sans,sans-serif;background:none;border:none;cursor:pointer;">Export as CSV</button>
+<button type="button" onclick="closeColExport('future')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:DM Sans,sans-serif;background:none;border:none;cursor:pointer;">Export as Excel</button>
+<button type="button" onclick="closeColExport('future')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:DM Sans,sans-serif;background:none;border:none;cursor:pointer;">Export as PDF</button>
 </div></div></div>
 <div class="card table-card"><div class="table-scroll">
 <table class="plans-table" aria-label="Future collections">
@@ -1377,7 +1403,7 @@
 </main></div></div></section><section class="phase5-screen-anchor phase5-desktop-screen col-screen-section" id="screen-col004" aria-label="Collection Log">
 <div class="app-shell">
 <aside class="sidebar" aria-label="Main navigation"><div class="sidebar-inner">
-<div class="sidebar-brand"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="logoP5g" x1="4" y1="34" x2="30" y2="2" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#7A5CFF"/><stop offset="40%" stop-color="#9B6FFF"/><stop offset="70%" stop-color="#C96EE8"/><stop offset="100%" stop-color="#FF6B8A"/></linearGradient><linearGradient id="logoP5h" x1="19" y1="34" x2="34" y2="4" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#B36CFF"/><stop offset="100%" stop-color="#FF5B6B"/></linearGradient></defs><path d="M4 34 C4 34 10 20 19 4 C19 4 14 14 11 22 C9 27 8 30 8 34 Z" fill="url(#logoP5g)" opacity="0.95"/><path d="M34 34 C34 34 28 20 19 4 C19 4 24 14 27 22 C29 27 30 30 30 34 Z" fill="url(#logoP5h)" opacity="0.9"/><path d="M11 23 Q19 19 27 23" stroke="url(#logoP5g)" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/><path d="M19 4 C19 4 20 8 21 12 C22 16 22 18 22 20 L19 26 L16 20 C16 18 16 16 17 12 C18 8 19 4 19 4 Z" fill="rgba(255,255,255,0.12)"/></svg><div class="brand-text"><span class="brand-name">Direct Debit.cc</span><span class="brand-sub">DIRECT DEBIT PLATFORM</span></div></div>
+<div class="sidebar-brand"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="logoP5g" x1="4" y1="34" x2="30" y2="2" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00A3A3"/><stop offset="50%" stop-color="#00BFBF"/><stop offset="100%" stop-color="#4ADE80"/></linearGradient><linearGradient id="logoP5h" x1="19" y1="34" x2="34" y2="4" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00BFBF"/><stop offset="100%" stop-color="#4ADE80"/></linearGradient></defs><path d="M4 34 C4 34 10 20 19 4 C19 4 14 14 11 22 C9 27 8 30 8 34 Z" fill="url(#logoP5g)" opacity="0.95"/><path d="M34 34 C34 34 28 20 19 4 C19 4 24 14 27 22 C29 27 30 30 30 34 Z" fill="url(#logoP5h)" opacity="0.9"/><path d="M11 23 Q19 19 27 23" stroke="url(#logoP5g)" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/><path d="M19 4 C19 4 20 8 21 12 C22 16 22 18 22 20 L19 26 L16 20 C16 18 16 16 17 12 C18 8 19 4 19 4 Z" fill="rgba(255,255,255,0.12)"/></svg><div class="brand-text"><span class="brand-name">Direct Debit.cc</span><span class="brand-sub">DIRECT DEBIT PLATFORM</span></div></div>
 <nav class="sidebar-nav" aria-label="Primary">
 <a href="#" class="nav-item"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
 <a href="../phase-1/phase-1-all-screens.html#screen-pp002" class="nav-item"><i data-lucide="credit-card"></i><span>Payment Plans</span></a>
@@ -1416,85 +1442,85 @@
 <div class="page-header"><h1 class="page-title">Collection Log</h1></div>
 <div style="background:white; border-radius:12px; box-shadow:0 1px 4px rgba(0,0,0,.06); margin-bottom:20px; overflow:hidden;">
   <div style="display:grid; grid-template-columns:repeat(3,1fr);">
-    <div style="padding:14px 16px; border-right:1px solid #EAE5F4;">
-      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#15803D; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#4E465E; text-transform:uppercase; letter-spacing:.05em;">Received</span></div>
+    <div style="padding:14px 16px; border-right:1px solid #E2E8F0;">
+      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#15803D; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#2D3F5C; text-transform:uppercase; letter-spacing:.05em;">Received</span></div>
       <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:6px;">
-        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">2</div></div>
-        <div style="width:1px; height:28px; background:#EAE5F4; flex-shrink:0;"></div>
-        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">AED 6,500</div></div>
+        <div><div style="font-size:11px; color:#2D3F5C; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#172B4D; line-height:1;">2</div></div>
+        <div style="width:1px; height:28px; background:#E2E8F0; flex-shrink:0;"></div>
+        <div><div style="font-size:11px; color:#2D3F5C; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#172B4D; line-height:1;">AED 6,500</div></div>
       </div>
       <div style="display:flex; align-items:center; gap:4px; margin-bottom:8px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg><span style="font-size:11px; font-weight:600; color:#16A34A;">+20% vs last month</span></div>
       <div style="display:flex; align-items:flex-end; gap:3px; height:28px;"><div style="flex:1; background:#BBF7D0; border-radius:2px 2px 0 0; height:45%;"></div><div style="flex:1; background:#BBF7D0; border-radius:2px 2px 0 0; height:55%;"></div><div style="flex:1; background:#BBF7D0; border-radius:2px 2px 0 0; height:50%;"></div><div style="flex:1; background:#BBF7D0; border-radius:2px 2px 0 0; height:70%;"></div><div style="flex:1; background:#BBF7D0; border-radius:2px 2px 0 0; height:85%;"></div><div style="flex:1; background:#15803D; border-radius:2px 2px 0 0; height:100%;"></div></div>
     </div>
-    <div style="padding:14px 16px; border-right:1px solid #EAE5F4;">
-      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#9F1239; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#4E465E; text-transform:uppercase; letter-spacing:.05em;">Failed</span></div>
+    <div style="padding:14px 16px; border-right:1px solid #E2E8F0;">
+      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#9F1239; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#2D3F5C; text-transform:uppercase; letter-spacing:.05em;">Failed</span></div>
       <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:6px;">
-        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">1</div></div>
-        <div style="width:1px; height:28px; background:#EAE5F4; flex-shrink:0;"></div>
-        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">AED 4,500</div></div>
+        <div><div style="font-size:11px; color:#2D3F5C; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#172B4D; line-height:1;">1</div></div>
+        <div style="width:1px; height:28px; background:#E2E8F0; flex-shrink:0;"></div>
+        <div><div style="font-size:11px; color:#2D3F5C; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#172B4D; line-height:1;">AED 4,500</div></div>
       </div>
       <div style="display:flex; align-items:center; gap:4px; margin-bottom:8px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span style="font-size:11px; font-weight:600; color:#16A34A;">-10% vs last month</span></div>
       <div style="display:flex; align-items:flex-end; gap:3px; height:28px;"><div style="flex:1; background:#FECDD3; border-radius:2px 2px 0 0; height:60%;"></div><div style="flex:1; background:#FECDD3; border-radius:2px 2px 0 0; height:75%;"></div><div style="flex:1; background:#FECDD3; border-radius:2px 2px 0 0; height:55%;"></div><div style="flex:1; background:#FECDD3; border-radius:2px 2px 0 0; height:70%;"></div><div style="flex:1; background:#FECDD3; border-radius:2px 2px 0 0; height:65%;"></div><div style="flex:1; background:#9F1239; border-radius:2px 2px 0 0; height:100%;"></div></div>
     </div>
     <div style="padding:14px 16px;">
-      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#475569; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#4E465E; text-transform:uppercase; letter-spacing:.05em;">Stopped</span></div>
+      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#475569; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#2D3F5C; text-transform:uppercase; letter-spacing:.05em;">Stopped</span></div>
       <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:6px;">
-        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">1</div></div>
-        <div style="width:1px; height:28px; background:#EAE5F4; flex-shrink:0;"></div>
-        <div><div style="font-size:11px; color:#4E465E; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#120C24; line-height:1;">AED 2,000</div></div>
+        <div><div style="font-size:11px; color:#2D3F5C; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#172B4D; line-height:1;">1</div></div>
+        <div style="width:1px; height:28px; background:#E2E8F0; flex-shrink:0;"></div>
+        <div><div style="font-size:11px; color:#2D3F5C; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#172B4D; line-height:1;">AED 2,000</div></div>
       </div>
       <div style="display:flex; align-items:center; gap:4px; margin-bottom:8px;"><span style="font-size:13px; color:#6B7280; font-weight:700; line-height:1;">&#8594;</span><span style="font-size:11px; font-weight:600; color:#6B7280;">same as last month</span></div>
       <div style="display:flex; align-items:flex-end; gap:3px; height:28px;"><div style="flex:1; background:#E2E8F0; border-radius:2px 2px 0 0; height:50%;"></div><div style="flex:1; background:#E2E8F0; border-radius:2px 2px 0 0; height:55%;"></div><div style="flex:1; background:#E2E8F0; border-radius:2px 2px 0 0; height:50%;"></div><div style="flex:1; background:#E2E8F0; border-radius:2px 2px 0 0; height:52%;"></div><div style="flex:1; background:#E2E8F0; border-radius:2px 2px 0 0; height:50%;"></div><div style="flex:1; background:#475569; border-radius:2px 2px 0 0; height:100%;"></div></div>
     </div>
   </div>
-  <div style="background:#F8FAFC; border-top:1px solid #EAE5F4; padding:10px 16px; display:flex; align-items:center; gap:24px;">
-    <span style="font-size:11px; font-weight:700; color:#4E465E; text-transform:uppercase; letter-spacing:.04em;">Total</span>
-    <span style="font-size:12px; font-weight:600; color:#120C24;">4 collections</span>
-    <span style="font-size:12px; font-weight:600; color:#120C24;">AED 13,000</span>
+  <div style="background:#F8FAFC; border-top:1px solid #E2E8F0; padding:10px 16px; display:flex; align-items:center; gap:24px;">
+    <span style="font-size:11px; font-weight:700; color:#2D3F5C; text-transform:uppercase; letter-spacing:.04em;">Total</span>
+    <span style="font-size:12px; font-weight:600; color:#172B4D;">4 collections</span>
+    <span style="font-size:12px; font-weight:600; color:#172B4D;">AED 13,000</span>
   </div>
 </div>
 <div style="display:flex; flex-wrap:wrap; align-items:flex-end; gap:10px 12px; margin-bottom:12px;">
-  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Collection Reference</label><input type="text" id="filter-log-ref" placeholder="e.g. COL-00854-5" oninput="applyLogColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
-  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Mandate Reference</label><input type="text" id="filter-log-mandate" placeholder="e.g. MND-00854" oninput="applyLogColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
-  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Payer Name</label><input type="text" id="filter-log-payer" placeholder="e.g. Khalid Al Nuaimi" oninput="applyLogColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; width:170px;"/></div>
-  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Status</label>
-    <select id="filter-log-status" onchange="applyLogColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234E465E' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; padding-right:28px; width:185px;">
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#2D3F5C;">Collection Reference</label><input type="text" id="filter-log-ref" placeholder="e.g. COL-00854-5" oninput="applyLogColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#2D3F5C;">Mandate Reference</label><input type="text" id="filter-log-mandate" placeholder="e.g. MND-00854" oninput="applyLogColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#2D3F5C;">Payer Name</label><input type="text" id="filter-log-payer" placeholder="e.g. Khalid Al Nuaimi" oninput="applyLogColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif; width:170px;"/></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#2D3F5C;">Status</label>
+    <select id="filter-log-status" onchange="applyLogColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; padding-right:28px; width:185px;">
       <option value="all">All Statuses</option><option value="received">Received</option><option value="failed">Failed</option><option value="stopped">Stopped</option>
     </select></div>
-  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#4E465E;">Collection Date</label>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#2D3F5C;">Collection Date</label>
     <div style="display:flex; align-items:center; gap:6px;">
-      <select id="filter-log-date-mode" onchange="handleLogColDateModeChange()" style="height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234E465E' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; padding-right:28px; width:130px;">
+      <select id="filter-log-date-mode" onchange="handleLogColDateModeChange()" style="height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; padding-right:28px; width:130px;">
         <option value="none">Any date</option><option value="after">After</option><option value="before">Before</option><option value="between">Between</option><option value="except">Except the period</option>
       </select>
-      <input type="date" id="filter-log-date-a" onchange="applyLogColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
-      <span id="filter-log-date-sep" style="display:none; font-size:12px; color:#4E465E; font-weight:600;">and</span>
-      <input type="date" id="filter-log-date-b" onchange="applyLogColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
+      <input type="date" id="filter-log-date-a" onchange="applyLogColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif;"/>
+      <span id="filter-log-date-sep" style="display:none; font-size:12px; color:#2D3F5C; font-weight:600;">and</span>
+      <input type="date" id="filter-log-date-b" onchange="applyLogColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif;"/>
     </div></div>
   <div style="display:flex; flex-direction:column; gap:4px;">
-    <label style="font-size:11px; font-weight:600; color:#4E465E;">Submitted On</label>
+    <label style="font-size:11px; font-weight:600; color:#2D3F5C;">Submitted On</label>
     <div style="display:flex; align-items:center; gap:6px;">
       <select id="log-filter-submitted-mode" onchange="handleLogSubmittedModeChange()"
-        style="height:34px; padding:0 28px 0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234E465E' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; width:130px;">
+        style="height:34px; padding:0 28px 0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; width:130px;">
         <option value="none">Any date</option>
         <option value="after">After</option>
         <option value="before">Before</option>
         <option value="between">Between</option>
         <option value="except">Except the period</option>
       </select>
-      <input type="date" id="log-filter-submitted-a" onchange="applyLogColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
-      <span id="log-filter-submitted-sep" style="display:none; font-size:12px; color:#4E465E; font-weight:600;">and</span>
-      <input type="date" id="log-filter-submitted-b" onchange="applyLogColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#120C24; background:white; border:1.5px solid #EAE5F4; border-radius:8px; font-family:Inter,sans-serif;"/>
+      <input type="date" id="log-filter-submitted-a" onchange="applyLogColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif;"/>
+      <span id="log-filter-submitted-sep" style="display:none; font-size:12px; color:#2D3F5C; font-weight:600;">and</span>
+      <input type="date" id="log-filter-submitted-b" onchange="applyLogColFilters()" style="display:none; height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif;"/>
     </div>
   </div>
-  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:transparent;">Clear</label><button type="button" onclick="clearLogColFilters()" style="height:34px; padding:0 14px; background:white; color:#4E465E; border:1.5px solid #EAE5F4; border-radius:8px; font-size:12px; font-weight:600; font-family:Inter,sans-serif; cursor:pointer;">Clear</button></div>
+  <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:transparent;">Clear</label><button type="button" onclick="clearLogColFilters()" style="height:34px; padding:0 14px; background:white; color:#2D3F5C; border:1.5px solid #E2E8F0; border-radius:8px; font-size:12px; font-weight:600; font-family:DM Sans,sans-serif; cursor:pointer;">Clear</button></div>
 </div>
 <div style="display:flex; justify-content:flex-end; margin-bottom:10px;"><div style="position:relative;" data-export-wrap="log" id="log-export-wrapper">
-<button onclick="toggleColExport('log')" style="display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 14px; background:white; color:#120C24; border:1.5px solid #EAE5F4; border-radius:8px; font-size:13px; font-weight:600; font-family:Inter,sans-serif; cursor:pointer;">
+<button onclick="toggleColExport('log')" style="display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 14px; background:white; color:#172B4D; border:1.5px solid #E2E8F0; border-radius:8px; font-size:13px; font-weight:600; font-family:DM Sans,sans-serif; cursor:pointer;">
 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
-<div id="log-export-menu" class="col-export-menu" style="display:none; position:absolute; right:0; top:calc(100% + 4px); background:white; border:1px solid #EAE5F4; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.08); min-width:150px; z-index:200; overflow:hidden;">
-<button type="button" onclick="closeColExport('log')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as CSV</button>
-<button type="button" onclick="closeColExport('log')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as Excel</button>
-<button type="button" onclick="closeColExport('log')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:Inter,sans-serif;background:none;border:none;cursor:pointer;">Export as PDF</button>
+<div id="log-export-menu" class="col-export-menu" style="display:none; position:absolute; right:0; top:calc(100% + 4px); background:white; border:1px solid #E2E8F0; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.08); min-width:150px; z-index:200; overflow:hidden;">
+<button type="button" onclick="closeColExport('log')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:DM Sans,sans-serif;background:none;border:none;cursor:pointer;">Export as CSV</button>
+<button type="button" onclick="closeColExport('log')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:DM Sans,sans-serif;background:none;border:none;cursor:pointer;">Export as Excel</button>
+<button type="button" onclick="closeColExport('log')" style="display:block;width:100%;padding:10px 14px;text-align:left;font-size:13px;font-family:DM Sans,sans-serif;background:none;border:none;cursor:pointer;">Export as PDF</button>
 </div></div></div>
 <div class="card table-card"><div class="table-scroll">
 <table class="plans-table" aria-label="Collection log">
@@ -1533,6 +1559,522 @@
 </table>
 <p id="log-col-empty" class="empty-hint" style="display:none;">No collections match your filters.</p>
 </div></div>
+</main></div></div></section><section class="phase5-screen-anchor phase5-desktop-screen col-screen-section" id="screen-col005" aria-label="Collection Statement Validation">
+<div class="app-shell">
+<aside class="sidebar" aria-label="Main navigation"><div class="sidebar-inner">
+<div class="sidebar-brand"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="logoP5i" x1="4" y1="34" x2="30" y2="2" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00A3A3"/><stop offset="50%" stop-color="#00BFBF"/><stop offset="100%" stop-color="#4ADE80"/></linearGradient><linearGradient id="logoP5j" x1="19" y1="34" x2="34" y2="4" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00BFBF"/><stop offset="100%" stop-color="#4ADE80"/></linearGradient></defs><path d="M4 34 C4 34 10 20 19 4 C19 4 14 14 11 22 C9 27 8 30 8 34 Z" fill="url(#logoP5i)" opacity="0.95"/><path d="M34 34 C34 34 28 20 19 4 C19 4 24 14 27 22 C29 27 30 30 30 34 Z" fill="url(#logoP5j)" opacity="0.9"/><path d="M11 23 Q19 19 27 23" stroke="url(#logoP5i)" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/><path d="M19 4 C19 4 20 8 21 12 C22 16 22 18 22 20 L19 26 L16 20 C16 18 16 16 17 12 C18 8 19 4 19 4 Z" fill="rgba(255,255,255,0.12)"/></svg><div class="brand-text"><span class="brand-name">Direct Debit.cc</span><span class="brand-sub">DIRECT DEBIT PLATFORM</span></div></div>
+<nav class="sidebar-nav" aria-label="Primary">
+<a href="#" class="nav-item"><i data-lucide="layout-dashboard"></i><span>Overview</span></a>
+<a href="../phase-1/phase-1-all-screens.html#screen-pp002" class="nav-item"><i data-lucide="credit-card"></i><span>Payment Plans</span></a>
+<a href="../phase-3/phase-3-all-screens.html#screen-mandates" class="nav-item"><i data-lucide="file-text"></i><span>Mandates Management</span></a>
+<a href="../phase_4/phase-4-all-screens.html#screen-rej001" class="nav-item"><i data-lucide="x-circle"></i><span>Rejections</span></a>
+<div class="nav-group" id="nav-group-collections">
+  <div class="nav-group-header nav-item" onclick="toggleNavGroup('collections')" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between;">
+    <span style="display:flex; align-items:center; gap:10px;"><i data-lucide="banknote"></i>Collections</span>
+    <i data-lucide="chevron-down" id="nav-group-collections-chevron" style="width:14px; height:14px; transition:transform 0.2s; transform:rotate(180deg);"></i>
+  </div>
+  <div class="nav-sub-items" id="nav-sub-collections" style="display:flex; flex-direction:column; padding-left:20px;">
+    <a class="nav-item nav-sub-item" href="#screen-col001" onclick="showColScreen('screen-col001'); return false;"><i data-lucide="layout-dashboard" style="width:15px; height:15px;"></i>Collections Dashboard</a>
+    <a class="nav-item nav-sub-item" href="#screen-col002" onclick="showColScreen('screen-col002'); return false;"><i data-lucide="clock" style="width:15px; height:15px;"></i>Ready for Collection</a>
+    <a class="nav-item nav-sub-item" href="#screen-col003" onclick="showColScreen('screen-col003'); return false;"><i data-lucide="calendar" style="width:15px; height:15px;"></i>Future Collections</a>
+    <a class="nav-item nav-sub-item" href="#screen-col004" onclick="showColScreen('screen-col004'); return false;"><i data-lucide="archive" style="width:15px; height:15px;"></i>Collection Log</a>
+  </div>
+</div>
+<a href="#" class="nav-item"><i data-lucide="alert-triangle"></i><span>Bounced</span></a>
+<a href="#" class="nav-item"><i data-lucide="bar-chart-2"></i><span>Reports</span></a>
+<a href="#" class="nav-item"><i data-lucide="settings"></i><span>Settings</span></a>
+</nav>
+<div class="sidebar-atmosphere" aria-hidden="true"></div>
+<div class="sidebar-footer"><div class="merchant-card"><div class="merchant-avatar">DM</div><div class="merchant-meta"><div class="merchant-name">Demo Merchant LLC</div><div class="merchant-id">MID-UAE-10294</div></div></div></div>
+</div></aside>
+<div class="main-wrap">
+<header class="topbar phase3-topbar">
+<div class="topbar-search-wrap"><div class="search-field"><i data-lucide="search" class="search-icon"></i>
+<input type="search" id="stmt-col-search" placeholder="Search by Collection Reference or Payer Name..." autocomplete="off" aria-label="Search statement collections"/></div></div>
+<div class="topbar-actions"><button type="button" class="btn btn-ghost" aria-label="Notifications"><i data-lucide="bell" style="width:20px;height:20px"></i></button>
+<div class="user-pill"><div class="user-avatar">AK</div><span class="user-name">Amira K.</span></div></div>
+</header>
+<main class="content">
+<nav class="breadcrumb" aria-label="Breadcrumb">
+<a href="#" onclick="showColScreen('screen-col002'); return false;">Overview</a>
+<span class="breadcrumb-sep">/</span>
+<a href="#" onclick="showColScreen('screen-col002'); return false;">Collections</a>
+<span class="breadcrumb-sep">/</span>
+<a href="#" onclick="showColScreen('screen-col002'); return false;">Ready for Collection</a>
+<span class="breadcrumb-sep">/</span>
+<span class="breadcrumb-current">Collection Statement Validation</span>
+</nav>
+
+<div class="page-header" style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:20px;">
+<div>
+<h1 class="page-title">Collection Statement Validation</h1>
+<p style="font-size:13px; color:var(--txt-muted); margin-top:4px;">Review the uploaded collections below. Edit any invalid fields directly. Valid collections can be sent to the bank.</p>
+</div>
+<div style="display:flex; align-items:center; gap:10px; flex-shrink:0;">
+<button onclick="confirmSendValidOnly()"
+style="display:inline-flex; align-items:center; gap:7px; height:36px; padding:0 16px; background:var(--teal); color:white; border:none; border-radius:8px; font-size:13px; font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer;">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Send Valid Only
+</button>
+<button onclick="confirmSendSelected()"
+style="display:inline-flex; align-items:center; gap:7px; height:36px; padding:0 16px; background:white; color:var(--txt-head); border:1.5px solid var(--border); border-radius:8px; font-size:13px; font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer;">
+Send Selected
+</button>
+<button onclick="confirmCancelStatement()"
+style="display:inline-flex; align-items:center; gap:7px; height:36px; padding:0 16px; background:white; color:var(--red); border:1.5px solid #FECACA; border-radius:8px; font-size:13px; font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer;">
+Cancel
+</button>
+</div>
+</div>
+
+<div style="display:flex; align-items:center; gap:16px; background:white; border:1px solid var(--border); border-radius:10px; padding:12px 18px; margin-bottom:20px; font-size:12px;">
+<span style="color:var(--txt-muted);">Uploaded:</span>
+<span style="font-weight:700; color:var(--txt-head);" class="stmt-total">12 collections</span>
+<span style="width:1px; height:16px; background:var(--border);"></span>
+<span style="display:flex; align-items:center; gap:5px; color:#15803D; font-weight:600;" class="stmt-valid-count">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+6 Valid
+</span>
+<span style="width:1px; height:16px; background:var(--border);"></span>
+<span style="display:flex; align-items:center; gap:5px; color:var(--red); font-weight:600;" class="stmt-invalid-count">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+6 Invalid
+</span>
+</div>
+
+<div style="margin-bottom:28px;">
+<div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+<div style="width:10px; height:10px; border-radius:50%; background:#15803D;"></div>
+<span style="font-size:13px; font-weight:700; color:#15803D;">Valid Collections (6)</span>
+</div>
+<div style="background:white; border-radius:12px; border:1px solid var(--border); overflow:hidden;">
+<table style="width:100%; border-collapse:collapse; font-size:12px;" id="validStmtTable">
+<thead>
+<tr style="background:var(--bg);">
+<th style="width:40px; padding:10px 12px; text-align:center; border-bottom:1px solid var(--border);">
+<input type="checkbox" id="valid-select-all" onchange="toggleValidSelectAll(this)" style="width:14px; height:14px; accent-color:var(--teal); cursor:pointer;"/>
+</th>
+<th style="padding:10px 12px; text-align:left; font-weight:600; color:var(--txt-muted); text-transform:uppercase; letter-spacing:.04em; border-bottom:1px solid var(--border);">Mandate Reference</th>
+<th style="padding:10px 12px; text-align:left; font-weight:600; color:var(--txt-muted); text-transform:uppercase; letter-spacing:.04em; border-bottom:1px solid var(--border);">Amount (AED)</th>
+<th style="padding:10px 12px; text-align:left; font-weight:600; color:var(--txt-muted); text-transform:uppercase; letter-spacing:.04em; border-bottom:1px solid var(--border);">Collection Date</th>
+<th style="width:88px; border-bottom:1px solid var(--border);"></th>
+</tr>
+</thead>
+<tbody id="validStmtBody">
+<tr class="stmt-row stmt-valid" data-id="sv1" style="border-bottom:1px solid var(--border-lt);">
+<td style="padding:10px 12px; text-align:center; vertical-align:top;">
+<input type="checkbox" class="valid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--teal); cursor:pointer; margin-top:2px;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="text" value="MND-00850" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="number" value="2500" data-field="amount" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="date" value="2026-07-01" data-field="date" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
+<button onclick="stmtSendRow(this)"
+title="Send this collection"
+style="width:30px; height:30px; background:var(--teal-pale); border:1px solid var(--teal-light); border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--teal); margin-right:4px;">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+</button>
+<button onclick="stmtDeleteRow(this)"
+title="Delete this collection"
+style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+</button>
+</td>
+</tr>
+<tr class="stmt-row stmt-valid" data-id="sv2" style="border-bottom:1px solid var(--border-lt);">
+<td style="padding:10px 12px; text-align:center; vertical-align:top;">
+<input type="checkbox" class="valid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--teal); cursor:pointer; margin-top:2px;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="text" value="MND-00851" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="number" value="5000" data-field="amount" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="date" value="2026-07-01" data-field="date" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
+<button onclick="stmtSendRow(this)"
+title="Send this collection"
+style="width:30px; height:30px; background:var(--teal-pale); border:1px solid var(--teal-light); border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--teal); margin-right:4px;">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+</button>
+<button onclick="stmtDeleteRow(this)"
+title="Delete this collection"
+style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+</button>
+</td>
+</tr>
+<tr class="stmt-row stmt-valid" data-id="sv3" style="border-bottom:1px solid var(--border-lt);">
+<td style="padding:10px 12px; text-align:center; vertical-align:top;">
+<input type="checkbox" class="valid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--teal); cursor:pointer; margin-top:2px;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="text" value="MND-00852" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="number" value="1800" data-field="amount" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="date" value="2026-07-05" data-field="date" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
+<button onclick="stmtSendRow(this)"
+title="Send this collection"
+style="width:30px; height:30px; background:var(--teal-pale); border:1px solid var(--teal-light); border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--teal); margin-right:4px;">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+</button>
+<button onclick="stmtDeleteRow(this)"
+title="Delete this collection"
+style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+</button>
+</td>
+</tr>
+<tr class="stmt-row stmt-valid" data-id="sv4" style="border-bottom:1px solid var(--border-lt);">
+<td style="padding:10px 12px; text-align:center; vertical-align:top;">
+<input type="checkbox" class="valid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--teal); cursor:pointer; margin-top:2px;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="text" value="MND-00853" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="number" value="12000" data-field="amount" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="date" value="2026-07-10" data-field="date" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
+<button onclick="stmtSendRow(this)"
+title="Send this collection"
+style="width:30px; height:30px; background:var(--teal-pale); border:1px solid var(--teal-light); border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--teal); margin-right:4px;">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+</button>
+<button onclick="stmtDeleteRow(this)"
+title="Delete this collection"
+style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+</button>
+</td>
+</tr>
+<tr class="stmt-row stmt-valid" data-id="sv5" style="border-bottom:1px solid var(--border-lt);">
+<td style="padding:10px 12px; text-align:center; vertical-align:top;">
+<input type="checkbox" class="valid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--teal); cursor:pointer; margin-top:2px;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="text" value="MND-00855" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="number" value="3200" data-field="amount" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="date" value="2026-07-01" data-field="date" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
+<button onclick="stmtSendRow(this)"
+title="Send this collection"
+style="width:30px; height:30px; background:var(--teal-pale); border:1px solid var(--teal-light); border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--teal); margin-right:4px;">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+</button>
+<button onclick="stmtDeleteRow(this)"
+title="Delete this collection"
+style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+</button>
+</td>
+</tr>
+<tr class="stmt-row stmt-valid" data-id="sv6" style="border-bottom:1px solid var(--border-lt);">
+<td style="padding:10px 12px; text-align:center; vertical-align:top;">
+<input type="checkbox" class="valid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--teal); cursor:pointer; margin-top:2px;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="text" value="MND-00856" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="number" value="8000" data-field="amount" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="date" value="2026-07-15" data-field="date" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
+<button onclick="stmtSendRow(this)"
+title="Send this collection"
+style="width:30px; height:30px; background:var(--teal-pale); border:1px solid var(--teal-light); border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--teal); margin-right:4px;">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+</button>
+<button onclick="stmtDeleteRow(this)"
+title="Delete this collection"
+style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div style="background:#FFF5F5; border:1.5px solid #FECACA; border-radius:10px; padding:12px 16px; margin-bottom:14px; font-size:12px; color:var(--red); line-height:1.7;">
+⚠️ <strong>Some fields below were cleared because they contained invalid values from the uploaded file.</strong>
+Please fill them in manually before sending. Common reasons:
+<ul style="margin:6px 0 0 16px; padding:0; color:var(--txt-body);">
+<li>Amount field contained text instead of a number</li>
+<li>Amount was zero or negative</li>
+<li>Collection date was in an unrecognised format</li>
+<li>A required field (Mandate Reference, Amount, or Collection Date) was empty in the file</li>
+</ul>
+</div>
+
+<div>
+<div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+<div style="width:10px; height:10px; border-radius:50%; background:var(--red);"></div>
+<span style="font-size:13px; font-weight:700; color:var(--red);">Invalid Collections (6)</span>
+<span style="font-size:11px; color:var(--txt-muted); margin-left:4px;">— Fix errors to move these to the Valid section</span>
+</div>
+<div style="background:white; border-radius:12px; border:1px solid #FECACA; overflow:hidden;">
+<table style="width:100%; border-collapse:collapse; font-size:12px;" id="invalidStmtTable">
+<thead>
+<tr style="background:#FFF5F5;">
+<th style="width:40px; padding:10px 12px; text-align:center; border-bottom:1px solid #FECACA;">
+<input type="checkbox" id="invalid-select-all" onchange="toggleInvalidSelectAll(this)" style="width:14px; height:14px; accent-color:var(--red); cursor:pointer;"/>
+</th>
+<th style="padding:10px 12px; text-align:left; font-weight:600; color:var(--txt-muted); text-transform:uppercase; letter-spacing:.04em; border-bottom:1px solid #FECACA;">Mandate Reference</th>
+<th style="padding:10px 12px; text-align:left; font-weight:600; color:var(--txt-muted); text-transform:uppercase; letter-spacing:.04em; border-bottom:1px solid #FECACA;">Amount (AED)</th>
+<th style="padding:10px 12px; text-align:left; font-weight:600; color:var(--txt-muted); text-transform:uppercase; letter-spacing:.04em; border-bottom:1px solid #FECACA;">Collection Date</th>
+<th style="padding:10px 12px; text-align:left; font-weight:600; color:var(--txt-muted); text-transform:uppercase; letter-spacing:.04em; border-bottom:1px solid #FECACA;">Error</th>
+<th style="width:88px; border-bottom:1px solid #FECACA;"></th>
+</tr>
+</thead>
+<tbody id="invalidStmtBody">
+<tr class="stmt-row stmt-invalid" data-id="si1" style="background:#FFF8F8; border-bottom:1px solid #FECACA;">
+<td style="padding:10px 12px; text-align:center; vertical-align:top;">
+<input type="checkbox" class="invalid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--red); cursor:pointer; margin-top:2px;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="text" value="MND-99999" data-field="mandate" class="stmt-input stmt-error-field" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:2px solid var(--red); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:#FFF5F5; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="number" value="3000" data-field="amount" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="date" value="2026-07-01" data-field="date" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<span class="stmt-error-badge" style="display:inline-flex; align-items:center; gap:4px; background:#FEE2E2; color:var(--red); border-radius:6px; padding:3px 8px; font-size:11px; font-weight:600; white-space:nowrap;">
+Mandate not found
+</span>
+</td>
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
+<button disabled title="Fix errors before sending"
+style="width:30px; height:30px; background:var(--border-lt); border:1px solid var(--border); border-radius:7px; cursor:not-allowed; display:inline-flex; align-items:center; justify-content:center; color:var(--txt-faint); margin-right:4px; opacity:0.5;">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+</button>
+<button onclick="stmtDeleteRow(this)"
+title="Delete this collection"
+style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+</button>
+</td>
+</tr>
+<tr class="stmt-row stmt-invalid" data-id="si2" style="background:#FFF8F8; border-bottom:1px solid #FECACA;">
+<td style="padding:10px 12px; text-align:center; vertical-align:top;">
+<input type="checkbox" class="invalid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--red); cursor:pointer; margin-top:2px;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="text" value="MND-00854" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="number" value="99999" data-field="amount" class="stmt-input stmt-error-field" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:2px solid var(--red); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:#FFF5F5; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="date" value="2026-07-03" data-field="date" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<span class="stmt-error-badge" style="display:inline-flex; align-items:center; gap:4px; background:#FEE2E2; color:var(--red); border-radius:6px; padding:3px 8px; font-size:11px; font-weight:600; white-space:nowrap;">
+Amount exceeds maximum
+</span>
+</td>
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
+<button disabled title="Fix errors before sending"
+style="width:30px; height:30px; background:var(--border-lt); border:1px solid var(--border); border-radius:7px; cursor:not-allowed; display:inline-flex; align-items:center; justify-content:center; color:var(--txt-faint); margin-right:4px; opacity:0.5;">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+</button>
+<button onclick="stmtDeleteRow(this)"
+title="Delete this collection"
+style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+</button>
+</td>
+</tr>
+<tr class="stmt-row stmt-invalid" data-id="si3" style="background:#FFF8F8; border-bottom:1px solid #FECACA;">
+<td style="padding:10px 12px; text-align:center; vertical-align:top;">
+<input type="checkbox" class="invalid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--red); cursor:pointer; margin-top:2px;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="text" value="MND-00850" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="number" value="2500" data-field="amount" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="date" value="2026-07-15" data-field="date" class="stmt-input stmt-error-field" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:2px solid var(--red); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:#FFF5F5; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<span class="stmt-error-badge" style="display:inline-flex; align-items:center; gap:4px; background:#FEE2E2; color:var(--red); border-radius:6px; padding:3px 8px; font-size:11px; font-weight:600; white-space:nowrap;">
+Frequency period already used
+</span>
+</td>
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
+<button disabled title="Fix errors before sending"
+style="width:30px; height:30px; background:var(--border-lt); border:1px solid var(--border); border-radius:7px; cursor:not-allowed; display:inline-flex; align-items:center; justify-content:center; color:var(--txt-faint); margin-right:4px; opacity:0.5;">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+</button>
+<button onclick="stmtDeleteRow(this)"
+title="Delete this collection"
+style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+</button>
+</td>
+</tr>
+<tr class="stmt-row stmt-invalid" data-id="si4" style="background:#FFF8F8; border-bottom:1px solid #FECACA;">
+<td style="padding:10px 12px; text-align:center; vertical-align:top;">
+<input type="checkbox" class="invalid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--red); cursor:pointer; margin-top:2px;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="text" value="MND-00857" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="number" value="" placeholder="Enter amount" data-field="amount" class="stmt-input stmt-error-field" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:2px solid var(--red); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:#FFF5F5; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="date" value="2026-07-08" data-field="date" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<span class="stmt-error-badge" style="display:inline-flex; align-items:center; gap:4px; background:#FEE2E2; color:var(--red); border-radius:6px; padding:3px 8px; font-size:11px; font-weight:600; white-space:nowrap;">
+Amount must be a number
+</span>
+</td>
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
+<button disabled title="Fix errors before sending"
+style="width:30px; height:30px; background:var(--border-lt); border:1px solid var(--border); border-radius:7px; cursor:not-allowed; display:inline-flex; align-items:center; justify-content:center; color:var(--txt-faint); margin-right:4px; opacity:0.5;">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+</button>
+<button onclick="stmtDeleteRow(this)"
+title="Delete this collection"
+style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+</button>
+</td>
+</tr>
+<tr class="stmt-row stmt-invalid" data-id="si5" style="background:#FFF8F8; border-bottom:1px solid #FECACA;">
+<td style="padding:10px 12px; text-align:center; vertical-align:top;">
+<input type="checkbox" class="invalid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--red); cursor:pointer; margin-top:2px;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="text" value="MND-00858" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="number" value="" placeholder="Enter amount" data-field="amount" class="stmt-input stmt-error-field" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:2px solid var(--red); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:#FFF5F5; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="date" value="2026-07-12" data-field="date" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<span class="stmt-error-badge" style="display:inline-flex; align-items:center; gap:4px; background:#FEE2E2; color:var(--red); border-radius:6px; padding:3px 8px; font-size:11px; font-weight:600; white-space:nowrap;">
+Amount must be a positive number
+</span>
+</td>
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
+<button disabled title="Fix errors before sending"
+style="width:30px; height:30px; background:var(--border-lt); border:1px solid var(--border); border-radius:7px; cursor:not-allowed; display:inline-flex; align-items:center; justify-content:center; color:var(--txt-faint); margin-right:4px; opacity:0.5;">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+</button>
+<button onclick="stmtDeleteRow(this)"
+title="Delete this collection"
+style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+</button>
+</td>
+</tr>
+<tr class="stmt-row stmt-invalid" data-id="si6" style="background:#FFF8F8;">
+<td style="padding:10px 12px; text-align:center; vertical-align:top;">
+<input type="checkbox" class="invalid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--red); cursor:pointer; margin-top:2px;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="text" value="MND-00853" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="number" value="12000" data-field="amount" class="stmt-input" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="date" value="" data-field="date" class="stmt-input stmt-error-field" oninput="liveValidate(this)"
+style="width:100%; padding:7px 10px; border:2px solid var(--red); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:#FFF5F5; outline:none;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<span class="stmt-error-badge" style="display:inline-flex; align-items:center; gap:4px; background:#FEE2E2; color:var(--red); border-radius:6px; padding:3px 8px; font-size:11px; font-weight:600; white-space:nowrap;">
+Invalid date format
+</span>
+</td>
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
+<button disabled title="Fix errors before sending"
+style="width:30px; height:30px; background:var(--border-lt); border:1px solid var(--border); border-radius:7px; cursor:not-allowed; display:inline-flex; align-items:center; justify-content:center; color:var(--txt-faint); margin-right:4px; opacity:0.5;">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+</button>
+<button onclick="stmtDeleteRow(this)"
+title="Delete this collection"
+style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
 </main></div></div></section><script>
 let activeMenu = null;
 const COL_ACTION_LABELS = { send:"Send for Collection", stop:"Stop Collection", archive:"Archive", reminder:"Send Reminder to Payer", resend:"Resend to Bank", "reset-bank":"Reset Bank Submissions Count", "reset-payer":"Reset Payer Reminders Count", escalate:"Escalate" };
@@ -1579,8 +2121,21 @@ function toggleColExport(id){ const m=document.getElementById(id+"-export-menu")
 function closeColExport(id){ const m=document.getElementById(id+"-export-menu"); if(m)m.style.display="none"; }
 document.addEventListener("click",function(e){ if(!e.target.closest("[data-export-wrap]"))document.querySelectorAll(".col-export-menu").forEach(x=>x.style.display="none"); });
 function toggleDueSelectAll(master){ document.querySelectorAll(".due-row-check").forEach(cb=>{cb.checked=master.checked;}); onDueRowCheck(); }
-function onDueRowCheck(){ const all=document.querySelectorAll(".due-row-check"); const checked=document.querySelectorAll(".due-row-check:checked"); const master=document.getElementById("due-select-all"); const btn=document.getElementById("due-send-selected-btn"); const countBadge=document.getElementById("due-selected-count"); if(master){master.checked=checked.length===all.length&&all.length>0;master.indeterminate=checked.length>0&&checked.length<all.length;} const hasSelection=checked.length>0; if(btn){btn.disabled=!hasSelection;btn.style.background=hasSelection?"#7A5CFF":"#C4B5FD";btn.style.cursor=hasSelection?"pointer":"not-allowed";} if(countBadge)countBadge.textContent=checked.length; }
+function onDueRowCheck(){ const all=document.querySelectorAll(".due-row-check"); const checked=document.querySelectorAll(".due-row-check:checked"); const master=document.getElementById("due-select-all"); const btn=document.getElementById("due-send-selected-btn"); const countBadge=document.getElementById("due-selected-count"); if(master){master.checked=checked.length===all.length&&all.length>0;master.indeterminate=checked.length>0&&checked.length<all.length;} const hasSelection=checked.length>0; if(btn){btn.disabled=!hasSelection;btn.style.background=hasSelection?"#00A3A3":"#94A3B8";btn.style.cursor=hasSelection?"pointer":"not-allowed";} if(countBadge)countBadge.textContent=checked.length; }
 function sendSelectedCollections(){ const checked=document.querySelectorAll(".due-row-check:checked"); if(checked.length===0)return; showConfirmDialog("Send Selected for Collection","Are you sure you want to send "+checked.length+" selected collection"+(checked.length>1?"s":"")+" to the bank?","Send for Collection",function(){ showToast(checked.length+" collection"+(checked.length>1?"s":"")+" sent for collection successfully."); document.querySelectorAll(".due-row-check").forEach(cb=>cb.checked=false); const master=document.getElementById("due-select-all"); if(master){master.checked=false;master.indeterminate=false;} onDueRowCheck(); }); }
+function openUploadStatementPicker(){ document.getElementById("collection-statement-input").click(); }
+function handleStatementUpload(input){ if(!input.files||!input.files[0])return; const file=input.files[0]; input.value=""; showToast("Processing collection statement..."); setTimeout(()=>{showColScreen("screen-col005");},900); }
+function stmtSendRow(btn){ const row=btn.closest("tr"); showConfirmDialog("Send Collection","Are you sure you want to send this collection to the bank?","Send",function(){ if(row)row.remove(); showToast("Collection sent for collection successfully."); updateStmtSummary(); }); }
+function stmtDeleteRow(btn){ const row=btn.closest("tr"); showConfirmDialog("Delete Collection","Are you sure you want to delete this collection from the statement?","Delete",function(){ if(row)row.remove(); showToast("Collection removed."); updateStmtSummary(); }); }
+function liveValidate(input){ const row=input.closest("tr"); if(!row)return; const field=input.getAttribute("data-field"); let hasError=false; let errorMsg=""; if(field==="amount"){ const val=parseFloat(input.value); if(input.value.trim()===""||isNaN(val)){hasError=true;errorMsg="Amount must be a number";} else if(val<=0){hasError=true;errorMsg="Amount must be a positive number";} } else if(field==="date"){ const val=input.value.trim(); const d=new Date(val); if(!val||isNaN(d.getTime())){hasError=true;errorMsg="Invalid date format";} } else if(field==="mandate"){ if(input.value.trim()===""){hasError=true;errorMsg="Mandate Reference is required";} } if(hasError){ input.style.border="2px solid var(--red)"; input.style.background="#FFF5F5"; const badge=row.querySelector(".stmt-error-badge"); if(badge)badge.textContent=errorMsg; } else { input.style.border="1.5px solid var(--border)"; input.style.background="white"; input.classList.remove("stmt-error-field"); } const allInputs=row.querySelectorAll(".stmt-input"); let rowHasError=false; allInputs.forEach(inp=>{ if(inp.style.border&&inp.style.border.includes("var(--red)"))rowHasError=true; }); if(!rowHasError&&row.classList.contains("stmt-invalid")){ moveRowToValid(row); } }
+function moveRowToValid(row){ row.classList.remove("stmt-invalid"); row.classList.add("stmt-valid"); row.style.background=""; const errorCell=row.querySelector("td:nth-last-child(2)"); if(errorCell&&errorCell.querySelector(".stmt-error-badge"))errorCell.innerHTML=""; const validBody=document.getElementById("validStmtBody"); if(validBody)validBody.appendChild(row); showToast("Collection moved to Valid section."); updateStmtSummary(); }
+function updateStmtSummary(){ const validCount=document.querySelectorAll(".stmt-valid").length; const invalidCount=document.querySelectorAll(".stmt-invalid").length; const totalEl=document.querySelector("#screen-col005 .stmt-total"); if(totalEl)totalEl.textContent=(validCount+invalidCount)+" collections"; const validEl=document.querySelector("#screen-col005 .stmt-valid-count"); if(validEl)validEl.textContent=validCount+" Valid"; const invalidEl=document.querySelector("#screen-col005 .stmt-invalid-count"); if(invalidEl)invalidEl.textContent=invalidCount+" Invalid"; }
+function toggleValidSelectAll(master){ document.querySelectorAll(".valid-row-check").forEach(cb=>cb.checked=master.checked); }
+function toggleInvalidSelectAll(master){ document.querySelectorAll(".invalid-row-check").forEach(cb=>cb.checked=master.checked); }
+function onStmtCheckChange(){ const validChecks=document.querySelectorAll(".valid-row-check"); const validChecked=document.querySelectorAll(".valid-row-check:checked"); const validMaster=document.getElementById("valid-select-all"); if(validMaster){validMaster.checked=validChecked.length===validChecks.length&&validChecks.length>0;validMaster.indeterminate=validChecked.length>0&&validChecked.length<validChecks.length;} const invalidChecks=document.querySelectorAll(".invalid-row-check"); const invalidChecked=document.querySelectorAll(".invalid-row-check:checked"); const invalidMaster=document.getElementById("invalid-select-all"); if(invalidMaster){invalidMaster.checked=invalidChecked.length===invalidChecks.length&&invalidChecks.length>0;invalidMaster.indeterminate=invalidChecked.length>0&&invalidChecked.length<invalidChecks.length;} }
+function confirmSendValidOnly(){ const validCount=document.querySelectorAll(".stmt-valid").length; if(validCount===0){showToast("No valid collections to send.");return;} showConfirmDialog("Send Valid Collections Only","Are you sure you want to send all "+validCount+" valid collection"+(validCount>1?"s":"")+" to the bank? Invalid collections will be discarded.","Send Valid Only",function(){ showToast(validCount+" collection"+(validCount>1?"s":"")+" sent for collection successfully."); showColScreen("screen-col001"); }); }
+function confirmSendSelected(){ const selectedValid=document.querySelectorAll(".valid-row-check:checked"); const selectedInvalid=document.querySelectorAll(".invalid-row-check:checked"); if(selectedValid.length===0&&selectedInvalid.length===0){showToast("Please select at least one collection.");return;} if(selectedInvalid.length>0){ selectedInvalid.forEach(cb=>{ const row=cb.closest("tr"); if(row)row.style.outline="2px solid var(--red)"; }); if(selectedValid.length===0){showToast("None of the selected collections are valid. Please fix errors first.");return;} showConfirmDialog("Send Selected Collections",selectedInvalid.length+" selected collection"+(selectedInvalid.length>1?"s are":" is")+" invalid and will be discarded. Only the "+selectedValid.length+" valid selection"+(selectedValid.length>1?"s":"")+" will be sent. Continue?","Send Valid Selected",function(){ showToast(selectedValid.length+" collection"+(selectedValid.length>1?"s":"")+" sent for collection successfully."); showColScreen("screen-col001"); }); } else { showConfirmDialog("Send Selected Collections","Are you sure you want to send the "+selectedValid.length+" selected collection"+(selectedValid.length>1?"s":"")+" to the bank?","Send Selected",function(){ showToast(selectedValid.length+" collection"+(selectedValid.length>1?"s":"")+" sent for collection successfully."); showColScreen("screen-col001"); }); } }
+function confirmCancelStatement(){ showConfirmDialog("Cancel Upload","Are you sure you want to cancel? All collections in this statement — both valid and invalid — will be discarded.","Yes, Cancel",function(){ showColScreen("screen-col002"); }); }
 function toggleNavGroup(name){ document.querySelectorAll("#nav-sub-"+name).forEach(sub=>{ const open=sub.style.display!=="none"; sub.style.display=open?"none":"flex"; }); document.querySelectorAll("#nav-group-"+name+"-chevron").forEach(chevron=>{ const sub=document.querySelector("#nav-sub-"+name); const open=sub&&sub.style.display!=="none"; chevron.style.transform=open?"rotate(180deg)":""; }); }
 function showColScreen(id){ document.querySelectorAll(".phase5-desktop-screen").forEach(s=>s.classList.remove("is-active")); const el=document.getElementById(id); if(el)el.classList.add("is-active"); document.querySelectorAll(".prototype-nav a[data-screen]").forEach(a=>{a.classList.toggle("active",a.getAttribute("data-screen")===id);}); document.querySelectorAll(".nav-sub-item").forEach(a=>a.classList.remove("active")); document.querySelectorAll('.nav-sub-item[href="#'+id+'"]').forEach(a=>a.classList.add("active")); document.querySelectorAll("#nav-sub-collections").forEach(sub=>{sub.style.display="flex";}); document.querySelectorAll("#nav-group-collections-chevron").forEach(c=>{c.style.transform="rotate(180deg)";}); closeActionMenu(); try{history.replaceState(null,"","#"+id);}catch(e){} if(window.lucide)lucide.createIcons(); if(id==="screen-col001")applyColFilters(); if(id==="screen-col002")applyDueColFilters(); if(id==="screen-col003")applyFutureColFilters(); if(id==="screen-col004")applyLogColFilters(); }
 function initColTables(){ ["colTableBody","dueColTableBody"].forEach(tid=>{ const tbody=document.getElementById(tid); if(!tbody)return; tbody.querySelectorAll("tr").forEach(rebuildColActionMenu); tbody.addEventListener("click",e=>{ const btn=e.target.closest("[data-action]"); if(!btn)return; const tr=btn.closest("tr"); if(tr)handleColAction(btn,tr); }); }); applyColFilters(); applyDueColFilters(); applyFutureColFilters(); applyLogColFilters(); }
