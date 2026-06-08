@@ -1085,7 +1085,21 @@
     <div style="width:24px; height:24px; background:#475569; border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg></div>
     <div><span style="font-size:13px; font-weight:700; color:#172B4D;">4 in Collection Log</span><span style="font-size:11px; color:#2D3F5C; display:block;">Open Collection Log â†’</span></div>
   </a>
-  <div style="margin-left:auto;" id="col-export-wrapper"><div style="position:relative;" data-export-wrap="col" id="col-export-wrapper">
+  <div style="margin-left:auto; display:flex; align-items:center; gap:10px;">
+  <div style="position:relative;" id="col-settlement-upload-wrapper">
+  <button onclick="document.getElementById('col-settlement-file-input').click()"
+    style="display:inline-flex; align-items:center; gap:7px; height:36px; padding:0 14px; background:white; color:#0F1F38; border:1.5px solid #E2E8F0; border-radius:8px; font-size:13px; font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="17 8 12 3 7 8"/>
+      <line x1="12" y1="3" x2="12" y2="15"/>
+    </svg>
+    Upload Bank Settlement File
+  </button>
+  <input type="file" id="col-settlement-file-input" accept=".csv,.txt,.xlsx,.xls"
+    style="display:none" onchange="handleSettlementUpload(this)"/>
+</div>
+  <div style="position:relative;" data-export-wrap="col" id="col-export-wrapper">
 <button onclick="toggleColExport('col')" style="display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 14px; background:white; color:#172B4D; border:1.5px solid #E2E8F0; border-radius:8px; font-size:13px; font-weight:600; font-family:DM Sans,sans-serif; cursor:pointer;">
 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
 <div id="col-export-menu" class="col-export-menu" style="display:none; position:absolute; right:0; top:calc(100% + 4px); background:white; border:1px solid #E2E8F0; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.08); min-width:150px; z-index:200; overflow:hidden;">
@@ -1104,49 +1118,49 @@
   <th scope="col" class="col-status">Status</th><th scope="col">Actions</th>
 </tr></thead>
 <tbody id="colTableBody"><tr data-search="COL-00850-1 MND-00850 Ahmed Al Marzouqi" data-status="ready" data-collection-date="2026-06-01" data-submitted="">
-  <td><a class="link-mandate" href="#">COL-00850-1</a></td>
+  <td style="color:#0F1F38; font-weight:500;">COL-00850-1</td>
   <td><a class="link-mandate" href="#">MND-00850</a></td>
   <td class="col-payer-name">Ahmed Al Marzouqi</td>
   <td>AED 2,500</td><td>01/06/2026</td><td>—</td>
   <td class="col-status"><span class="badge badge-col-ready">Ready for Collection</span></td>
   <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
 </tr><tr data-search="COL-00851-2 MND-00851 Sara Al Hamdan" data-status="ready" data-collection-date="2026-06-01" data-submitted="">
-  <td><a class="link-mandate" href="#">COL-00851-2</a></td>
+  <td style="color:#0F1F38; font-weight:500;">COL-00851-2</td>
   <td><a class="link-mandate" href="#">MND-00851</a></td>
   <td class="col-payer-name">Sara Al Hamdan</td>
   <td>AED 5,000</td><td>01/06/2026</td><td>—</td>
   <td class="col-status"><span class="badge badge-col-ready">Ready for Collection</span></td>
   <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
 </tr><tr data-search="COL-00850-8 MND-00850 Ahmed Al Marzouqi" data-status="ready" data-collection-date="2026-05-25" data-submitted="">
-  <td><a class="link-mandate" href="#">COL-00850-8</a></td>
+  <td style="color:#0F1F38; font-weight:500;">COL-00850-8</td>
   <td><a class="link-mandate" href="#">MND-00850</a></td>
   <td class="col-payer-name">Ahmed Al Marzouqi</td>
   <td>AED 2,500</td><td>25/05/2026</td><td>—</td>
   <td class="col-status"><span class="badge badge-col-ready">Ready for Collection</span></td>
   <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
 </tr><tr data-search="COL-00852-3 MND-00852 Mohammed Al Rashidi" data-status="sent" data-collection-date="2026-05-30" data-submitted="2026-05-31">
-  <td><a class="link-mandate" href="#">COL-00852-3</a></td>
+  <td style="color:#0F1F38; font-weight:500;">COL-00852-3</td>
   <td><a class="link-mandate" href="#">MND-00852</a></td>
   <td class="col-payer-name">Mohammed Al Rashidi</td>
   <td>AED 1,800</td><td>30/05/2026</td><td>31/05/2026</td>
   <td class="col-status"><span class="badge badge-col-sent">Sent for Collection</span></td>
   <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" disabled aria-disabled="true">&#8942;</button></div></td>
 </tr><tr data-search="COL-00853-4 MND-00853 Fatima Al Zaabi" data-status="pending-bank" data-collection-date="2026-05-30" data-submitted="2026-05-31">
-  <td><a class="link-mandate" href="#">COL-00853-4</a></td>
+  <td style="color:#0F1F38; font-weight:500;">COL-00853-4</td>
   <td><a class="link-mandate" href="#">MND-00853</a></td>
   <td class="col-payer-name">Fatima Al Zaabi</td>
   <td>AED 12,000</td><td>30/05/2026</td><td>31/05/2026</td>
   <td class="col-status"><span class="badge badge-col-pending-bank">Pending Bank Response</span></td>
   <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" disabled aria-disabled="true">&#8942;</button></div></td>
 </tr><tr data-search="COL-00855-6 MND-00855 Reem Al Mansoori" data-status="bounced" data-collection-date="2026-05-28" data-submitted="2026-05-29" class="row-col-bounced">
-  <td><a class="link-mandate" href="#">COL-00855-6</a></td>
+  <td style="color:#0F1F38; font-weight:500;">COL-00855-6</td>
   <td><a class="link-mandate" href="#">MND-00855</a></td>
   <td class="col-payer-name">Reem Al Mansoori</td>
   <td>AED 3,200</td><td>28/05/2026</td><td>29/05/2026</td>
   <td class="col-status"><span class="badge badge-col-bounced">Bounced</span></td>
   <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
 </tr><tr data-search="COL-00856-7 MND-00856 Omar Al Shamsi" data-status="bounced" data-collection-date="2026-05-25" data-submitted="2026-05-26" class="row-col-bounced">
-  <td><a class="link-mandate" href="#">COL-00856-7</a></td>
+  <td style="color:#0F1F38; font-weight:500;">COL-00856-7</td>
   <td><a class="link-mandate" href="#">MND-00856</a></td>
   <td class="col-payer-name">Omar Al Shamsi</td>
   <td>AED 8,000</td><td>25/05/2026</td><td>26/05/2026</td>
@@ -1841,9 +1855,6 @@ Please fill them in manually before sending. Common reasons:
 <table style="width:100%; border-collapse:collapse; font-size:12px;" id="invalidStmtTable">
 <thead>
 <tr style="background:#FFF5F5;">
-<th style="width:40px; padding:10px 12px; text-align:center; border-bottom:1px solid #FECACA;">
-<input type="checkbox" id="invalid-select-all" onchange="toggleInvalidSelectAll(this)" style="width:14px; height:14px; accent-color:var(--red); cursor:pointer;"/>
-</th>
 <th style="padding:10px 12px; text-align:left; font-weight:600; color:var(--txt-muted); text-transform:uppercase; letter-spacing:.04em; border-bottom:1px solid #FECACA;">Mandate Reference</th>
 <th style="padding:10px 12px; text-align:left; font-weight:600; color:var(--txt-muted); text-transform:uppercase; letter-spacing:.04em; border-bottom:1px solid #FECACA;">Amount (AED)</th>
 <th style="padding:10px 12px; text-align:left; font-weight:600; color:var(--txt-muted); text-transform:uppercase; letter-spacing:.04em; border-bottom:1px solid #FECACA;">Collection Date</th>
@@ -1853,9 +1864,6 @@ Please fill them in manually before sending. Common reasons:
 </thead>
 <tbody id="invalidStmtBody">
 <tr class="stmt-row stmt-invalid" data-id="si1" style="background:#FFF8F8; border-bottom:1px solid #FECACA;">
-<td style="padding:10px 12px; text-align:center; vertical-align:top;">
-<input type="checkbox" class="invalid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--red); cursor:pointer; margin-top:2px;"/>
-</td>
 <td style="padding:8px 12px; vertical-align:top;">
 <input type="text" value="MND-99999" data-field="mandate" class="stmt-input stmt-error-field" oninput="liveValidate(this)"
 style="width:100%; padding:7px 10px; border:2px solid var(--red); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:#FFF5F5; outline:none;"/>
@@ -1882,9 +1890,6 @@ style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; bo
 </td>
 </tr>
 <tr class="stmt-row stmt-invalid" data-id="si2" style="background:#FFF8F8; border-bottom:1px solid #FECACA;">
-<td style="padding:10px 12px; text-align:center; vertical-align:top;">
-<input type="checkbox" class="invalid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--red); cursor:pointer; margin-top:2px;"/>
-</td>
 <td style="padding:8px 12px; vertical-align:top;">
 <input type="text" value="MND-00854" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
 style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
@@ -1911,9 +1916,6 @@ style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; bo
 </td>
 </tr>
 <tr class="stmt-row stmt-invalid" data-id="si3" style="background:#FFF8F8; border-bottom:1px solid #FECACA;">
-<td style="padding:10px 12px; text-align:center; vertical-align:top;">
-<input type="checkbox" class="invalid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--red); cursor:pointer; margin-top:2px;"/>
-</td>
 <td style="padding:8px 12px; vertical-align:top;">
 <input type="text" value="MND-00850" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
 style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
@@ -1940,9 +1942,6 @@ style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; bo
 </td>
 </tr>
 <tr class="stmt-row stmt-invalid" data-id="si4" style="background:#FFF8F8; border-bottom:1px solid #FECACA;">
-<td style="padding:10px 12px; text-align:center; vertical-align:top;">
-<input type="checkbox" class="invalid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--red); cursor:pointer; margin-top:2px;"/>
-</td>
 <td style="padding:8px 12px; vertical-align:top;">
 <input type="text" value="MND-00857" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
 style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
@@ -1969,9 +1968,6 @@ style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; bo
 </td>
 </tr>
 <tr class="stmt-row stmt-invalid" data-id="si5" style="background:#FFF8F8; border-bottom:1px solid #FECACA;">
-<td style="padding:10px 12px; text-align:center; vertical-align:top;">
-<input type="checkbox" class="invalid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--red); cursor:pointer; margin-top:2px;"/>
-</td>
 <td style="padding:8px 12px; vertical-align:top;">
 <input type="text" value="MND-00858" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
 style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
@@ -1998,9 +1994,6 @@ style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; bo
 </td>
 </tr>
 <tr class="stmt-row stmt-invalid" data-id="si6" style="background:#FFF8F8;">
-<td style="padding:10px 12px; text-align:center; vertical-align:top;">
-<input type="checkbox" class="invalid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--red); cursor:pointer; margin-top:2px;"/>
-</td>
 <td style="padding:8px 12px; vertical-align:top;">
 <input type="text" value="MND-00853" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
 style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
@@ -2085,15 +2078,16 @@ function onDueRowCheck(){ const all=document.querySelectorAll(".due-row-check");
 function sendSelectedCollections(){ const checked=document.querySelectorAll(".due-row-check:checked"); if(checked.length===0)return; showConfirmDialog("Send Selected for Collection","Are you sure you want to send "+checked.length+" selected collection"+(checked.length>1?"s":"")+" to the bank?","Send for Collection",function(){ showToast(checked.length+" collection"+(checked.length>1?"s":"")+" sent for collection successfully."); document.querySelectorAll(".due-row-check").forEach(cb=>cb.checked=false); const master=document.getElementById("due-select-all"); if(master){master.checked=false;master.indeterminate=false;} onDueRowCheck(); }); }
 function openUploadStatementPicker(){ document.getElementById("collection-statement-input").click(); }
 function handleStatementUpload(input){ if(!input.files||!input.files[0])return; const file=input.files[0]; input.value=""; showToast("Processing collection statement..."); setTimeout(()=>{showColScreen("screen-col005");},900); }
+function handleSettlementUpload(input){ if(!input.files||!input.files[0])return; input.value=""; showToast("Processing settlement file..."); setTimeout(()=>{ const rows=document.querySelectorAll("#colTableBody tr"); rows.forEach(tr=>{ const statusCell=tr.cells[6]; if(!statusCell)return; const statusText=statusCell.textContent.toLowerCase(); if(statusText.includes("pending bank response")){ const ref=(tr.cells[0]?.textContent||"").trim(); const lastChar=ref.slice(-1); const isReceived=parseInt(lastChar)%2===0; if(isReceived){ statusCell.innerHTML='<span class="bdg" style="background:#DCFCE7;color:#15803D;">Received</span>'; tr.style.background="#FFFFFF"; } else { statusCell.innerHTML='<span class="bdg" style="background:#FFE4E6;color:#BE123C;">Bounced</span>'; tr.style.background="#FFF5F5"; } } }); updateReadyCount(); showToast("Settlement file processed. Collection statuses updated."); },1200); }
 function stmtDeleteRow(btn){ const row=btn.closest("tr"); showConfirmDialog("Delete Collection","Are you sure you want to delete this collection from the statement?","Delete",function(){ if(row)row.remove(); showToast("Collection removed."); updateStmtSummary(); }); }
-function liveValidate(input){ const row=input.closest("tr"); if(!row)return; const field=input.getAttribute("data-field"); let hasError=false; let errorMsg=""; if(field==="amount"){ const val=parseFloat(input.value); if(input.value.trim()===""||isNaN(val)){hasError=true;errorMsg="Amount must be a number";} else if(val<=0){hasError=true;errorMsg="Amount must be a positive number";} } else if(field==="date"){ const val=input.value.trim(); const d=new Date(val); if(!val||isNaN(d.getTime())){hasError=true;errorMsg="Invalid date format";} } else if(field==="mandate"){ if(input.value.trim()===""){hasError=true;errorMsg="Mandate Reference is required";} } if(hasError){ input.style.border="2px solid var(--red)"; input.style.background="#FFF5F5"; const badge=row.querySelector(".stmt-error-badge"); if(badge)badge.textContent=errorMsg; } else { input.style.border="1.5px solid var(--border)"; input.style.background="white"; input.classList.remove("stmt-error-field"); } const allInputs=row.querySelectorAll(".stmt-input"); let rowHasError=false; allInputs.forEach(inp=>{ if(inp.style.border&&inp.style.border.includes("var(--red)"))rowHasError=true; }); if(!rowHasError&&row.classList.contains("stmt-invalid")){ moveRowToValid(row); } }
-function moveRowToValid(row){ row.classList.remove("stmt-invalid"); row.classList.add("stmt-valid"); row.style.background=""; const errorCell=row.querySelector("td:nth-last-child(2)"); if(errorCell&&errorCell.querySelector(".stmt-error-badge"))errorCell.innerHTML=""; const validBody=document.getElementById("validStmtBody"); if(validBody)validBody.appendChild(row); showToast("Collection moved to Valid section."); updateStmtSummary(); }
+function liveValidate(input){ const row=input.closest("tr"); if(!row)return; const field=input.getAttribute("data-field"); let hasError=false; let errorMsg=""; if(field==="amount"){ const val=parseFloat(input.value); if(input.value.trim()===""||isNaN(val)){hasError=true;errorMsg="Amount must be a number";} else if(val<=0){hasError=true;errorMsg="Amount must be a positive number";} } else if(field==="date"){ const val=input.value.trim(); if(!val||isNaN(new Date(val).getTime())){hasError=true;errorMsg="Invalid date format";} } else if(field==="mandate"){ if(input.value.trim()===""){hasError=true;errorMsg="Mandate Reference is required";} } if(hasError){ input.style.border="2px solid var(--red)"; input.style.background="#FFF5F5"; } else { input.style.border="1.5px solid var(--border)"; input.style.background="white"; } const isInvalid=row.classList.contains("stmt-invalid"); const isValid=row.classList.contains("stmt-valid"); if(isInvalid){ const badge=row.querySelector(".stmt-error-badge"); if(badge&&hasError)badge.textContent=errorMsg; let rowStillHasError=false; row.querySelectorAll(".stmt-input").forEach(inp=>{ if(inp.style.border&&inp.style.border.includes("var(--red)"))rowStillHasError=true; }); if(!rowStillHasError)moveRowToValid(row); } else if(isValid&&hasError){ moveRowToInvalid(row,errorMsg); } }
+function moveRowToValid(row){ row.classList.remove("stmt-invalid"); row.classList.add("stmt-valid"); row.style.background=""; const errorCell=row.querySelector("td:has(.stmt-error-badge)")||(()=>{ const tds=row.querySelectorAll("td"); for(const td of tds){ if(td.querySelector(".stmt-error-badge"))return td; } return null; })(); if(errorCell)errorCell.remove(); if(!row.querySelector("input.valid-row-check")){ const checkTd=document.createElement("td"); checkTd.style.cssText="padding:10px 12px; text-align:center; vertical-align:top;"; checkTd.innerHTML='<input type="checkbox" class="valid-row-check" onchange="onStmtCheckChange()" style="width:14px;height:14px;accent-color:var(--teal);cursor:pointer;margin-top:2px;"/>'; row.insertBefore(checkTd,row.firstChild); } const validBody=document.getElementById("validStmtBody"); if(validBody)validBody.appendChild(row); showToast("All errors resolved. Row moved to Valid section."); updateStmtSummary(); }
+function moveRowToInvalid(row,errorMsg){ row.classList.remove("stmt-valid"); row.classList.add("stmt-invalid"); row.style.background="#FFF8F8"; const checkboxTd=row.querySelector("td:first-child"); if(checkboxTd&&checkboxTd.querySelector('input[type="checkbox"]'))checkboxTd.remove(); if(!row.querySelector(".stmt-error-badge")){ const actionsTd=row.querySelector("td:last-child"); const errorTd=document.createElement("td"); errorTd.style.cssText="padding:8px 12px; vertical-align:top;"; errorTd.innerHTML='<span class="stmt-error-badge" style="display:inline-flex;align-items:center;gap:4px;background:#FEE2E2;color:var(--red);border-radius:6px;padding:3px 8px;font-size:11px;font-weight:600;white-space:nowrap;">'+errorMsg+"</span>"; row.insertBefore(errorTd,actionsTd); } else { row.querySelector(".stmt-error-badge").textContent=errorMsg; } const invalidBody=document.getElementById("invalidStmtBody"); if(invalidBody)invalidBody.appendChild(row); showToast("Error detected. Row moved to Invalid section."); updateStmtSummary(); }
 function updateStmtSummary(){ const validCount=document.querySelectorAll(".stmt-valid").length; const invalidCount=document.querySelectorAll(".stmt-invalid").length; const totalEl=document.querySelector("#screen-col005 .stmt-total"); if(totalEl)totalEl.textContent=(validCount+invalidCount)+" collections"; const validEl=document.querySelector("#screen-col005 .stmt-valid-count"); if(validEl)validEl.textContent=validCount+" Valid"; const invalidEl=document.querySelector("#screen-col005 .stmt-invalid-count"); if(invalidEl)invalidEl.textContent=invalidCount+" Invalid"; }
 function toggleValidSelectAll(master){ document.querySelectorAll(".valid-row-check").forEach(cb=>cb.checked=master.checked); }
-function toggleInvalidSelectAll(master){ document.querySelectorAll(".invalid-row-check").forEach(cb=>cb.checked=master.checked); }
-function onStmtCheckChange(){ const validChecks=document.querySelectorAll(".valid-row-check"); const validChecked=document.querySelectorAll(".valid-row-check:checked"); const validMaster=document.getElementById("valid-select-all"); if(validMaster){validMaster.checked=validChecked.length===validChecks.length&&validChecks.length>0;validMaster.indeterminate=validChecked.length>0&&validChecked.length<validChecks.length;} const invalidChecks=document.querySelectorAll(".invalid-row-check"); const invalidChecked=document.querySelectorAll(".invalid-row-check:checked"); const invalidMaster=document.getElementById("invalid-select-all"); if(invalidMaster){invalidMaster.checked=invalidChecked.length===invalidChecks.length&&invalidChecks.length>0;invalidMaster.indeterminate=invalidChecked.length>0&&invalidChecked.length<invalidChecks.length;} }
+function onStmtCheckChange(){ const validChecks=document.querySelectorAll(".valid-row-check"); const validChecked=document.querySelectorAll(".valid-row-check:checked"); const validMaster=document.getElementById("valid-select-all"); if(validMaster){validMaster.checked=validChecked.length===validChecks.length&&validChecks.length>0;validMaster.indeterminate=validChecked.length>0&&validChecked.length<validChecks.length;} }
 function confirmSendValidOnly(){ const validCount=document.querySelectorAll(".stmt-valid").length; if(validCount===0){showToast("No valid collections to send.");return;} showConfirmDialog("Send Valid Collections Only","Are you sure you want to send all "+validCount+" valid collection"+(validCount>1?"s":"")+" to the bank? Invalid collections will be discarded.","Send Valid Only",function(){ showToast(validCount+" collection"+(validCount>1?"s":"")+" sent for collection successfully."); showColScreen("screen-col001"); },"var(--teal)"); }
-function confirmSendSelected(){ const selectedValid=document.querySelectorAll(".valid-row-check:checked"); const selectedInvalid=document.querySelectorAll(".invalid-row-check:checked"); if(selectedValid.length===0&&selectedInvalid.length===0){showToast("Please select at least one collection.");return;} if(selectedInvalid.length>0){ selectedInvalid.forEach(cb=>{ const row=cb.closest("tr"); if(row)row.style.outline="2px solid var(--red)"; }); if(selectedValid.length===0){showToast("None of the selected collections are valid. Please fix errors first.");return;} showConfirmDialog("Send Selected Collections",selectedInvalid.length+" selected collection"+(selectedInvalid.length>1?"s are":" is")+" invalid and will be discarded. Only the "+selectedValid.length+" valid selection"+(selectedValid.length>1?"s":"")+" will be sent. Continue?","Send Valid Selected",function(){ showToast(selectedValid.length+" collection"+(selectedValid.length>1?"s":"")+" sent for collection successfully."); showColScreen("screen-col001"); }); } else { showConfirmDialog("Send Selected Collections","Are you sure you want to send the "+selectedValid.length+" selected collection"+(selectedValid.length>1?"s":"")+" to the bank?","Send Selected",function(){ showToast(selectedValid.length+" collection"+(selectedValid.length>1?"s":"")+" sent for collection successfully."); showColScreen("screen-col001"); }); } }
+function confirmSendSelected(){ const selectedValid=document.querySelectorAll(".valid-row-check:checked"); if(selectedValid.length===0){showToast("Please select at least one collection.");return;} showConfirmDialog("Send Selected Collections","Are you sure you want to send the "+selectedValid.length+" selected collection"+(selectedValid.length>1?"s":"")+" to the bank?","Send Selected",function(){ showToast(selectedValid.length+" collection"+(selectedValid.length>1?"s":"")+" sent for collection successfully."); showColScreen("screen-col001"); }); }
 function confirmCancelStatement(){ showConfirmDialog("Cancel Upload","Are you sure you want to cancel? All collections in this statement — both valid and invalid — will be discarded.","Yes, Cancel",function(){ showColScreen("screen-col002"); }); }
 function toggleNavGroup(name){ document.querySelectorAll("#nav-sub-"+name).forEach(sub=>{ const open=sub.style.display!=="none"; sub.style.display=open?"none":"flex"; }); document.querySelectorAll("#nav-group-"+name+"-chevron").forEach(chevron=>{ const sub=document.querySelector("#nav-sub-"+name); const open=sub&&sub.style.display!=="none"; chevron.style.transform=open?"rotate(180deg)":""; }); }
 function showColScreen(id){ document.querySelectorAll(".phase5-desktop-screen").forEach(s=>s.classList.remove("is-active")); const el=document.getElementById(id); if(el)el.classList.add("is-active"); document.querySelectorAll(".prototype-nav a[data-screen]").forEach(a=>{a.classList.toggle("active",a.getAttribute("data-screen")===id);}); document.querySelectorAll(".nav-sub-item").forEach(a=>a.classList.remove("active")); document.querySelectorAll('.nav-sub-item[href="#'+id+'"]').forEach(a=>a.classList.add("active")); document.querySelectorAll("#nav-sub-collections").forEach(sub=>{sub.style.display="flex";}); document.querySelectorAll("#nav-group-collections-chevron").forEach(c=>{c.style.transform="rotate(180deg)";}); closeActionMenu(); try{history.replaceState(null,"","#"+id);}catch(e){} if(window.lucide)lucide.createIcons(); if(id==="screen-col001")applyColFilters(); if(id==="screen-col002")applyDueColFilters(); if(id==="screen-col003")applyFutureColFilters(); if(id==="screen-col004")applyLogColFilters(); }
