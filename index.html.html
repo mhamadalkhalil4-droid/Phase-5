@@ -911,7 +911,7 @@
     .phase5-screen-anchor { scroll-margin-top: 52px; }
     #screen-col001 .table-scroll, #screen-col002 .table-scroll, #screen-col003 .table-scroll, #screen-col004 .table-scroll, #screen-col005 .table-scroll { overflow-x: hidden; }
     .badge-col-ready { background: #EFF6FF; color: #1D4ED8; }
-    .badge-col-sent { background: #FEF9C3; color: #854D0E; }
+    .badge-col-processing { background: #FEF9C3; color: #854D0E; }
     .badge-col-pending-bank { background: #E6F7F7; color: #6D28D9; }
     .badge-col-bounced { background: #FFE4E6; color: #BE123C; }
     .badge-col-future { background: #ECFEFF; color: #0E7490; }
@@ -988,19 +988,9 @@
 <nav class="breadcrumb" aria-label="Breadcrumb"><a href="#">Overview</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-current">Collections</span></nav>
 <div class="page-header"><h1 class="page-title">Collections Dashboard</h1></div>
 <div style="background:white; border-radius:12px; box-shadow:0 1px 4px rgba(0,0,0,.06); margin-bottom:20px; overflow:hidden;">
-  <div style="display:grid; grid-template-columns:repeat(4,1fr);">
+  <div style="display:grid; grid-template-columns:repeat(3,1fr);">
     <div style="padding:14px 16px; border-right:1px solid #E2E8F0;">
-      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#1D4ED8; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#2D3F5C; text-transform:uppercase; letter-spacing:.05em;">Ready for Collection</span></div>
-      <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:6px;">
-        <div><div style="font-size:11px; color:#2D3F5C; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#172B4D; line-height:1;">3</div></div>
-        <div style="width:1px; height:28px; background:#E2E8F0; flex-shrink:0;"></div>
-        <div><div style="font-size:11px; color:#2D3F5C; margin-bottom:1px;">Amount</div><div style="font-size:22px; font-weight:700; color:#172B4D; line-height:1;">AED 10,000</div></div>
-      </div>
-      <div style="display:flex; align-items:center; gap:4px; margin-bottom:8px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg><span style="font-size:11px; font-weight:600; color:#16A34A;">+15% vs last month</span></div>
-      <div style="display:flex; align-items:flex-end; gap:3px; height:28px;"><div style="flex:1; background:#BFDBFE; border-radius:2px 2px 0 0; height:40%;"></div><div style="flex:1; background:#BFDBFE; border-radius:2px 2px 0 0; height:60%;"></div><div style="flex:1; background:#BFDBFE; border-radius:2px 2px 0 0; height:50%;"></div><div style="flex:1; background:#BFDBFE; border-radius:2px 2px 0 0; height:70%;"></div><div style="flex:1; background:#BFDBFE; border-radius:2px 2px 0 0; height:80%;"></div><div style="flex:1; background:#1D4ED8; border-radius:2px 2px 0 0; height:100%;"></div></div>
-    </div>
-    <div style="padding:14px 16px; border-right:1px solid #E2E8F0;">
-      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#854D0E; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#2D3F5C; text-transform:uppercase; letter-spacing:.05em;">Sent for Collection</span></div>
+      <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;"><div style="width:8px; height:8px; border-radius:50%; background:#854D0E; flex-shrink:0;"></div><span style="font-size:10px; font-weight:700; color:#2D3F5C; text-transform:uppercase; letter-spacing:.05em;">Processing Payment</span></div>
       <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:6px;">
         <div><div style="font-size:11px; color:#2D3F5C; margin-bottom:1px;">Collections</div><div style="font-size:22px; font-weight:700; color:#172B4D; line-height:1;">1</div></div>
         <div style="width:1px; height:28px; background:#E2E8F0; flex-shrink:0;"></div>
@@ -1032,8 +1022,8 @@
   </div>
   <div style="background:#F8FAFC; border-top:1px solid #E2E8F0; padding:10px 16px; display:flex; align-items:center; gap:24px;">
     <span style="font-size:11px; font-weight:700; color:#2D3F5C; text-transform:uppercase; letter-spacing:.04em;">Total</span>
-    <span style="font-size:12px; font-weight:600; color:#172B4D;">7 collections</span>
-    <span style="font-size:12px; font-weight:600; color:#172B4D;">AED 35,000</span>
+    <span style="font-size:12px; font-weight:600; color:#172B4D;">4 collections</span>
+    <span style="font-size:12px; font-weight:600; color:#172B4D;">AED 25,000</span>
   </div>
 </div>
 <div style="display:flex; flex-wrap:wrap; align-items:flex-end; gap:10px 12px; margin-bottom:12px;">
@@ -1042,7 +1032,7 @@
   <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#2D3F5C;">Payer Name</label><input type="text" id="filter-col-payer" placeholder="e.g. Ahmed Al Marzouqi" oninput="applyColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif; width:170px;"/></div>
   <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#2D3F5C;">Status</label>
     <select id="filter-col-status" onchange="applyColFilters()" style="height:34px; padding:0 10px; font-size:12px; color:#172B4D; background:white; border:1.5px solid #E2E8F0; border-radius:8px; font-family:DM Sans,sans-serif; appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 8px center; cursor:pointer; padding-right:28px; width:185px;">
-      <option value="all">All Statuses</option><option value="ready">Ready for Collection</option><option value="sent">Sent for Collection</option>
+      <option value="all">All Statuses</option><option value="processing">Processing Payment</option>
       <option value="pending-bank">Pending Bank Response</option><option value="bounced">Bounced</option>
     </select></div>
   <div style="display:flex; flex-direction:column; gap:4px;"><label style="font-size:11px; font-weight:600; color:#2D3F5C;">Collection Date</label>
@@ -1075,7 +1065,7 @@
 <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px; flex-wrap:wrap;">
   <a href="#screen-col002" onclick="showColScreen('screen-col002'); return false;" style="display:inline-flex; align-items:center; gap:8px; background:#EFF6FF; border:1.5px solid #BFDBFE; border-radius:10px; padding:8px 14px; text-decoration:none; flex:1; min-width:180px;">
     <div style="width:24px; height:24px; background:#1D4ED8; border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-    <div><span id="ready-count-badge" style="font-size:13px; font-weight:700; color:#172B4D;">3 Ready for Collection</span><span style="font-size:11px; color:#2D3F5C; display:block;">Open Ready for Collection â†’</span></div>
+    <div><span style="font-size:13px; font-weight:700; color:#172B4D;">Ready for Collection</span><span style="font-size:11px; color:#2D3F5C; display:block;">Open Ready for Collection â†’</span></div>
   </a>
   <a href="#screen-col003" onclick="showColScreen('screen-col003'); return false;" style="display:inline-flex; align-items:center; gap:8px; background:#ECFEFF; border:1.5px solid #A5F3FC; border-radius:10px; padding:8px 14px; text-decoration:none; flex:1; min-width:180px;">
     <div style="width:24px; height:24px; background:#0E7490; border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
@@ -1110,62 +1100,37 @@
 </div>
 <div class="card table-card"><div class="table-scroll">
 <table class="plans-table" aria-label="Collections">
-<colgroup><col style="width:145px"/><col style="width:130px"/><col style="width:130px"/><col style="width:95px"/><col style="width:95px"/><col style="width:100px"/><col style="width:130px"/><col style="width:52px"/></colgroup>
+<colgroup><col style="width:155px"/><col style="width:140px"/><col style="width:140px"/><col style="width:100px"/><col style="width:100px"/><col style="width:110px"/><col style="width:150px"/></colgroup>
 <thead><tr>
   <th scope="col">Collection Reference</th><th scope="col">Mandate Reference</th>
   <th scope="col" class="col-payer-name">Payer Name</th><th scope="col">Amount (AED)</th>
   <th scope="col">Collection Date</th><th scope="col">Submitted On</th>
-  <th scope="col" class="col-status">Status</th><th scope="col">Actions</th>
+  <th scope="col" class="col-status">Status</th>
 </tr></thead>
-<tbody id="colTableBody"><tr data-search="COL-00850-1 MND-00850 Ahmed Al Marzouqi" data-status="ready" data-collection-date="2026-06-01" data-submitted="">
-  <td style="color:#0F1F38; font-weight:500;">COL-00850-1</td>
-  <td><a class="link-mandate" href="#">MND-00850</a></td>
-  <td class="col-payer-name">Ahmed Al Marzouqi</td>
-  <td>AED 2,500</td><td>01/06/2026</td><td>—</td>
-  <td class="col-status"><span class="badge badge-col-ready">Ready for Collection</span></td>
-  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
-</tr><tr data-search="COL-00851-2 MND-00851 Sara Al Hamdan" data-status="ready" data-collection-date="2026-06-01" data-submitted="">
-  <td style="color:#0F1F38; font-weight:500;">COL-00851-2</td>
-  <td><a class="link-mandate" href="#">MND-00851</a></td>
-  <td class="col-payer-name">Sara Al Hamdan</td>
-  <td>AED 5,000</td><td>01/06/2026</td><td>—</td>
-  <td class="col-status"><span class="badge badge-col-ready">Ready for Collection</span></td>
-  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
-</tr><tr data-search="COL-00850-8 MND-00850 Ahmed Al Marzouqi" data-status="ready" data-collection-date="2026-05-25" data-submitted="">
-  <td style="color:#0F1F38; font-weight:500;">COL-00850-8</td>
-  <td><a class="link-mandate" href="#">MND-00850</a></td>
-  <td class="col-payer-name">Ahmed Al Marzouqi</td>
-  <td>AED 2,500</td><td>25/05/2026</td><td>—</td>
-  <td class="col-status"><span class="badge badge-col-ready">Ready for Collection</span></td>
-  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
-</tr><tr data-search="COL-00852-3 MND-00852 Mohammed Al Rashidi" data-status="sent" data-collection-date="2026-05-30" data-submitted="2026-05-31">
+<tbody id="colTableBody"><tr data-search="COL-00852-3 MND-00852 Mohammed Al Rashidi" data-status="processing" data-collection-date="2026-05-30" data-submitted="2026-05-31">
   <td style="color:#0F1F38; font-weight:500;">COL-00852-3</td>
   <td><a class="link-mandate" href="#">MND-00852</a></td>
   <td class="col-payer-name">Mohammed Al Rashidi</td>
   <td>AED 1,800</td><td>30/05/2026</td><td>31/05/2026</td>
-  <td class="col-status"><span class="badge badge-col-sent">Sent for Collection</span></td>
-  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" disabled aria-disabled="true">&#8942;</button></div></td>
+  <td class="col-status"><span class="badge badge-col-processing">Processing Payment</span></td>
 </tr><tr data-search="COL-00853-4 MND-00853 Fatima Al Zaabi" data-status="pending-bank" data-collection-date="2026-05-30" data-submitted="2026-05-31">
   <td style="color:#0F1F38; font-weight:500;">COL-00853-4</td>
   <td><a class="link-mandate" href="#">MND-00853</a></td>
   <td class="col-payer-name">Fatima Al Zaabi</td>
   <td>AED 12,000</td><td>30/05/2026</td><td>31/05/2026</td>
   <td class="col-status"><span class="badge badge-col-pending-bank">Pending Bank Response</span></td>
-  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" disabled aria-disabled="true">&#8942;</button></div></td>
 </tr><tr data-search="COL-00855-6 MND-00855 Reem Al Mansoori" data-status="bounced" data-collection-date="2026-05-28" data-submitted="2026-05-29" class="row-col-bounced">
   <td style="color:#0F1F38; font-weight:500;">COL-00855-6</td>
   <td><a class="link-mandate" href="#">MND-00855</a></td>
   <td class="col-payer-name">Reem Al Mansoori</td>
   <td>AED 3,200</td><td>28/05/2026</td><td>29/05/2026</td>
   <td class="col-status"><span class="badge badge-col-bounced">Bounced</span></td>
-  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
 </tr><tr data-search="COL-00856-7 MND-00856 Omar Al Shamsi" data-status="bounced" data-collection-date="2026-05-25" data-submitted="2026-05-26" class="row-col-bounced">
   <td style="color:#0F1F38; font-weight:500;">COL-00856-7</td>
   <td><a class="link-mandate" href="#">MND-00856</a></td>
   <td class="col-payer-name">Omar Al Shamsi</td>
   <td>AED 8,000</td><td>25/05/2026</td><td>26/05/2026</td>
   <td class="col-status"><span class="badge badge-col-bounced">Bounced</span></td>
-  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
 </tr></tbody>
 </table>
 <p id="col-empty" class="empty-hint" style="display:none;">No collections match your filters.</p>
@@ -1224,9 +1189,17 @@
   Upload Collection Statement
 </button>
 <input type="file" id="collection-statement-input" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleStatementUpload(this)"/>
-  <button id="due-send-selected-btn" onclick="sendSelectedCollections()" disabled style="display:inline-flex; align-items:center; gap:8px; height:36px; padding:0 16px; background:#94A3B8; color:white; border:none; border-radius:8px; font-size:13px; font-weight:600; font-family:DM Sans,sans-serif; cursor:not-allowed;">
+  <button id="col-send-selected-btn" onclick="sendSelectedCollections()" disabled style="display:inline-flex; align-items:center; gap:8px; height:36px; padding:0 16px; background:#94A3B8; color:white; border:none; border-radius:8px; font-size:13px; font-weight:600; font-family:DM Sans,sans-serif; cursor:not-allowed;">
     Send Selected for Collection <span id="due-selected-count" style="background:rgba(255,255,255,0.3); border-radius:12px; padding:1px 8px; font-size:12px;">0</span>
   </button>
+  <div style="display:flex; align-items:center; gap:8px; padding:6px 12px; background:#F8FAFC; border:1.5px solid var(--border); border-radius:8px;">
+  <span style="font-size:12px; font-weight:600; color:#64748B;">RPA Mode</span>
+  <button type="button" id="rpa-toggle-btn" onclick="toggleRpaMode()"
+    style="width:36px; height:20px; border-radius:10px; border:none; background:#E2E8F0; cursor:pointer; position:relative; transition:background 0.2s;">
+    <span id="rpa-toggle-knob" style="position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:white; transition:transform 0.2s;"></span>
+  </button>
+  <span id="rpa-mode-label" style="font-size:11px; font-weight:700; color:#94A3B8;">OFF</span>
+</div>
   <div style="position:relative;" data-export-wrap="due" id="due-export-wrapper">
 <button onclick="toggleColExport('due')" style="display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 14px; background:white; color:#172B4D; border:1.5px solid #E2E8F0; border-radius:8px; font-size:13px; font-weight:600; font-family:DM Sans,sans-serif; cursor:pointer;">
 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
@@ -1260,28 +1233,53 @@
   <th scope="col" class="col-payer-name">Payer Name</th><th scope="col">Amount (AED)</th>
   <th scope="col">Collection Date</th><th scope="col">Submitted On</th><th scope="col">Actions</th>
 </tr></thead>
-<tbody id="dueColTableBody"><tr data-search="COL-00850-1 MND-00850 Ahmed Al Marzouqi" data-status="ready" data-collection-date="2026-06-01">
-  <td style="text-align:center; vertical-align:top; padding-top:11px;"><input type="checkbox" class="due-row-check" onchange="onDueRowCheck()" style="width:15px; height:15px; cursor:pointer; accent-color:#00A3A3;"/></td>
-  <td><a class="link-mandate" href="#">COL-00850-1</a></td>
-  <td><a class="link-mandate" href="#">MND-00850</a></td>
-  <td class="col-payer-name">Ahmed Al Marzouqi</td>
-  <td>AED 2,500</td><td>01/06/2026</td><td>—</td>
-  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
-</tr><tr data-search="COL-00851-2 MND-00851 Sara Al Hamdan" data-status="ready" data-collection-date="2026-06-01">
-  <td style="text-align:center; vertical-align:top; padding-top:11px;"><input type="checkbox" class="due-row-check" onchange="onDueRowCheck()" style="width:15px; height:15px; cursor:pointer; accent-color:#00A3A3;"/></td>
-  <td><a class="link-mandate" href="#">COL-00851-2</a></td>
-  <td><a class="link-mandate" href="#">MND-00851</a></td>
-  <td class="col-payer-name">Sara Al Hamdan</td>
-  <td>AED 5,000</td><td>01/06/2026</td><td>—</td>
-  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
-</tr><tr data-search="COL-00850-8 MND-00850 Ahmed Al Marzouqi" data-status="ready" data-collection-date="2026-05-25">
-  <td style="text-align:center; vertical-align:top; padding-top:11px;"><input type="checkbox" class="due-row-check" onchange="onDueRowCheck()" style="width:15px; height:15px; cursor:pointer; accent-color:#00A3A3;"/></td>
-  <td><a class="link-mandate" href="#">COL-00850-8</a></td>
-  <td><a class="link-mandate" href="#">MND-00850</a></td>
-  <td class="col-payer-name">Ahmed Al Marzouqi</td>
-  <td>AED 2,500</td><td>25/05/2026</td><td>—</td>
-  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
-</tr></tbody>
+<tbody id="dueColTableBody">
+<tr data-search="COL-00850-1 MND-00850 Ahmed Al Marzouqi" data-status="ready" data-collection-date="2026-06-11" data-submitted="">
+  <td style="padding:10px 12px; text-align:center; vertical-align:top;"><input type="checkbox" class="due-row-check" onchange="onDueRowCheck()" style="width:14px;height:14px;cursor:pointer;accent-color:#00A3A3;margin-top:2px;"/></td>
+  <td style="padding:10px 12px; vertical-align:top; font-weight:600; color:#0F1F38;">COL-00850-1</td>
+  <td style="padding:10px 12px; vertical-align:top;"><a href="#" style="color:#00A3A3; text-decoration:underline; font-weight:500;">MND-00850</a></td>
+  <td style="padding:10px 12px; vertical-align:top; white-space:normal; word-break:break-word;">Ahmed Al Marzouqi</td>
+  <td style="padding:10px 12px; vertical-align:top;">2,500</td>
+  <td style="padding:10px 12px; vertical-align:top;">11/06/2026</td>
+  <td style="padding:10px 12px; vertical-align:top; color:#64748B;">—</td>
+  <td class="actions-cell">
+  <div class="action-wrapper">
+    <button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button>
+    <div class="action-menu" style="display:none;"></div>
+  </div>
+</td>
+</tr>
+<tr data-search="COL-00851-2 MND-00851 Sara Al Hamdan" data-status="ready" data-collection-date="2026-06-11" data-submitted="">
+  <td style="padding:10px 12px; text-align:center; vertical-align:top;"><input type="checkbox" class="due-row-check" onchange="onDueRowCheck()" style="width:14px;height:14px;cursor:pointer;accent-color:#00A3A3;margin-top:2px;"/></td>
+  <td style="padding:10px 12px; vertical-align:top; font-weight:600; color:#0F1F38;">COL-00851-2</td>
+  <td style="padding:10px 12px; vertical-align:top;"><a href="#" style="color:#00A3A3; text-decoration:underline; font-weight:500;">MND-00851</a></td>
+  <td style="padding:10px 12px; vertical-align:top; white-space:normal; word-break:break-word;">Sara Al Hamdan</td>
+  <td style="padding:10px 12px; vertical-align:top;">5,000</td>
+  <td style="padding:10px 12px; vertical-align:top;">11/06/2026</td>
+  <td style="padding:10px 12px; vertical-align:top; color:#64748B;">—</td>
+  <td class="actions-cell">
+  <div class="action-wrapper">
+    <button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button>
+    <div class="action-menu" style="display:none;"></div>
+  </div>
+</td>
+</tr>
+<tr data-search="COL-00852-3 MND-00852 Mohammed Al Rashidi" data-status="ready" data-collection-date="2026-06-11" data-submitted="">
+  <td style="padding:10px 12px; text-align:center; vertical-align:top;"><input type="checkbox" class="due-row-check" onchange="onDueRowCheck()" style="width:14px;height:14px;cursor:pointer;accent-color:#00A3A3;margin-top:2px;"/></td>
+  <td style="padding:10px 12px; vertical-align:top; font-weight:600; color:#0F1F38;">COL-00852-3</td>
+  <td style="padding:10px 12px; vertical-align:top;"><a href="#" style="color:#00A3A3; text-decoration:underline; font-weight:500;">MND-00852</a></td>
+  <td style="padding:10px 12px; vertical-align:top; white-space:normal; word-break:break-word;">Mohammed Al Rashidi</td>
+  <td style="padding:10px 12px; vertical-align:top;">1,800</td>
+  <td style="padding:10px 12px; vertical-align:top;">11/06/2026</td>
+  <td style="padding:10px 12px; vertical-align:top; color:#64748B;">—</td>
+  <td class="actions-cell">
+  <div class="action-wrapper">
+    <button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button>
+    <div class="action-menu" style="display:none;"></div>
+  </div>
+</td>
+</tr>
+</tbody>
 </table>
 <p id="due-col-empty" class="empty-hint" style="display:none;">No collections match your filters.</p>
 </div></div>
@@ -1380,36 +1378,41 @@
 </div></div></div>
 <div class="card table-card"><div class="table-scroll">
 <table class="plans-table" aria-label="Future collections">
-<colgroup><col style="width:155px"/><col style="width:155px"/><col style="width:100px"/><col style="width:120px"/><col style="width:140px"/></colgroup>
+<colgroup><col style="width:155px"/><col style="width:155px"/><col style="width:100px"/><col style="width:120px"/><col style="width:140px"/><col style="width:52px"/></colgroup>
 <thead><tr>
   <th scope="col">Mandate Reference</th><th scope="col" class="col-payer-name">Payer Name</th>
-  <th scope="col">Amount (AED)</th><th scope="col">Collection Date</th><th scope="col" class="col-status">Status</th>
+  <th scope="col">Amount (AED)</th><th scope="col">Collection Date</th><th scope="col" class="col-status">Status</th><th scope="col">Actions</th>
 </tr></thead>
-<tbody id="futureColTableBody"><tr data-search="MND-00850 Ahmed Al Marzouqi" data-status="future" data-collection-date="2026-07-01">
+<tbody id="futureColTableBody"><tr data-search="MND-00850 Ahmed Al Marzouqi" data-status="future" data-period-available="true" data-collection-date="2026-07-01">
   <td><a class="link-mandate" href="#">MND-00850</a></td>
   <td class="col-payer-name">Ahmed Al Marzouqi</td>
   <td>AED 2,500</td><td>01/07/2026</td>
   <td class="col-status"><span class="badge badge-col-future">Future Collection</span></td>
-</tr><tr data-search="MND-00851 Sara Al Hamdan" data-status="future" data-collection-date="2026-07-01">
+  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
+</tr><tr data-search="MND-00851 Sara Al Hamdan" data-status="future" data-period-available="false" data-collection-date="2026-07-01">
   <td><a class="link-mandate" href="#">MND-00851</a></td>
   <td class="col-payer-name">Sara Al Hamdan</td>
   <td>AED 5,000</td><td>01/07/2026</td>
   <td class="col-status"><span class="badge badge-col-future">Future Collection</span></td>
-</tr><tr data-search="MND-00852 Mohammed Al Rashidi" data-status="future" data-collection-date="2026-07-05">
+  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
+</tr><tr data-search="MND-00852 Mohammed Al Rashidi" data-status="future" data-period-available="true" data-collection-date="2026-07-05">
   <td><a class="link-mandate" href="#">MND-00852</a></td>
   <td class="col-payer-name">Mohammed Al Rashidi</td>
   <td>AED 1,800</td><td>05/07/2026</td>
   <td class="col-status"><span class="badge badge-col-future">Future Collection</span></td>
-</tr><tr data-search="MND-00853 Fatima Al Zaabi" data-status="future" data-collection-date="2026-07-10">
+  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
+</tr><tr data-search="MND-00853 Fatima Al Zaabi" data-status="future" data-period-available="false" data-collection-date="2026-07-10">
   <td><a class="link-mandate" href="#">MND-00853</a></td>
   <td class="col-payer-name">Fatima Al Zaabi</td>
   <td>AED 12,000</td><td>10/07/2026</td>
   <td class="col-status"><span class="badge badge-col-future">Future Collection</span></td>
-</tr><tr data-search="MND-00855 Reem Al Mansoori" data-status="future" data-collection-date="2026-07-15">
+  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
+</tr><tr data-search="MND-00855 Reem Al Mansoori" data-status="future" data-period-available="true" data-collection-date="2026-07-15">
   <td><a class="link-mandate" href="#">MND-00855</a></td>
   <td class="col-payer-name">Reem Al Mansoori</td>
   <td>AED 5,700</td><td>15/07/2026</td>
   <td class="col-status"><span class="badge badge-col-future">Future Collection</span></td>
+  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
 </tr></tbody>
 </table>
 <p id="future-col-empty" class="empty-hint" style="display:none;">No collections match your filters.</p>
@@ -1551,21 +1554,18 @@
   <td class="col-payer-name">Khalid Al Nuaimi</td>
   <td>AED 3,500</td><td>28/05/2026</td><td>29/05/2026</td>
   <td class="col-status"><span class="badge badge-col-received">Received</span></td>
-  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
 </tr><tr data-search="COL-00857-9 MND-00857 Hamad Al Dhaheri" data-status="received" data-collection-date="2026-05-20" data-submitted="2026-05-21">
   <td><a class="link-mandate" href="#">COL-00857-9</a></td>
   <td><a class="link-mandate" href="#">MND-00857</a></td>
   <td class="col-payer-name">Hamad Al Dhaheri</td>
   <td>AED 3,000</td><td>20/05/2026</td><td>21/05/2026</td>
   <td class="col-status"><span class="badge badge-col-received">Received</span></td>
-  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
 </tr><tr data-search="COL-00858-10 MND-00858 Nora Al Kaabi" data-status="failed" data-collection-date="2026-05-15" data-submitted="2026-05-16" class="row-col-failed">
   <td><a class="link-mandate" href="#">COL-00858-10</a></td>
   <td><a class="link-mandate" href="#">MND-00858</a></td>
   <td class="col-payer-name">Nora Al Kaabi</td>
   <td>AED 4,500</td><td>15/05/2026</td><td>16/05/2026</td>
   <td class="col-status"><span class="badge badge-col-failed" style="background:#FFF1F2; color:#9F1239; white-space:normal; word-break:break-word;">Failed (Insufficient funds)</span></td>
-  <td class="actions-cell"><div class="action-wrapper"><button type="button" class="three-dot-btn" onclick="toggleActionMenu(this,event)">&#8942;</button><div class="action-menu" style="display:none;"></div></div></td>
 </tr><tr data-search="COL-00859-11 MND-00859 Saeed Al Marri" data-status="stopped" data-period-available="true" data-collection-date="2026-05-10" data-submitted="2026-05-11" class="row-col-stopped">
   <td><a class="link-mandate" href="#">COL-00859-11</a></td>
   <td><a class="link-mandate" href="#">MND-00859</a></td>
@@ -1636,13 +1636,9 @@
 <p style="font-size:13px; color:var(--txt-muted); margin-top:4px;">Review the uploaded collections below. Edit any invalid fields directly. Valid collections can be sent to the bank.</p>
 </div>
 <div style="display:flex; align-items:center; gap:10px; flex-shrink:0;">
-<button onclick="confirmSendValidOnly()"
+<button onclick="confirmSubmitValid()"
 style="display:inline-flex; align-items:center; gap:7px; height:36px; padding:0 16px; background:var(--teal); color:white; border:none; border-radius:8px; font-size:13px; font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer;">
-Send Valid Only
-</button>
-<button onclick="confirmSendSelected()"
-style="display:inline-flex; align-items:center; gap:7px; height:36px; padding:0 16px; background:white; color:var(--txt-head); border:1.5px solid var(--border); border-radius:8px; font-size:13px; font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer;">
-Send Selected
+Submit Valid
 </button>
 <button onclick="confirmCancelStatement()"
 style="display:inline-flex; align-items:center; gap:7px; height:36px; padding:0 16px; background:white; color:var(--red); border:1.5px solid #FECACA; border-radius:8px; font-size:13px; font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer;">
@@ -1655,40 +1651,53 @@ Cancel
 <span style="color:var(--txt-muted);">Uploaded:</span>
 <span style="font-weight:700; color:var(--txt-head);" class="stmt-total">12 collections</span>
 <span style="width:1px; height:16px; background:var(--border);"></span>
-<span style="display:flex; align-items:center; gap:5px; color:#15803D; font-weight:600;" class="stmt-valid-count">
-<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-6 Valid
-</span>
-<span style="width:1px; height:16px; background:var(--border);"></span>
-<span style="display:flex; align-items:center; gap:5px; color:var(--red); font-weight:600;" class="stmt-invalid-count">
-<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-6 Invalid
-</span>
+<span id="stmt-summary-counts" style="font-weight:600; color:var(--txt-head);">0 Valid · 0 Invalid</span>
 </div>
 
 <div style="margin-bottom:28px;">
-<div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
-<div style="width:10px; height:10px; border-radius:50%; background:#15803D;"></div>
-<span style="font-size:13px; font-weight:700; color:#15803D;">Valid Collections (6)</span>
+<div id="ready-section-header"
+  onclick="toggleValidSection()"
+  style="display:flex; align-items:center; justify-content:space-between;
+    padding:12px 16px; background:#F0FDF4; border:1.5px solid #BBF7D0;
+    border-radius:10px; cursor:pointer; user-select:none; margin-bottom:0;
+    transition:background 0.15s;"
+  onmouseenter="this.style.background='#DCFCE7'"
+  onmouseleave="this.style.background='#F0FDF4'">
+
+  <div style="display:flex; align-items:center; gap:10px;">
+    <div style="width:28px; height:28px; background:#15803D; border-radius:6px;
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white"
+        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
+    <div>
+      <div style="font-size:13px; font-weight:700; color:#15803D;" id="ready-section-label">Valid (0)</div>
+      <div style="font-size:11px; color:#166534; margin-top:1px;">Click to expand and review</div>
+    </div>
+  </div>
+
+  <svg id="valid-section-chevron"
+    width="18" height="18" viewBox="0 0 24 24" fill="none"
+    stroke="#15803D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+    style="flex-shrink:0; transition:transform 0.2s; transform:rotate(0deg);">
+    <polyline points="6 9 12 15 18 9"/>
+  </svg>
 </div>
+<div id="valid-section-body" style="display:none; border:1.5px solid #BBF7D0; border-top:none; border-radius:0 0 10px 10px; overflow:hidden;">
 <div style="background:white; border-radius:12px; border:1px solid var(--border); overflow:hidden;">
 <table style="width:100%; border-collapse:collapse; font-size:12px;" id="validStmtTable">
 <thead>
 <tr style="background:var(--bg);">
-<th style="width:40px; padding:10px 12px; text-align:center; border-bottom:1px solid var(--border);">
-<input type="checkbox" id="valid-select-all" onchange="toggleValidSelectAll(this)" style="width:14px; height:14px; accent-color:var(--teal); cursor:pointer;"/>
-</th>
-<th style="padding:10px 12px; text-align:left; font-weight:600; color:var(--txt-muted); text-transform:uppercase; letter-spacing:.04em; border-bottom:1px solid var(--border);">Mandate Reference</th>
-<th style="padding:10px 12px; text-align:left; font-weight:600; color:var(--txt-muted); text-transform:uppercase; letter-spacing:.04em; border-bottom:1px solid var(--border);">Amount (AED)</th>
-<th style="padding:10px 12px; text-align:left; font-weight:600; color:var(--txt-muted); text-transform:uppercase; letter-spacing:.04em; border-bottom:1px solid var(--border);">Collection Date</th>
-<th style="width:88px; border-bottom:1px solid var(--border);"></th>
+<th style="padding:10px 12px; text-align:left; font-weight:600; color:var(--txt-muted); text-transform:uppercase; letter-spacing:.04em; border-bottom:1px solid var(--border); vertical-align:top;">Mandate Reference</th>
+<th style="padding:10px 12px; text-align:left; font-weight:600; color:var(--txt-muted); text-transform:uppercase; letter-spacing:.04em; border-bottom:1px solid var(--border); vertical-align:top;">Amount (AED)</th>
+<th style="padding:10px 12px; text-align:left; font-weight:600; color:var(--txt-muted); text-transform:uppercase; letter-spacing:.04em; border-bottom:1px solid var(--border); vertical-align:top;">Collection Date</th>
+<th style="width:120px; border-bottom:1px solid var(--border); vertical-align:top;"></th>
 </tr>
 </thead>
 <tbody id="validStmtBody">
 <tr class="stmt-row stmt-valid" data-id="sv1" style="border-bottom:1px solid var(--border-lt);">
-<td style="padding:10px 12px; text-align:center; vertical-align:top;">
-<input type="checkbox" class="valid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--teal); cursor:pointer; margin-top:2px;"/>
-</td>
 <td style="padding:8px 12px; vertical-align:top;">
 <input type="text" value="MND-00850" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
 style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
@@ -1698,10 +1707,23 @@ style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-ra
 style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
 </td>
 <td style="padding:8px 12px; vertical-align:top;">
-<input type="date" value="2026-07-01" data-field="date" class="stmt-input" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+<div class="stmt-date-wrapper" style="position:relative; display:inline-block;">
+  <input type="text" data-field="date" readonly value="11/06/2026"
+    class="stmt-input stmt-date-display"
+    style="cursor:pointer; background:white; min-width:120px; width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); outline:none;"
+    placeholder="Select date"
+    onclick="openStmtCalendar(this)"/>
+  <input type="hidden" data-field="date-iso" class="stmt-date-iso" value="2026-06-11"/>
+</div>
 </td>
-<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;"><button type="button" class="stmt-preview-btn"
+  onclick="openMandatePreview(this)"
+  style="display:inline-flex; align-items:center; justify-content:center;
+    width:28px; height:28px; border-radius:6px; border:1.5px solid var(--border);
+    background:white; cursor:pointer; color:#64748B; margin-right:4px;"
+  title="Preview mandate">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+</button>
 <button onclick="stmtDeleteRow(this)"
 title="Delete this collection"
 style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
@@ -1710,129 +1732,46 @@ style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; bo
 </td>
 </tr>
 <tr class="stmt-row stmt-valid" data-id="sv2" style="border-bottom:1px solid var(--border-lt);">
-<td style="padding:10px 12px; text-align:center; vertical-align:top;">
-<input type="checkbox" class="valid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--teal); cursor:pointer; margin-top:2px;"/>
-</td>
-<td style="padding:8px 12px; vertical-align:top;">
-<input type="text" value="MND-00851" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
-</td>
-<td style="padding:8px 12px; vertical-align:top;">
-<input type="number" value="5000" data-field="amount" class="stmt-input" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
-</td>
-<td style="padding:8px 12px; vertical-align:top;">
-<input type="date" value="2026-07-01" data-field="date" class="stmt-input" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
-</td>
-<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
-<button onclick="stmtDeleteRow(this)"
-title="Delete this collection"
-style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
-<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
-</button>
-</td>
+<td style="padding:8px 12px; vertical-align:top;"><input type="text" value="MND-00851" data-field="mandate" class="stmt-input" oninput="liveValidate(this)" style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/></td>
+<td style="padding:8px 12px; vertical-align:top;"><input type="number" value="5000" data-field="amount" class="stmt-input" oninput="liveValidate(this)" style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/></td>
+<td style="padding:8px 12px; vertical-align:top;"><div class="stmt-date-wrapper" style="position:relative; display:inline-block;"><input type="text" data-field="date" readonly value="01/07/2026" class="stmt-input stmt-date-display" style="cursor:pointer; background:white; min-width:120px; width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); outline:none;" placeholder="Select date" onclick="openStmtCalendar(this)"/><input type="hidden" data-field="date-iso" class="stmt-date-iso" value="2026-07-01"/></div></td>
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;"><button type="button" class="stmt-preview-btn" onclick="openMandatePreview(this)" style="display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:6px; border:1.5px solid var(--border); background:white; cursor:pointer; color:#64748B; margin-right:4px;" title="Preview mandate"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button onclick="stmtDeleteRow(this)" title="Delete this collection" style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg></button></td>
 </tr>
 <tr class="stmt-row stmt-valid" data-id="sv3" style="border-bottom:1px solid var(--border-lt);">
-<td style="padding:10px 12px; text-align:center; vertical-align:top;">
-<input type="checkbox" class="valid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--teal); cursor:pointer; margin-top:2px;"/>
-</td>
-<td style="padding:8px 12px; vertical-align:top;">
-<input type="text" value="MND-00852" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
-</td>
-<td style="padding:8px 12px; vertical-align:top;">
-<input type="number" value="1800" data-field="amount" class="stmt-input" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
-</td>
-<td style="padding:8px 12px; vertical-align:top;">
-<input type="date" value="2026-07-05" data-field="date" class="stmt-input" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
-</td>
-<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
-<button onclick="stmtDeleteRow(this)"
-title="Delete this collection"
-style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
-<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
-</button>
-</td>
+<td style="padding:8px 12px; vertical-align:top;"><input type="text" value="MND-00852" data-field="mandate" class="stmt-input" oninput="liveValidate(this)" style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/></td>
+<td style="padding:8px 12px; vertical-align:top;"><input type="number" value="1800" data-field="amount" class="stmt-input" oninput="liveValidate(this)" style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/></td>
+<td style="padding:8px 12px; vertical-align:top;"><div class="stmt-date-wrapper" style="position:relative; display:inline-block;"><input type="text" data-field="date" readonly value="05/07/2026" class="stmt-input stmt-date-display" style="cursor:pointer; background:white; min-width:120px; width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); outline:none;" placeholder="Select date" onclick="openStmtCalendar(this)"/><input type="hidden" data-field="date-iso" class="stmt-date-iso" value="2026-07-05"/></div></td>
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;"><button type="button" class="stmt-preview-btn" onclick="openMandatePreview(this)" style="display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:6px; border:1.5px solid var(--border); background:white; cursor:pointer; color:#64748B; margin-right:4px;" title="Preview mandate"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button onclick="stmtDeleteRow(this)" title="Delete this collection" style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg></button></td>
 </tr>
 <tr class="stmt-row stmt-valid" data-id="sv4" style="border-bottom:1px solid var(--border-lt);">
-<td style="padding:10px 12px; text-align:center; vertical-align:top;">
-<input type="checkbox" class="valid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--teal); cursor:pointer; margin-top:2px;"/>
-</td>
-<td style="padding:8px 12px; vertical-align:top;">
-<input type="text" value="MND-00853" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
-</td>
-<td style="padding:8px 12px; vertical-align:top;">
-<input type="number" value="12000" data-field="amount" class="stmt-input" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
-</td>
-<td style="padding:8px 12px; vertical-align:top;">
-<input type="date" value="2026-07-10" data-field="date" class="stmt-input" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
-</td>
-<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
-<button onclick="stmtDeleteRow(this)"
-title="Delete this collection"
-style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
-<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
-</button>
-</td>
+<td style="padding:8px 12px; vertical-align:top;"><input type="text" value="MND-00853" data-field="mandate" class="stmt-input" oninput="liveValidate(this)" style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/></td>
+<td style="padding:8px 12px; vertical-align:top;"><input type="number" value="12000" data-field="amount" class="stmt-input" oninput="liveValidate(this)" style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/></td>
+<td style="padding:8px 12px; vertical-align:top;"><div class="stmt-date-wrapper" style="position:relative; display:inline-block;"><input type="text" data-field="date" readonly value="10/07/2026" class="stmt-input stmt-date-display" style="cursor:pointer; background:white; min-width:120px; width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); outline:none;" placeholder="Select date" onclick="openStmtCalendar(this)"/><input type="hidden" data-field="date-iso" class="stmt-date-iso" value="2026-07-10"/></div></td>
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;"><button type="button" class="stmt-preview-btn" onclick="openMandatePreview(this)" style="display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:6px; border:1.5px solid var(--border); background:white; cursor:pointer; color:#64748B; margin-right:4px;" title="Preview mandate"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button onclick="stmtDeleteRow(this)" title="Delete this collection" style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg></button></td>
 </tr>
 <tr class="stmt-row stmt-valid" data-id="sv5" style="border-bottom:1px solid var(--border-lt);">
-<td style="padding:10px 12px; text-align:center; vertical-align:top;">
-<input type="checkbox" class="valid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--teal); cursor:pointer; margin-top:2px;"/>
-</td>
-<td style="padding:8px 12px; vertical-align:top;">
-<input type="text" value="MND-00855" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
-</td>
-<td style="padding:8px 12px; vertical-align:top;">
-<input type="number" value="3200" data-field="amount" class="stmt-input" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
-</td>
-<td style="padding:8px 12px; vertical-align:top;">
-<input type="date" value="2026-07-01" data-field="date" class="stmt-input" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
-</td>
-<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
-<button onclick="stmtDeleteRow(this)"
-title="Delete this collection"
-style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
-<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
-</button>
-</td>
+<td style="padding:8px 12px; vertical-align:top;"><input type="text" value="MND-00855" data-field="mandate" class="stmt-input" oninput="liveValidate(this)" style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/></td>
+<td style="padding:8px 12px; vertical-align:top;"><input type="number" value="3200" data-field="amount" class="stmt-input" oninput="liveValidate(this)" style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/></td>
+<td style="padding:8px 12px; vertical-align:top;"><div class="stmt-date-wrapper" style="position:relative; display:inline-block;"><input type="text" data-field="date" readonly value="01/07/2026" class="stmt-input stmt-date-display" style="cursor:pointer; background:white; min-width:120px; width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); outline:none;" placeholder="Select date" onclick="openStmtCalendar(this)"/><input type="hidden" data-field="date-iso" class="stmt-date-iso" value="2026-07-01"/></div></td>
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;"><button type="button" class="stmt-preview-btn" onclick="openMandatePreview(this)" style="display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:6px; border:1.5px solid var(--border); background:white; cursor:pointer; color:#64748B; margin-right:4px;" title="Preview mandate"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button onclick="stmtDeleteRow(this)" title="Delete this collection" style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg></button></td>
 </tr>
 <tr class="stmt-row stmt-valid" data-id="sv6" style="border-bottom:1px solid var(--border-lt);">
-<td style="padding:10px 12px; text-align:center; vertical-align:top;">
-<input type="checkbox" class="valid-row-check" onchange="onStmtCheckChange()" style="width:14px; height:14px; accent-color:var(--teal); cursor:pointer; margin-top:2px;"/>
-</td>
-<td style="padding:8px 12px; vertical-align:top;">
-<input type="text" value="MND-00856" data-field="mandate" class="stmt-input" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
-</td>
-<td style="padding:8px 12px; vertical-align:top;">
-<input type="number" value="8000" data-field="amount" class="stmt-input" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
-</td>
-<td style="padding:8px 12px; vertical-align:top;">
-<input type="date" value="2026-07-15" data-field="date" class="stmt-input" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
-</td>
-<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
-<button onclick="stmtDeleteRow(this)"
-title="Delete this collection"
-style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
-<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
-</button>
-</td>
+<td style="padding:8px 12px; vertical-align:top;"><input type="text" value="MND-00856" data-field="mandate" class="stmt-input" oninput="liveValidate(this)" style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/></td>
+<td style="padding:8px 12px; vertical-align:top;"><input type="number" value="8000" data-field="amount" class="stmt-input" oninput="liveValidate(this)" style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/></td>
+<td style="padding:8px 12px; vertical-align:top;"><div class="stmt-date-wrapper" style="position:relative; display:inline-block;"><input type="text" data-field="date" readonly value="15/07/2026" class="stmt-input stmt-date-display" style="cursor:pointer; background:white; min-width:120px; width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); outline:none;" placeholder="Select date" onclick="openStmtCalendar(this)"/><input type="hidden" data-field="date-iso" class="stmt-date-iso" value="2026-07-15"/></div></td>
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;"><button type="button" class="stmt-preview-btn" onclick="openMandatePreview(this)" style="display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:6px; border:1.5px solid var(--border); background:white; cursor:pointer; color:#64748B; margin-right:4px;" title="Preview mandate"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button onclick="stmtDeleteRow(this)" title="Delete this collection" style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg></button></td>
 </tr>
 </tbody>
 </table>
+<div style="display:flex; align-items:center; justify-content:center; gap:12px; padding:12px; border-top:1px solid var(--border);">
+<button type="button" id="valid-page-prev" onclick="renderValidPage(validCurrentPage-1)" style="height:32px; padding:0 12px; background:white; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-weight:600; cursor:pointer;">Previous</button>
+<span id="valid-page-info" style="font-size:12px; color:var(--txt-muted);">Page 1 of 1</span>
+<button type="button" id="valid-page-next" onclick="renderValidPage(validCurrentPage+1)" style="height:32px; padding:0 12px; background:white; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-weight:600; cursor:pointer;">Next</button>
 </div>
 </div>
+</div>
+</div>
+
 
 <div style="background:#FFF5F5; border:1.5px solid #FECACA; border-radius:10px; padding:12px 16px; margin-bottom:14px; font-size:12px; color:var(--red); line-height:1.7;">
 ⚠️ <strong>Some fields below were cleared because they contained invalid values from the uploaded file.</strong>
@@ -1846,12 +1785,27 @@ Please fill them in manually before sending. Common reasons:
 </div>
 
 <div>
-<div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
-<div style="width:10px; height:10px; border-radius:50%; background:var(--red);"></div>
-<span style="font-size:13px; font-weight:700; color:var(--red);">Invalid Collections (6)</span>
-<span style="font-size:11px; color:var(--txt-muted); margin-left:4px;">— Fix errors to move these to the Valid section</span>
+<div id="invalid-section-header"
+  style="display:flex; align-items:center; justify-content:space-between;
+    padding:12px 16px; background:#FFF1F2; border:1.5px solid #FECACA;
+    border-radius:10px 10px 0 0; cursor:default; user-select:none; margin-bottom:0;">
+
+  <div style="display:flex; align-items:center; gap:10px;">
+    <div style="width:28px; height:28px; background:#DC2626; border-radius:6px;
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white"
+        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </div>
+    <div>
+      <div style="font-size:13px; font-weight:700; color:#DC2626;" id="invalid-section-label">Invalid (0)</div>
+      <div style="font-size:11px; color:#991B1B; margin-top:1px;">Fix errors to move rows to the Valid section</div>
+    </div>
+  </div>
 </div>
-<div style="background:white; border-radius:12px; border:1px solid #FECACA; overflow:hidden;">
+<div id="invalid-section-body" style="border:1.5px solid #FECACA; border-top:none; border-radius:0 0 10px 10px; overflow:hidden;">
+<div style="background:white; overflow:hidden;">
 <table style="width:100%; border-collapse:collapse; font-size:12px;" id="invalidStmtTable">
 <thead>
 <tr style="background:#FFF5F5;">
@@ -1873,16 +1827,21 @@ style="width:100%; padding:7px 10px; border:2px solid var(--red); border-radius:
 style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
 </td>
 <td style="padding:8px 12px; vertical-align:top;">
-<input type="date" value="2026-07-01" data-field="date" class="stmt-input" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+<div class="stmt-date-wrapper" style="position:relative; display:inline-block;">
+  <input type="text" data-field="date" readonly value="01/07/2026"
+    class="stmt-input stmt-date-display"
+    style="cursor:pointer; background:white; min-width:120px; width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); outline:none;"
+    placeholder="Select date"
+    onclick="openStmtCalendar(this)"/>
+  <input type="hidden" data-field="date-iso" class="stmt-date-iso" value="2026-07-01"/>
+</div>
 </td>
 <td style="padding:8px 12px; vertical-align:top;">
 <span class="stmt-error-badge" style="display:inline-flex; align-items:center; gap:4px; background:#FEE2E2; color:var(--red); border-radius:6px; padding:3px 8px; font-size:11px; font-weight:600; white-space:nowrap;">
 Mandate not found
 </span>
 </td>
-<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
-<button onclick="stmtDeleteRow(this)"
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;"><button onclick="stmtDeleteRow(this)"
 title="Delete this collection"
 style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
@@ -1899,15 +1858,28 @@ style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-ra
 style="width:100%; padding:7px 10px; border:2px solid var(--red); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:#FFF5F5; outline:none;"/>
 </td>
 <td style="padding:8px 12px; vertical-align:top;">
-<input type="date" value="2026-07-03" data-field="date" class="stmt-input" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+<div class="stmt-date-wrapper" style="position:relative; display:inline-block;">
+  <input type="text" data-field="date" readonly value="03/07/2026"
+    class="stmt-input stmt-date-display"
+    style="cursor:pointer; background:white; min-width:120px; width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); outline:none;"
+    placeholder="Select date"
+    onclick="openStmtCalendar(this)"/>
+  <input type="hidden" data-field="date-iso" class="stmt-date-iso" value="2026-07-03"/>
+</div>
 </td>
 <td style="padding:8px 12px; vertical-align:top;">
 <span class="stmt-error-badge" style="display:inline-flex; align-items:center; gap:4px; background:#FEE2E2; color:var(--red); border-radius:6px; padding:3px 8px; font-size:11px; font-weight:600; white-space:nowrap;">
 Amount exceeds maximum
 </span>
 </td>
-<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;"><button type="button" class="stmt-preview-btn"
+  onclick="openMandatePreview(this)"
+  style="display:inline-flex; align-items:center; justify-content:center;
+    width:28px; height:28px; border-radius:6px; border:1.5px solid var(--border);
+    background:white; cursor:pointer; color:#64748B; margin-right:4px;"
+  title="Preview mandate">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+</button>
 <button onclick="stmtDeleteRow(this)"
 title="Delete this collection"
 style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
@@ -1925,15 +1897,28 @@ style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-ra
 style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
 </td>
 <td style="padding:8px 12px; vertical-align:top;">
-<input type="date" value="2026-07-15" data-field="date" class="stmt-input stmt-error-field" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:2px solid var(--red); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:#FFF5F5; outline:none;"/>
+<div class="stmt-date-wrapper" style="position:relative; display:inline-block;">
+  <input type="text" data-field="date" readonly value="15/07/2026"
+    class="stmt-input stmt-date-display stmt-error-field"
+    style="cursor:pointer; background:#FFF5F5; min-width:120px; width:100%; padding:7px 10px; border:2px solid var(--red); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); outline:none;"
+    placeholder="Select date"
+    onclick="openStmtCalendar(this)"/>
+  <input type="hidden" data-field="date-iso" class="stmt-date-iso" value="2026-07-15"/>
+</div>
 </td>
 <td style="padding:8px 12px; vertical-align:top;">
 <span class="stmt-error-badge" style="display:inline-flex; align-items:center; gap:4px; background:#FEE2E2; color:var(--red); border-radius:6px; padding:3px 8px; font-size:11px; font-weight:600; white-space:nowrap;">
 Frequency period already used
 </span>
 </td>
-<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;"><button type="button" class="stmt-preview-btn"
+  onclick="openMandatePreview(this)"
+  style="display:inline-flex; align-items:center; justify-content:center;
+    width:28px; height:28px; border-radius:6px; border:1.5px solid var(--border);
+    background:white; cursor:pointer; color:#64748B; margin-right:4px;"
+  title="Preview mandate">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+</button>
 <button onclick="stmtDeleteRow(this)"
 title="Delete this collection"
 style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
@@ -1951,15 +1936,28 @@ style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-ra
 style="width:100%; padding:7px 10px; border:2px solid var(--red); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:#FFF5F5; outline:none;"/>
 </td>
 <td style="padding:8px 12px; vertical-align:top;">
-<input type="date" value="2026-07-08" data-field="date" class="stmt-input" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+<div class="stmt-date-wrapper" style="position:relative; display:inline-block;">
+  <input type="text" data-field="date" readonly value="08/07/2026"
+    class="stmt-input stmt-date-display"
+    style="cursor:pointer; background:white; min-width:120px; width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); outline:none;"
+    placeholder="Select date"
+    onclick="openStmtCalendar(this)"/>
+  <input type="hidden" data-field="date-iso" class="stmt-date-iso" value="2026-07-08"/>
+</div>
 </td>
 <td style="padding:8px 12px; vertical-align:top;">
 <span class="stmt-error-badge" style="display:inline-flex; align-items:center; gap:4px; background:#FEE2E2; color:var(--red); border-radius:6px; padding:3px 8px; font-size:11px; font-weight:600; white-space:nowrap;">
 Amount must be a number
 </span>
 </td>
-<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;"><button type="button" class="stmt-preview-btn"
+  onclick="openMandatePreview(this)"
+  style="display:inline-flex; align-items:center; justify-content:center;
+    width:28px; height:28px; border-radius:6px; border:1.5px solid var(--border);
+    background:white; cursor:pointer; color:#64748B; margin-right:4px;"
+  title="Preview mandate">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+</button>
 <button onclick="stmtDeleteRow(this)"
 title="Delete this collection"
 style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
@@ -1977,15 +1975,28 @@ style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-ra
 style="width:100%; padding:7px 10px; border:2px solid var(--red); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:#FFF5F5; outline:none;"/>
 </td>
 <td style="padding:8px 12px; vertical-align:top;">
-<input type="date" value="2026-07-12" data-field="date" class="stmt-input" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
+<div class="stmt-date-wrapper" style="position:relative; display:inline-block;">
+  <input type="text" data-field="date" readonly value="12/07/2026"
+    class="stmt-input stmt-date-display"
+    style="cursor:pointer; background:white; min-width:120px; width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); outline:none;"
+    placeholder="Select date"
+    onclick="openStmtCalendar(this)"/>
+  <input type="hidden" data-field="date-iso" class="stmt-date-iso" value="2026-07-12"/>
+</div>
 </td>
 <td style="padding:8px 12px; vertical-align:top;">
 <span class="stmt-error-badge" style="display:inline-flex; align-items:center; gap:4px; background:#FEE2E2; color:var(--red); border-radius:6px; padding:3px 8px; font-size:11px; font-weight:600; white-space:nowrap;">
 Amount must be a positive number
 </span>
 </td>
-<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;"><button type="button" class="stmt-preview-btn"
+  onclick="openMandatePreview(this)"
+  style="display:inline-flex; align-items:center; justify-content:center;
+    width:28px; height:28px; border-radius:6px; border:1.5px solid var(--border);
+    background:white; cursor:pointer; color:#64748B; margin-right:4px;"
+  title="Preview mandate">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+</button>
 <button onclick="stmtDeleteRow(this)"
 title="Delete this collection"
 style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
@@ -2003,15 +2014,28 @@ style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-ra
 style="width:100%; padding:7px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:white; outline:none;"/>
 </td>
 <td style="padding:8px 12px; vertical-align:top;">
-<input type="date" value="" data-field="date" class="stmt-input stmt-error-field" oninput="liveValidate(this)"
-style="width:100%; padding:7px 10px; border:2px solid var(--red); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); background:#FFF5F5; outline:none;"/>
+<div class="stmt-date-wrapper" style="position:relative; display:inline-block;">
+  <input type="text" data-field="date" readonly value=""
+    class="stmt-input stmt-date-display stmt-error-field"
+    style="cursor:pointer; background:#FFF5F5; min-width:120px; width:100%; padding:7px 10px; border:2px solid var(--red); border-radius:8px; font-size:12px; font-family:'DM Sans',sans-serif; color:var(--txt-head); outline:none;"
+    placeholder="Select date"
+    onclick="openStmtCalendar(this)"/>
+  <input type="hidden" data-field="date-iso" class="stmt-date-iso" value=""/>
+</div>
 </td>
 <td style="padding:8px 12px; vertical-align:top;">
 <span class="stmt-error-badge" style="display:inline-flex; align-items:center; gap:4px; background:#FEE2E2; color:var(--red); border-radius:6px; padding:3px 8px; font-size:11px; font-weight:600; white-space:nowrap;">
 Invalid date format
 </span>
 </td>
-<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;"><button type="button" class="stmt-preview-btn"
+  onclick="openMandatePreview(this)"
+  style="display:inline-flex; align-items:center; justify-content:center;
+    width:28px; height:28px; border-radius:6px; border:1.5px solid var(--border);
+    background:white; cursor:pointer; color:#64748B; margin-right:4px;"
+  title="Preview mandate">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+</button>
 <button onclick="stmtDeleteRow(this)"
 title="Delete this collection"
 style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; border-radius:7px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--red);">
@@ -2019,30 +2043,90 @@ style="width:30px; height:30px; background:#FFF1F2; border:1px solid #FECACA; bo
 </button>
 </td>
 </tr>
+
+<tr class="stmt-row stmt-invalid" data-id="si-past" style="background:#FFF8F8; border-bottom:1px solid #FECACA;">
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="text" value="MND-00855" data-field="mandate" class="stmt-input"
+oninput="liveValidate(this)"
+style="width:100%; height:32px; border:1.5px solid var(--border); border-radius:6px; padding:0 8px; font-size:13px; font-family:'DM Sans',sans-serif;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<input type="number" value="1500" data-field="amount" class="stmt-input"
+oninput="liveValidate(this)"
+style="width:100%; height:32px; border:1.5px solid var(--border); border-radius:6px; padding:0 8px; font-size:13px; font-family:'DM Sans',sans-serif;"/>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<div class="stmt-date-wrapper" style="position:relative; display:inline-block;">
+<input type="text" value="01/05/2026" data-field="date" readonly
+class="stmt-input stmt-date-display"
+style="cursor:pointer; background:#FFF5F5; border:2px solid var(--red); min-width:120px; height:32px; border-radius:6px; padding:0 8px; font-size:13px; font-family:'DM Sans',sans-serif;"
+onclick="openStmtCalendar(this)" placeholder="Select date"/>
+<input type="hidden" data-field="date-iso" class="stmt-date-iso" value="2026-05-01"/>
+</div>
+</td>
+<td style="padding:8px 12px; vertical-align:top;">
+<span class="stmt-error-badge" style="display:inline-flex;align-items:center;gap:4px;background:#FEE2E2;color:var(--red);border-radius:6px;padding:3px 8px;font-size:11px;font-weight:600;white-space:nowrap;">Collection date is in the past</span>
+</td>
+<td style="padding:8px 10px; vertical-align:top; text-align:right; white-space:nowrap;">
+<button type="button" class="stmt-preview-btn" onclick="openMandatePreview(this)"
+style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;border:1.5px solid var(--border);background:white;cursor:pointer;color:#64748B;margin-right:4px;" title="Preview mandate">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+</button>
+<button type="button" onclick="stmtDeleteRow(this)"
+style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;border:1.5px solid #FECACA;background:white;cursor:pointer;color:var(--red);" title="Remove row">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+</button>
+</td>
+</tr>
 </tbody>
 </table>
 </div>
 </div>
+</div>
+
+
+<div id="mandate-preview-modal" style="display:none; position:fixed; inset:0; background:rgba(15,31,56,0.45); z-index:9999; align-items:center; justify-content:center;">
+  <div style="background:white; border-radius:14px; padding:28px; max-width:560px; width:100%; max-height:80vh; overflow-y:auto; box-shadow:0 8px 32px rgba(15,31,56,0.18);">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
+      <h3 style="font-size:16px; font-weight:700; color:#0F1F38; margin:0;">Mandate Summary</h3>
+      <button onclick="closeMandatePreview()" style="background:none; border:none; cursor:pointer; color:#64748B;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="mandate-preview-content"></div>
+  </div>
+</div>
+<div id="stmt-calendar-popup" style="display:none; position:fixed; background:white; border:1.5px solid var(--border); border-radius:12px; box-shadow:0 8px 24px rgba(15,31,56,0.12); z-index:10000; padding:16px; min-width:280px;">
+  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+    <button type="button" id="stmt-cal-prev" onclick="stmtCalNav(-1)" style="background:none;border:none;cursor:pointer;padding:4px 8px;font-size:16px;color:#0F1F38;">‹</button>
+    <span id="stmt-cal-header" style="font-size:13px; font-weight:700; color:#0F1F38;"></span>
+    <button type="button" id="stmt-cal-next" onclick="stmtCalNav(1)" style="background:none;border:none;cursor:pointer;padding:4px 8px;font-size:16px;color:#0F1F38;">›</button>
+  </div>
+  <div id="stmt-cal-grid" style="display:grid; grid-template-columns:repeat(7,1fr); gap:2px; text-align:center; font-size:12px;"></div>
+  <div style="margin-top:10px; font-size:10px; color:#64748B; display:flex; gap:10px; flex-wrap:wrap;">
+    <span><span style="display:inline-block;width:10px;height:10px;background:#F1F5F9;border-radius:2px;vertical-align:middle;margin-right:3px;"></span>Blocked</span>
+    <span><span style="display:inline-block;width:10px;height:10px;background:#ECFEFF;border:1px solid #00A3A3;border-radius:2px;vertical-align:middle;margin-right:3px;"></span>Add-on</span>
+  </div>
+</div>
 
 </main></div></div></section><script>
 let activeMenu = null;
-const COL_ACTION_LABELS = { send:"Send for Collection", stop:"Stop Collection", archive:"Archive", activate:"Activate Collection", reminder:"Send Reminder to Payer", resend:"Resend to Bank", "reset-bank":"Reset Bank Submissions Count", "reset-payer":"Reset Payer Reminders Count", escalate:"Escalate" };
+const COL_ACTION_LABELS = { send:"Send for Collection", stop:"Stop Collection", activate:"Activate Collection", reminder:"Send Reminder to Payer", resend:"Resend to Bank", "reset-bank":"Reset Bank Submissions Count", "reset-payer":"Reset Payer Reminders Count", escalate:"Escalate" };
 const COL_ACTION_CONFIRM = {
   send:{title:"Send for Collection",msg:"Are you sure you want to send this collection to the bank?",confirmLabel:"Send",toast:"Collection sent to the bank."},
   stop:{title:"Stop Collection",msg:"Are you sure you want to stop this collection? This action cannot be undone.",confirmLabel:"Stop Collection",toast:"Collection stopped."},
   "stop-bounced":{title:"Stop Collection",msg:"Are you sure you want to stop this collection permanently? No further retries or reminders will be sent.",confirmLabel:"Stop Collection",toast:"Collection stopped permanently."},
-  archive:{title:"Archive",msg:"Are you sure you want to archive this collection?",confirmLabel:"Archive",toast:"Collection archived successfully."},
   reminder:{title:"Send Reminder to Payer",msg:"Are you sure you want to send a reminder to this payer?",confirmLabel:"Send Reminder",toast:"Reminder sent to payer successfully."},
   resend:{title:"Resend to Bank",msg:"Are you sure you want to resend this collection to the bank?",confirmLabel:"Resend to Bank",toast:"Collection resubmitted to bank successfully."},
   "reset-bank":{title:"Reset Bank Submissions Count",msg:"Are you sure you want to reset the bank submissions count for this collection to zero?",confirmLabel:"Reset Count",toast:"Bank submissions count reset to 0."},
   "reset-payer":{title:"Reset Payer Reminders Count",msg:"Are you sure you want to reset the payer reminders count for this collection to zero?",confirmLabel:"Reset Count",toast:"Payer reminders count reset to 0."},
   escalate:{title:"Escalate Collection",msg:"Are you sure you want to escalate this collection?",confirmLabel:"Escalate",toast:"Collection escalated successfully."}
 };
-function getColActions(status){ if(status==="ready")return["send","stop"]; if(status==="stopped")return["activate","archive"]; if(status==="received"||status==="failed")return["archive"]; if(status==="bounced")return["reminder","resend","reset-bank","reset-payer","escalate","stop"]; return[]; }
+function getColActions(status){ if(status==="processing"||status==="pending-bank"||status==="future")return[]; if(status==="ready")return["send","stop"]; if(status==="stopped")return["activate"]; if(status==="received")return[]; if(status==="failed")return[]; if(status==="bounced")return["reminder","resend","reset-bank","reset-payer","escalate","stop"]; return[]; }
 function rebuildColActionMenu(tr){ const menu=tr.querySelector(".action-menu"); if(!menu)return; const status=tr.getAttribute("data-status")||""; const actions=getColActions(status); menu.innerHTML=""; actions.forEach((act,i)=>{ if(act==="stop"&&i>0){ const div=document.createElement("div"); div.className="action-divider"; menu.appendChild(div); } if(act==="activate"){ const periodAvailable=tr.getAttribute("data-period-available")==="true"; const li=document.createElement("div"); li.className="action-item activate-action-item"; li.style.cssText="padding:9px 14px;font-size:13px;font-family:'DM Sans',sans-serif;color:"+(periodAvailable?"var(--txt-head)":"var(--txt-faint)")+";cursor:"+(periodAvailable?"pointer":"not-allowed")+";background:none;display:flex;align-items:center;justify-content:space-between;gap:8px;position:relative;border:none;width:100%;text-align:left;"; li.innerHTML='<span>Activate Collection</span>'+(!periodAvailable?'<span class="activate-tooltip-trigger" style="display:inline-flex;align-items:center;color:var(--txt-faint);"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span><div class="activate-tooltip" style="display:none;position:fixed;background:#1E293B;color:white;font-size:11px;padding:6px 10px;border-radius:6px;max-width:220px;line-height:1.5;z-index:10000;pointer-events:none;white-space:normal;">This frequency period is already occupied by another collection</div>':""); if(periodAvailable){ li.addEventListener("click",()=>{ closeActionMenu(); handleActivateCollection(tr); }); } else { li.addEventListener("mouseenter",()=>{ const tooltip=li.querySelector(".activate-tooltip"); if(tooltip){ const rect=li.getBoundingClientRect(); tooltip.style.display="block"; tooltip.style.top=rect.top+"px"; tooltip.style.left=(rect.left-230)+"px"; } }); li.addEventListener("mouseleave",()=>{ const tooltip=li.querySelector(".activate-tooltip"); if(tooltip)tooltip.style.display="none"; }); } menu.appendChild(li); return; } const danger=act==="stop"?" danger":""; const btn=document.createElement("button"); btn.type="button"; btn.className="action-item"+danger; btn.setAttribute("data-action",act); btn.textContent=COL_ACTION_LABELS[act]||act; menu.appendChild(btn); }); }
 function closeActionMenu(){ if(!activeMenu)return; activeMenu.style.display="none"; activeMenu.style.position=""; activeMenu.style.left=""; activeMenu.style.top=""; activeMenu.style.right=""; activeMenu.style.zIndex=""; activeMenu=null; }
 function positionActionMenu(btn,menu){ const rect=btn.getBoundingClientRect(); menu.style.position="fixed"; menu.style.top=(rect.bottom+4)+"px"; menu.style.right=(window.innerWidth-rect.right)+"px"; menu.style.left="auto"; menu.style.bottom="auto"; menu.style.zIndex="9999"; menu.style.display="block"; }
-function toggleActionMenu(btn,event){ event.stopPropagation(); if(btn.disabled)return; const menu=btn.nextElementSibling; if(!menu||!menu.classList.contains("action-menu"))return; const tr=btn.closest("tr"); if(tr&&!menu.innerHTML.trim())rebuildColActionMenu(tr); if(activeMenu&&activeMenu!==menu)closeActionMenu(); if(activeMenu===menu){closeActionMenu();return;} positionActionMenu(btn,menu); activeMenu=menu; }
+function toggleActionMenu(btn,event){ if(event)event.stopPropagation(); if(btn.disabled)return; const menu=btn.nextElementSibling; if(!menu||!menu.classList.contains("action-menu"))return; const tr=btn.closest("tr"); if(tr&&!menu.innerHTML.trim()){ if(tr.closest("#futureColTableBody"))buildFutureRowMenu(tr); else rebuildColActionMenu(tr); } if(activeMenu&&activeMenu!==menu)closeActionMenu(); if(activeMenu===menu){closeActionMenu();return;} positionActionMenu(btn,menu); activeMenu=menu; }
 document.addEventListener("click",function(e){ if(activeMenu&&!e.target.closest(".action-wrapper"))closeActionMenu(); });
 function showToast(message){ const toast=document.createElement("div"); toast.className="toast-notification"; toast.textContent=message; document.body.appendChild(toast); setTimeout(()=>toast.classList.add("visible"),10); setTimeout(()=>{toast.classList.remove("visible"); setTimeout(()=>toast.remove(),300);},3000); }
 function showConfirmDialog(title,message,confirmLabel,onConfirm,confirmColor){ const overlay=document.createElement("div"); overlay.className="confirm-overlay"; overlay.innerHTML='<div class="confirm-dialog"><h2>'+title+"</h2><p>"+message+'</p><div class="confirm-buttons"><button type="button" class="btn btn-secondary" data-cancel>Cancel</button><button type="button" class="btn-danger" data-confirm>'+confirmLabel+"</button></div></div>"; document.body.appendChild(overlay); const confirmBtn=overlay.querySelector("[data-confirm]"); if(confirmBtn)confirmBtn.style.background=confirmColor||"var(--red)"; overlay.querySelector("[data-cancel]").addEventListener("click",()=>overlay.remove()); overlay.querySelector("[data-confirm]").addEventListener("click",()=>{onConfirm();overlay.remove();}); }
@@ -2058,8 +2142,7 @@ function handleDateModeChange(prefix,applyFn){ const mode=document.getElementByI
 function handleColDateModeChange(){ const mode=document.getElementById("filter-col-date-mode")?.value; const a=document.getElementById("filter-col-date-a"); const b=document.getElementById("filter-col-date-b"); const sep=document.getElementById("filter-col-date-sep"); if(!a||!b||!sep)return; if(mode!=="between"&&mode!=="except"){a.value="";b.value="";} if(mode==="none"){a.style.display="none";b.style.display="none";sep.style.display="none";} else if(mode==="after"||mode==="before"){a.style.display="";b.style.display="none";sep.style.display="none";} else {a.style.display="";b.style.display="";sep.style.display="";} applyColFilters(); }
 function handleColSubmittedModeChange(){ const mode=document.getElementById("filter-submitted-mode")?.value; const a=document.getElementById("filter-submitted-a"); const b=document.getElementById("filter-submitted-b"); const sep=document.getElementById("filter-submitted-sep"); if(!a||!b||!sep)return; a.value=""; b.value=""; if(mode==="none"){a.style.display="none"; b.style.display="none"; sep.style.display="none";} else if(mode==="after"||mode==="before"){a.style.display=""; b.style.display="none"; sep.style.display="none";} else {a.style.display=""; b.style.display=""; sep.style.display="";} applyColFilters(); }
 function handleLogSubmittedModeChange(){ const mode=document.getElementById("log-filter-submitted-mode")?.value; const a=document.getElementById("log-filter-submitted-a"); const b=document.getElementById("log-filter-submitted-b"); const sep=document.getElementById("log-filter-submitted-sep"); if(!a||!b||!sep)return; a.value=""; b.value=""; if(mode==="none"){a.style.display="none"; b.style.display="none"; sep.style.display="none";} else if(mode==="after"||mode==="before"){a.style.display=""; b.style.display="none"; sep.style.display="none";} else {a.style.display=""; b.style.display=""; sep.style.display="";} applyLogColFilters(); }
-function applyColFilters(){ const q=(document.getElementById("col-search")?.value||"").toLowerCase().trim(); const ref=(document.getElementById("filter-col-ref")?.value||"").toLowerCase().trim(); const mnd=(document.getElementById("filter-col-mandate")?.value||"").toLowerCase().trim(); const payer=(document.getElementById("filter-col-payer")?.value||"").toLowerCase().trim(); const status=document.getElementById("filter-col-status")?.value||"all"; const mode=document.getElementById("filter-col-date-mode")?.value||"none"; const dateA=document.getElementById("filter-col-date-a")?.value||""; const dateB=document.getElementById("filter-col-date-b")?.value||""; const subMode=document.getElementById("filter-submitted-mode")?.value||"none"; const subA=document.getElementById("filter-submitted-a")?.value||""; const subB=document.getElementById("filter-submitted-b")?.value||""; let visible=0; document.querySelectorAll("#colTableBody tr").forEach(tr=>{ const searchStr=(tr.getAttribute("data-search")||"").toLowerCase(); const st=tr.getAttribute("data-status")||""; const iso=tr.getAttribute("data-collection-date")||""; const submittedIso=tr.getAttribute("data-submitted")||""; const show=(!q||searchStr.includes(q))&&(!ref||searchStr.includes(ref))&&(!mnd||searchStr.includes(mnd))&&(!payer||searchStr.includes(payer))&&(status==="all"||st===status)&&matchColDate(mode,dateA,dateB,iso)&&matchSubmittedDate(subMode,subA,subB,submittedIso); tr.style.display=show?"":"none"; if(show)visible++; }); const empty=document.getElementById("col-empty"); if(empty)empty.style.display=visible===0?"block":"none"; updateReadyCount(); }
-function updateReadyCount(){ let count=0; document.querySelectorAll("#colTableBody tr").forEach(tr=>{ if(tr.style.display!=="none"&&(tr.getAttribute("data-status")||"")==="ready")count++; }); const badge=document.getElementById("ready-count-badge"); if(badge)badge.textContent=count+" Ready for Collection"; }
+function applyColFilters(){ const q=(document.getElementById("col-search")?.value||"").toLowerCase().trim(); const ref=(document.getElementById("filter-col-ref")?.value||"").toLowerCase().trim(); const mnd=(document.getElementById("filter-col-mandate")?.value||"").toLowerCase().trim(); const payer=(document.getElementById("filter-col-payer")?.value||"").toLowerCase().trim(); const status=document.getElementById("filter-col-status")?.value||"all"; const mode=document.getElementById("filter-col-date-mode")?.value||"none"; const dateA=document.getElementById("filter-col-date-a")?.value||""; const dateB=document.getElementById("filter-col-date-b")?.value||""; const subMode=document.getElementById("filter-submitted-mode")?.value||"none"; const subA=document.getElementById("filter-submitted-a")?.value||""; const subB=document.getElementById("filter-submitted-b")?.value||""; let visible=0; document.querySelectorAll("#colTableBody tr").forEach(tr=>{ const searchStr=(tr.getAttribute("data-search")||"").toLowerCase(); const st=tr.getAttribute("data-status")||""; const iso=tr.getAttribute("data-collection-date")||""; const submittedIso=tr.getAttribute("data-submitted")||""; const show=(!q||searchStr.includes(q))&&(!ref||searchStr.includes(ref))&&(!mnd||searchStr.includes(mnd))&&(!payer||searchStr.includes(payer))&&(status==="all"||st===status)&&matchColDate(mode,dateA,dateB,iso)&&matchSubmittedDate(subMode,subA,subB,submittedIso); tr.style.display=show?"":"none"; if(show)visible++; }); const empty=document.getElementById("col-empty"); if(empty)empty.style.display=visible===0?"block":"none"; }
 function clearColFilters(){ ["filter-col-ref","filter-col-mandate","filter-col-payer","filter-col-status","filter-col-date-mode","filter-col-date-a","filter-col-date-b","filter-submitted-mode","filter-submitted-a","filter-submitted-b","col-search"].forEach(id=>{ const el=document.getElementById(id); if(!el)return; if(el.tagName==="SELECT")el.value=el.id==="filter-col-status"?"all":"none"; else el.value=""; }); handleColDateModeChange(); handleColSubmittedModeChange(); }
 function handleDueColDateModeChange(){ handleDateModeChange("due",applyDueColFilters); }
 function applyDueColFilters(){ const q=(document.getElementById("due-col-search")?.value||"").toLowerCase().trim(); const ref=(document.getElementById("filter-due-ref")?.value||"").toLowerCase().trim(); const mnd=(document.getElementById("filter-due-mandate")?.value||"").toLowerCase().trim(); const payer=(document.getElementById("filter-due-payer")?.value||"").toLowerCase().trim(); const mode=document.getElementById("filter-due-date-mode")?.value||"none"; const dateA=document.getElementById("filter-due-date-a")?.value||""; const dateB=document.getElementById("filter-due-date-b")?.value||""; let visible=0; document.querySelectorAll("#dueColTableBody tr").forEach(tr=>{ const searchStr=(tr.getAttribute("data-search")||"").toLowerCase(); const iso=tr.getAttribute("data-collection-date")||""; const show=(!q||searchStr.includes(q))&&(!ref||searchStr.includes(ref))&&(!mnd||searchStr.includes(mnd))&&(!payer||searchStr.includes(payer))&&matchColDate(mode,dateA,dateB,iso); tr.style.display=show?"":"none"; if(show)visible++; }); const empty=document.getElementById("due-col-empty"); if(empty)empty.style.display=visible===0?"block":"none"; document.querySelectorAll(".due-row-check").forEach(cb=>cb.checked=false); const master=document.getElementById("due-select-all"); if(master){master.checked=false;master.indeterminate=false;} onDueRowCheck(); }
@@ -2074,26 +2157,58 @@ function toggleColExport(id){ const m=document.getElementById(id+"-export-menu")
 function closeColExport(id){ const m=document.getElementById(id+"-export-menu"); if(m)m.style.display="none"; }
 document.addEventListener("click",function(e){ if(!e.target.closest("[data-export-wrap]"))document.querySelectorAll(".col-export-menu").forEach(x=>x.style.display="none"); });
 function toggleDueSelectAll(master){ document.querySelectorAll(".due-row-check").forEach(cb=>{cb.checked=master.checked;}); onDueRowCheck(); }
-function onDueRowCheck(){ const all=document.querySelectorAll(".due-row-check"); const checked=document.querySelectorAll(".due-row-check:checked"); const master=document.getElementById("due-select-all"); const btn=document.getElementById("due-send-selected-btn"); const countBadge=document.getElementById("due-selected-count"); if(master){master.checked=checked.length===all.length&&all.length>0;master.indeterminate=checked.length>0&&checked.length<all.length;} const hasSelection=checked.length>0; if(btn){btn.disabled=!hasSelection;btn.style.background=hasSelection?"#00A3A3":"#94A3B8";btn.style.cursor=hasSelection?"pointer":"not-allowed";} if(countBadge)countBadge.textContent=checked.length; }
+function onDueRowCheck(){ const all=document.querySelectorAll(".due-row-check"); const checked=document.querySelectorAll(".due-row-check:checked"); const master=document.getElementById("due-select-all"); const btn=document.getElementById("col-send-selected-btn"); const countBadge=document.getElementById("due-selected-count"); if(master){master.checked=checked.length===all.length&&all.length>0;master.indeterminate=checked.length>0&&checked.length<all.length;} const hasSelection=checked.length>0; if(btn){btn.disabled=!hasSelection;btn.style.background=hasSelection?"#00A3A3":"#94A3B8";btn.style.cursor=hasSelection?"pointer":"not-allowed";} if(countBadge)countBadge.textContent=checked.length; }
 function sendSelectedCollections(){ const checked=document.querySelectorAll(".due-row-check:checked"); if(checked.length===0)return; showConfirmDialog("Send Selected for Collection","Are you sure you want to send "+checked.length+" selected collection"+(checked.length>1?"s":"")+" to the bank?","Send for Collection",function(){ showToast(checked.length+" collection"+(checked.length>1?"s":"")+" sent for collection successfully."); document.querySelectorAll(".due-row-check").forEach(cb=>cb.checked=false); const master=document.getElementById("due-select-all"); if(master){master.checked=false;master.indeterminate=false;} onDueRowCheck(); }); }
 function openUploadStatementPicker(){ document.getElementById("collection-statement-input").click(); }
-function handleStatementUpload(input){ if(!input.files||!input.files[0])return; const file=input.files[0]; input.value=""; showToast("Processing collection statement..."); setTimeout(()=>{showColScreen("screen-col005");},900); }
-function handleSettlementUpload(input){ if(!input.files||!input.files[0])return; input.value=""; showToast("Processing settlement file..."); setTimeout(()=>{ const rows=document.querySelectorAll("#colTableBody tr"); rows.forEach(tr=>{ const statusCell=tr.cells[6]; if(!statusCell)return; const statusText=statusCell.textContent.toLowerCase(); if(statusText.includes("pending bank response")){ const ref=(tr.cells[0]?.textContent||"").trim(); const lastChar=ref.slice(-1); const isReceived=parseInt(lastChar)%2===0; if(isReceived){ statusCell.innerHTML='<span class="bdg" style="background:#DCFCE7;color:#15803D;">Received</span>'; tr.style.background="#FFFFFF"; } else { statusCell.innerHTML='<span class="bdg" style="background:#FFE4E6;color:#BE123C;">Bounced</span>'; tr.style.background="#FFF5F5"; } } }); updateReadyCount(); showToast("Settlement file processed. Collection statuses updated."); },1200); }
-function stmtDeleteRow(btn){ const row=btn.closest("tr"); showConfirmDialog("Delete Collection","Are you sure you want to delete this collection from the statement?","Delete",function(){ if(row)row.remove(); showToast("Collection removed."); updateStmtSummary(); }); }
-function liveValidate(input){ const row=input.closest("tr"); if(!row)return; const field=input.getAttribute("data-field"); let hasError=false; let errorMsg=""; if(field==="amount"){ const val=parseFloat(input.value); if(input.value.trim()===""||isNaN(val)){hasError=true;errorMsg="Amount must be a number";} else if(val<=0){hasError=true;errorMsg="Amount must be a positive number";} } else if(field==="date"){ const val=input.value.trim(); if(!val||isNaN(new Date(val).getTime())){hasError=true;errorMsg="Invalid date format";} } else if(field==="mandate"){ if(input.value.trim()===""){hasError=true;errorMsg="Mandate Reference is required";} } if(hasError){ input.style.border="2px solid var(--red)"; input.style.background="#FFF5F5"; } else { input.style.border="1.5px solid var(--border)"; input.style.background="white"; } const isInvalid=row.classList.contains("stmt-invalid"); const isValid=row.classList.contains("stmt-valid"); if(isInvalid){ const badge=row.querySelector(".stmt-error-badge"); if(badge&&hasError)badge.textContent=errorMsg; let rowStillHasError=false; row.querySelectorAll(".stmt-input").forEach(inp=>{ if(inp.style.border&&inp.style.border.includes("var(--red)"))rowStillHasError=true; }); if(!rowStillHasError)moveRowToValid(row); } else if(isValid&&hasError){ moveRowToInvalid(row,errorMsg); } }
-function moveRowToValid(row){ row.classList.remove("stmt-invalid"); row.classList.add("stmt-valid"); row.style.background=""; const errorCell=row.querySelector("td:has(.stmt-error-badge)")||(()=>{ const tds=row.querySelectorAll("td"); for(const td of tds){ if(td.querySelector(".stmt-error-badge"))return td; } return null; })(); if(errorCell)errorCell.remove(); if(!row.querySelector("input.valid-row-check")){ const checkTd=document.createElement("td"); checkTd.style.cssText="padding:10px 12px; text-align:center; vertical-align:top;"; checkTd.innerHTML='<input type="checkbox" class="valid-row-check" onchange="onStmtCheckChange()" style="width:14px;height:14px;accent-color:var(--teal);cursor:pointer;margin-top:2px;"/>'; row.insertBefore(checkTd,row.firstChild); } const validBody=document.getElementById("validStmtBody"); if(validBody)validBody.appendChild(row); showToast("All errors resolved. Row moved to Valid section."); updateStmtSummary(); }
-function moveRowToInvalid(row,errorMsg){ row.classList.remove("stmt-valid"); row.classList.add("stmt-invalid"); row.style.background="#FFF8F8"; const checkboxTd=row.querySelector("td:first-child"); if(checkboxTd&&checkboxTd.querySelector('input[type="checkbox"]'))checkboxTd.remove(); if(!row.querySelector(".stmt-error-badge")){ const actionsTd=row.querySelector("td:last-child"); const errorTd=document.createElement("td"); errorTd.style.cssText="padding:8px 12px; vertical-align:top;"; errorTd.innerHTML='<span class="stmt-error-badge" style="display:inline-flex;align-items:center;gap:4px;background:#FEE2E2;color:var(--red);border-radius:6px;padding:3px 8px;font-size:11px;font-weight:600;white-space:nowrap;">'+errorMsg+"</span>"; row.insertBefore(errorTd,actionsTd); } else { row.querySelector(".stmt-error-badge").textContent=errorMsg; } const invalidBody=document.getElementById("invalidStmtBody"); if(invalidBody)invalidBody.appendChild(row); showToast("Error detected. Row moved to Invalid section."); updateStmtSummary(); }
-function updateStmtSummary(){ const validCount=document.querySelectorAll(".stmt-valid").length; const invalidCount=document.querySelectorAll(".stmt-invalid").length; const totalEl=document.querySelector("#screen-col005 .stmt-total"); if(totalEl)totalEl.textContent=(validCount+invalidCount)+" collections"; const validEl=document.querySelector("#screen-col005 .stmt-valid-count"); if(validEl)validEl.textContent=validCount+" Valid"; const invalidEl=document.querySelector("#screen-col005 .stmt-invalid-count"); if(invalidEl)invalidEl.textContent=invalidCount+" Invalid"; }
-function toggleValidSelectAll(master){ document.querySelectorAll(".valid-row-check").forEach(cb=>cb.checked=master.checked); }
-function onStmtCheckChange(){ const validChecks=document.querySelectorAll(".valid-row-check"); const validChecked=document.querySelectorAll(".valid-row-check:checked"); const validMaster=document.getElementById("valid-select-all"); if(validMaster){validMaster.checked=validChecked.length===validChecks.length&&validChecks.length>0;validMaster.indeterminate=validChecked.length>0&&validChecked.length<validChecks.length;} }
-function confirmSendValidOnly(){ const validCount=document.querySelectorAll(".stmt-valid").length; if(validCount===0){showToast("No valid collections to send.");return;} showConfirmDialog("Send Valid Collections Only","Are you sure you want to send all "+validCount+" valid collection"+(validCount>1?"s":"")+" to the bank? Invalid collections will be discarded.","Send Valid Only",function(){ showToast(validCount+" collection"+(validCount>1?"s":"")+" sent for collection successfully."); showColScreen("screen-col001"); },"var(--teal)"); }
-function confirmSendSelected(){ const selectedValid=document.querySelectorAll(".valid-row-check:checked"); if(selectedValid.length===0){showToast("Please select at least one collection.");return;} showConfirmDialog("Send Selected Collections","Are you sure you want to send the "+selectedValid.length+" selected collection"+(selectedValid.length>1?"s":"")+" to the bank?","Send Selected",function(){ showToast(selectedValid.length+" collection"+(selectedValid.length>1?"s":"")+" sent for collection successfully."); showColScreen("screen-col001"); }); }
+function handleStatementUpload(input){ if(!input.files||!input.files[0])return; const file=input.files[0]; input.value=""; showToast("Processing collection statement..."); setTimeout(()=>{ showColScreen("screen-col005"); initStmtUploadValidation(); },900); }
+function handleSettlementUpload(input){ if(!input.files||!input.files[0])return; input.value=""; showToast("Processing settlement file..."); setTimeout(()=>{ const rows=document.querySelectorAll("#colTableBody tr"); rows.forEach(tr=>{ const statusCell=tr.cells[6]; if(!statusCell)return; const statusText=statusCell.textContent.toLowerCase(); if(statusText.includes("pending bank response")){ const ref=(tr.cells[0]?.textContent||"").trim(); const lastChar=ref.slice(-1); const isReceived=parseInt(lastChar)%2===0; if(isReceived){ statusCell.innerHTML='<span class="bdg" style="background:#DCFCE7;color:#15803D;">Received</span>'; tr.style.background="#FFFFFF"; } else { statusCell.innerHTML='<span class="bdg" style="background:#FFE4E6;color:#BE123C;">Bounced</span>'; tr.style.background="#FFF5F5"; } } }); showToast("Settlement file processed. Collection statuses updated."); },1200); }
+function stmtDeleteRow(btn){ const row=btn.closest("tr"); showConfirmDialog("Delete Collection","Are you sure you want to delete this collection from the statement?","Delete",function(){ if(row)row.remove(); showToast("Collection removed."); updateStmtSummary(); renderValidPage(validCurrentPage); }); }
+function parseStmtDateVal(val,row){
+  const hidden=row?.querySelector(".stmt-date-iso");
+  if(hidden&&hidden.value)return hidden.value;
+  if(!val)return "";
+  if(/^\d{4}-\d{2}-\d{2}$/.test(val))return val;
+  const m=val.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if(m)return m[3]+"-"+String(m[2]).padStart(2,"0")+"-"+String(m[1]).padStart(2,"0");
+  return val;
+}
+function liveValidate(input){ const row=input.closest("tr"); if(!row)return; const field=input.getAttribute("data-field"); let hasError=false; let errorMsg=""; if(field==="amount"){ const val=parseFloat(input.value); if(input.value.trim()===""||isNaN(val)){hasError=true;errorMsg="Amount must be a number";} else if(val<=0){hasError=true;errorMsg="Amount must be a positive number";} } else if(field==="date"){ const val=input.value.trim(); const iso=parseStmtDateVal(val,row); const d=new Date(iso); if(!val||isNaN(d.getTime())){hasError=true;errorMsg="Invalid date format";} else { const today=new Date(); today.setHours(0,0,0,0); const d2=new Date(iso); d2.setHours(0,0,0,0); if(d2<today){hasError=true;errorMsg="Collection date is in the past";} } } else if(field==="mandate"){ if(input.value.trim()===""){hasError=true;errorMsg="Mandate Reference is required";} } if(hasError){ input.style.border="2px solid var(--red)"; input.style.background="#FFF5F5"; input.classList.add("stmt-error-field"); } else { input.style.border="1.5px solid var(--border)"; input.style.background="white"; input.classList.remove("stmt-error-field"); } const isInvalid=row.classList.contains("stmt-invalid"); if(isInvalid){ const badge=row.querySelector(".stmt-error-badge"); if(badge&&hasError)badge.textContent=errorMsg; let rowStillHasError=false; row.querySelectorAll(".stmt-input").forEach(inp=>{ if(inp.style.border&&inp.style.border.includes("var(--red)"))rowStillHasError=true; }); if(!rowStillHasError)routeStmtRow(row); } else if(!hasError){ routeStmtRow(row); } else if(hasError){ moveRowToInvalid(row,errorMsg); } }
+function routeStmtRow(row){ const dateInput=row.querySelector('[data-field="date"]'); const hidden=row.querySelector(".stmt-date-iso"); const val=hidden?.value||parseStmtDateVal(dateInput?dateInput.value:"",row); const today=new Date(); today.setHours(0,0,0,0); const d=new Date(val); d.setHours(0,0,0,0); if(!val||isNaN(d.getTime()))return; let rowHasError=false; row.querySelectorAll(".stmt-input").forEach(inp=>{ if(inp.style.border&&inp.style.border.includes("var(--red)"))rowHasError=true; }); if(rowHasError)return; if(d<today){ moveRowToInvalid(row,"Collection date is in the past"); } else { moveRowToReadySection(row); } }
+function ensurePreviewBtn(row){ const badge=row.querySelector(".stmt-error-badge"); if(badge&&badge.textContent.trim()==="Mandate not found"){ const existing=row.querySelector(".stmt-preview-btn"); if(existing)existing.remove(); return; } const actionsTd=row.querySelector("td:last-child"); if(!actionsTd||actionsTd.querySelector(".stmt-preview-btn"))return; const preview=document.createElement("button"); preview.type="button"; preview.className="stmt-preview-btn"; preview.setAttribute("onclick","openMandatePreview(this)"); preview.title="Preview mandate"; preview.style.cssText="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;border:1.5px solid var(--border);background:white;cursor:pointer;color:#64748B;margin-right:4px;"; preview.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>'; const delBtn=actionsTd.querySelector("button[onclick*='stmtDeleteRow']"); if(delBtn)actionsTd.insertBefore(preview,delBtn); else actionsTd.prepend(preview); }
+function moveRowToReadySection(row){ const wasValid=row.parentElement?.id==="validStmtBody"&&row.classList.contains("stmt-valid"); row.classList.remove("stmt-invalid"); row.classList.add("stmt-valid"); row.style.background=""; const errorCell=row.querySelector("td .stmt-error-badge")?.closest("td"); if(errorCell)errorCell.remove(); ensurePreviewBtn(row); const body=document.getElementById("validStmtBody"); if(body)body.appendChild(row); if(!wasValid)showToast("Row moved to Valid section."); updateStmtSummary(); renderValidPage(validCurrentPage); }
+function moveRowToFutureSection(row){ moveRowToReadySection(row); }
+function moveRowToInvalid(row,errorMsg){ row.classList.remove("stmt-valid"); row.classList.add("stmt-invalid"); row.style.background="#FFF8F8"; if(!row.querySelector(".stmt-error-badge")){ const actionsTd=row.querySelector("td:last-child"); const errorTd=document.createElement("td"); errorTd.style.cssText="padding:8px 12px; vertical-align:top;"; errorTd.innerHTML='<span class="stmt-error-badge" style="display:inline-flex;align-items:center;gap:4px;background:#FEE2E2;color:var(--red);border-radius:6px;padding:3px 8px;font-size:11px;font-weight:600;white-space:nowrap;">'+errorMsg+"</span>"; row.insertBefore(errorTd,actionsTd); } else { row.querySelector(".stmt-error-badge").textContent=errorMsg; } ensurePreviewBtn(row); const invalidBody=document.getElementById("invalidStmtBody"); if(invalidBody)invalidBody.appendChild(row); showToast("Error detected. Row moved to Invalid section."); updateStmtSummary(); renderValidPage(validCurrentPage); }
+function updateStmtSummary(){ const validCount=document.querySelectorAll("#validStmtBody tr").length; const invalidCount=document.querySelectorAll("#invalidStmtBody tr").length; const total=validCount+invalidCount; const totalEl=document.querySelector("#screen-col005 .stmt-total"); if(totalEl)totalEl.textContent=total+" collections"; const summaryEl=document.getElementById("stmt-summary-counts"); if(summaryEl)summaryEl.textContent=validCount+" Valid · "+invalidCount+" Invalid"; const validLabel=document.getElementById("ready-section-label"); if(validLabel)validLabel.textContent="Valid ("+validCount+")"; const invalidLabel=document.getElementById("invalid-section-label"); if(invalidLabel)invalidLabel.textContent="Invalid ("+invalidCount+")"; }
+let validCurrentPage=1; const VALID_PAGE_SIZE=20;
+function renderValidPage(page){ const rows=Array.from(document.querySelectorAll("#validStmtBody tr")); const total=rows.length; const totalPages=Math.max(1,Math.ceil(total/VALID_PAGE_SIZE)); validCurrentPage=Math.min(Math.max(1,page),totalPages); rows.forEach((r,i)=>{ const start=(validCurrentPage-1)*VALID_PAGE_SIZE; r.style.display=(i>=start&&i<start+VALID_PAGE_SIZE)?"":"none"; }); const info=document.getElementById("valid-page-info"); if(info)info.textContent="Page "+validCurrentPage+" of "+totalPages; const prev=document.getElementById("valid-page-prev"); const next=document.getElementById("valid-page-next"); if(prev)prev.disabled=validCurrentPage<=1; if(next)next.disabled=validCurrentPage>=totalPages; }
+function renderFuturePage(page){}
+function toggleValidSection(){ const body=document.getElementById("valid-section-body"); const chevron=document.getElementById("valid-section-chevron"); const subtitle=document.querySelector("#ready-section-header #ready-section-label + div"); const isOpen=body.style.display!=="none"; body.style.display=isOpen?"none":"block"; chevron.style.transform=isOpen?"rotate(0deg)":"rotate(180deg)"; if(subtitle)subtitle.textContent=isOpen?"Click to expand and review":"Click to collapse"; }
+function toggleFutureSection(){}
+function confirmSubmitValid(){ const validCount=document.querySelectorAll("#validStmtBody tr").length; if(validCount===0){showToast("No valid collections to submit.");return;} showConfirmDialog("Submit Valid Collections","Are you sure you want to submit "+validCount+" valid collection"+(validCount>1?"s":"")+"? Invalid collections will be discarded.","Submit Valid",function(){ showToast(validCount+" collection"+(validCount>1?"s":"")+" submitted successfully."); showColScreen("screen-col001"); },"var(--teal)"); }
 function confirmCancelStatement(){ showConfirmDialog("Cancel Upload","Are you sure you want to cancel? All collections in this statement — both valid and invalid — will be discarded.","Yes, Cancel",function(){ showColScreen("screen-col002"); }); }
+function initStmtUploadValidation(){ document.querySelectorAll("#invalidStmtBody tr").forEach(row=>{ const dateInput=row.querySelector('[data-field="date"]'); const hidden=row.querySelector(".stmt-date-iso"); const val=hidden?.value||parseStmtDateVal(dateInput?.value||"",row); if(!val)return; const today=new Date(); today.setHours(0,0,0,0); const d=new Date(val); d.setHours(0,0,0,0); if(!isNaN(d.getTime())&&d<today){ const badge=row.querySelector(".stmt-error-badge"); if(badge)badge.textContent="Collection date is in the past"; if(dateInput){ dateInput.style.border="2px solid var(--red)"; dateInput.style.background="#FFF5F5"; dateInput.classList.add("stmt-error-field"); } } }); document.querySelectorAll("#validStmtBody tr").forEach(routeStmtRow); updateStmtSummary(); renderValidPage(1); }
+function openMandatePreview(btn){ const row=btn.closest("tr"); const mandateRef=row.querySelector('[data-field="mandate"]')?.value||"MND-00850"; const amount=row.querySelector('[data-field="amount"]')?.value||"2,500"; const date=row.querySelector('[data-field="date"]')?.value||""; document.getElementById("mandate-preview-content").innerHTML=`<table style="width:100%; border-collapse:collapse; font-size:13px; margin-bottom:20px;"><tr><td style="padding:8px 0; color:#64748B; width:45%;">Mandate Reference</td><td style="padding:8px 0; font-weight:600; color:#0F1F38;">${mandateRef}</td></tr><tr><td style="padding:8px 0; color:#64748B;">Payer Name</td><td style="padding:8px 0; font-weight:600; color:#0F1F38;">Ahmed Al Marzouqi</td></tr><tr><td style="padding:8px 0; color:#64748B;">Mandate Type</td><td style="padding:8px 0; font-weight:600; color:#0F1F38;">Variable</td></tr><tr><td style="padding:8px 0; color:#64748B;">Min Amount</td><td style="padding:8px 0; font-weight:600; color:#0F1F38;">AED 500</td></tr><tr><td style="padding:8px 0; color:#64748B;">Max Amount</td><td style="padding:8px 0; font-weight:600; color:#0F1F38;">AED 5,000</td></tr><tr><td style="padding:8px 0; color:#64748B;">Frequency</td><td style="padding:8px 0; font-weight:600; color:#0F1F38;">Monthly</td></tr><tr><td style="padding:8px 0; color:#64748B;">Start Date</td><td style="padding:8px 0; font-weight:600; color:#0F1F38;">01/01/2026</td></tr><tr><td style="padding:8px 0; color:#64748B;">End Date</td><td style="padding:8px 0; font-weight:600; color:#0F1F38;">31/12/2026</td></tr></table><p style="font-size:12px; font-weight:700; color:#172B4D; margin-bottom:10px;">Payment Schedule</p><table style="width:100%; border-collapse:collapse; font-size:12px;"><thead><tr style="background:#172B4D;"><th style="padding:8px 10px; text-align:left; color:white;">#</th><th style="padding:8px 10px; text-align:left; color:white;">Collection Date</th><th style="padding:8px 10px; text-align:left; color:white;">Amount (AED)</th><th style="padding:8px 10px; text-align:left; color:white;">Status</th></tr></thead><tbody>${[["1","01/01/2026","2,500","Received"],["2","01/02/2026","3,000","Received"],["3","01/03/2026","2,800","Received"],["4","01/04/2026","3,200","Received"],["5","01/05/2026","2,500","Received"],["6","01/06/2026","2,500","Ready for Collection"],["7","01/07/2026","—","Future Collection"],["8","01/08/2026","—","Future Collection"],["9","01/09/2026","—","Future Collection"],["10","01/10/2026","—","Future Collection"],["11","01/11/2026","—","Future Collection"],["12","01/12/2026","—","Future Collection"]].map(([n,d,a,s],i)=>{ const isFuture=s==="Future Collection"; const rowBg=isFuture?"#EFF6FF":(i%2===0?"white":"#F8FAFC"); const statusCell=isFuture?`<td style="padding:7px 10px;color:#1D4ED8;font-weight:600;">${s}</td>`:`<td style="padding:7px 10px;">${s}</td>`; return `<tr style="background:${rowBg}"><td style="padding:7px 10px;">${n}</td><td style="padding:7px 10px;">${d}</td><td style="padding:7px 10px;">${a}</td>${statusCell}</tr>`; }).join("")}</tbody></table>`; document.getElementById("mandate-preview-modal").style.display="flex"; }
+function closeMandatePreview(){ document.getElementById("mandate-preview-modal").style.display="none"; }
+const MANDATE_CALENDAR_DATA={"MND-00850":{frequency:"monthly",occupiedMonths:["2026-01","2026-02","2026-03","2026-04","2026-05","2026-06"],addonDates:[],type:"variable",maxAmount:5000},"MND-00851":{frequency:"monthly",occupiedMonths:["2026-01","2026-02","2026-03","2026-04","2026-05"],addonDates:["2026-06-15"],type:"variable",maxAmount:8000},"MND-00852":{frequency:"monthly",occupiedMonths:["2026-01","2026-02","2026-03","2026-04","2026-05","2026-06"],addonDates:[],type:"fixed",maxAmount:0},"MND-00853":{frequency:"monthly",occupiedMonths:["2026-01","2026-02","2026-03","2026-04","2026-05"],addonDates:[],type:"variable",maxAmount:15000},"MND-00855":{frequency:"monthly",occupiedMonths:["2026-01","2026-02","2026-03","2026-04","2026-05"],addonDates:[],type:"fixed",maxAmount:0}};
+const MANDATE_CAL_DEFAULT={frequency:"monthly",occupiedMonths:["2026-01","2026-02","2026-03","2026-04","2026-05"],addonDates:[],type:"fixed",maxAmount:0};
+let _stmtCalTarget=null;
+let _stmtCalYear=0;
+let _stmtCalMonth=0;
+let _stmtCalMandate="";
+function openStmtCalendar(inputEl){ _stmtCalTarget=inputEl; const row=inputEl.closest("tr"); const mandateInput=row?row.querySelector('[data-field="mandate"]'):null; _stmtCalMandate=mandateInput?mandateInput.value.trim():""; const today=new Date(); _stmtCalYear=today.getFullYear(); _stmtCalMonth=today.getMonth(); renderStmtCalendar(); const popup=document.getElementById("stmt-calendar-popup"); if(!popup)return; popup.style.display="block"; const rect=inputEl.getBoundingClientRect(); const popupW=290; let left=rect.left; if(left+popupW>window.innerWidth-8)left=window.innerWidth-popupW-8; popup.style.top=(rect.bottom+4)+"px"; popup.style.left=left+"px"; setTimeout(()=>{ document.addEventListener("click",closeStmtCalendarOutside,{once:true}); },10); }
+function closeStmtCalendarOutside(e){ const popup=document.getElementById("stmt-calendar-popup"); if(popup&&!popup.contains(e.target))popup.style.display="none"; }
+function stmtCalNav(dir){ _stmtCalMonth+=dir; if(_stmtCalMonth>11){_stmtCalMonth=0;_stmtCalYear++;} if(_stmtCalMonth<0){_stmtCalMonth=11;_stmtCalYear--;} renderStmtCalendar(); }
+function renderStmtCalendar(){ const data=MANDATE_CALENDAR_DATA[_stmtCalMandate]||MANDATE_CAL_DEFAULT; const today=new Date(); today.setHours(0,0,0,0); const months=["January","February","March","April","May","June","July","August","September","October","November","December"]; const hdr=document.getElementById("stmt-cal-header"); if(hdr)hdr.textContent=months[_stmtCalMonth]+" "+_stmtCalYear; const grid=document.getElementById("stmt-cal-grid"); if(!grid)return; grid.innerHTML=""; ["Mo","Tu","We","Th","Fr","Sa","Su"].forEach(d=>{ const h=document.createElement("div"); h.textContent=d; h.style.cssText="font-weight:700; color:#64748B; padding:4px 0; font-size:11px;"; grid.appendChild(h); }); const first=new Date(_stmtCalYear,_stmtCalMonth,1); const startDay=(first.getDay()+6)%7; for(let i=0;i<startDay;i++)grid.appendChild(document.createElement("div")); const yearMonth=_stmtCalYear+"-"+String(_stmtCalMonth+1).padStart(2,"0"); const isMonthOccupied=data.occupiedMonths.includes(yearMonth); const daysInMonth=new Date(_stmtCalYear,_stmtCalMonth+1,0).getDate(); for(let d=1;d<=daysInMonth;d++){ const iso=yearMonth+"-"+String(d).padStart(2,"0"); const date=new Date(iso); date.setHours(0,0,0,0); const isPast=date<today; const isToday=date.getTime()===today.getTime(); const isAddon=data.addonDates.includes(iso); const isBlocked=isMonthOccupied&&!isAddon; const cell=document.createElement("div"); cell.textContent=d; cell.style.cssText="padding:5px 3px; border-radius:6px; font-size:12px; transition:background 0.1s; text-align:center;"; if(isPast){ cell.style.cssText+="color:#CBD5E1; cursor:not-allowed;"; } else if(isBlocked){ cell.style.cssText+="background:#F1F5F9; color:#94A3B8; cursor:not-allowed;"; cell.title="This frequency period is already occupied by another collection"; } else if(isAddon){ cell.style.cssText+="background:#ECFEFF; border:1px solid #00A3A3; color:#0F1F38; cursor:pointer;"; cell.title="Add-on available — existing collection on this date is within the mandate max amount"; cell.addEventListener("click",()=>selectStmtDate(iso)); } else { cell.style.cssText+="color:#0F1F38; cursor:pointer;"; cell.addEventListener("mouseenter",()=>{ cell.style.background="#F0FDFA"; }); cell.addEventListener("mouseleave",()=>{ cell.style.background=""; }); cell.addEventListener("click",()=>selectStmtDate(iso)); } if(isToday&&!isPast&&!isBlocked)cell.style.boxShadow="0 0 0 2px var(--teal)"; grid.appendChild(cell); } }
+function selectStmtDate(iso){ if(!_stmtCalTarget)return; const [y,m,d]=iso.split("-"); _stmtCalTarget.value=d+"/"+m+"/"+y; const wrapper=_stmtCalTarget.closest(".stmt-date-wrapper"); const hidden=wrapper?.querySelector(".stmt-date-iso"); if(hidden)hidden.value=iso; document.getElementById("stmt-calendar-popup").style.display="none"; _stmtCalTarget.setAttribute("data-field","date"); _stmtCalTarget.dispatchEvent(new Event("input")); const row=_stmtCalTarget.closest("tr"); if(row)routeStmtRow(row); }
+let rpaEnabled=false;
+function toggleRpaMode(){ rpaEnabled=!rpaEnabled; const btn=document.getElementById("rpa-toggle-btn"); const knob=document.getElementById("rpa-toggle-knob"); const label=document.getElementById("rpa-mode-label"); if(btn)btn.style.background=rpaEnabled?"var(--teal)":"#E2E8F0"; if(knob)knob.style.transform=rpaEnabled?"translateX(16px)":"translateX(0)"; if(label){ label.textContent=rpaEnabled?"ON":"OFF"; label.style.color=rpaEnabled?"var(--teal)":"#94A3B8"; } applyRpaMode(); }
+function applyRpaMode(){ const sendSelected=document.getElementById("col-send-selected-btn"); if(sendSelected)sendSelected.style.display=rpaEnabled?"none":""; let banner=document.getElementById("rpa-active-banner"); if(rpaEnabled&&!banner){ banner=document.createElement("div"); banner.id="rpa-active-banner"; banner.style.cssText="background:#E6F7F7; border:1px solid #00BFBF; border-radius:8px; padding:10px 16px; font-size:12px; color:#0F1F38; margin-bottom:14px;"; banner.textContent="RPA Mode is active. Collections will be automatically sent for processing. Manual send actions are disabled."; const main=document.querySelector("#screen-col002 main")||document.getElementById("screen-col002"); if(main)main.insertBefore(banner,main.querySelector(".filter-bar")||main.querySelector("div[style*='flex-wrap']")||main.firstChild); } else if(!rpaEnabled&&banner){ banner.remove(); } document.querySelectorAll("#dueColTableBody tr").forEach(tr=>{ const menu=tr.querySelector(".action-menu"); if(!menu)return; if(rpaEnabled){ menu.innerHTML=""; const btn=document.createElement("button"); btn.type="button"; btn.className="action-item danger"; btn.setAttribute("data-action","stop"); btn.textContent="Stop Collection"; menu.appendChild(btn); } else { rebuildColActionMenu(tr); } }); }
+function buildFutureRowMenu(tr){ const menu=tr.querySelector(".action-menu"); if(!menu)return; menu.innerHTML=""; const periodFree=tr.getAttribute("data-period-available")!=="false"; const li=document.createElement("div"); li.style.cssText="padding:9px 14px; font-size:13px; font-family:'DM Sans',sans-serif; color:"+(periodFree?"var(--txt-head)":"var(--txt-faint)")+"; cursor:"+(periodFree?"pointer":"not-allowed")+"; background:none; display:flex; align-items:center; justify-content:space-between; gap:8px; position:relative; border:none; width:100%; text-align:left;"; li.innerHTML="<span>Send for Collection Now</span>"; if(!periodFree){ li.innerHTML+='<span style="display:inline-flex;align-items:center;color:var(--txt-faint);"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span><div class="future-tooltip" style="display:none; position:fixed; background:#1E293B; color:white; font-size:11px; padding:6px 10px; border-radius:6px; max-width:220px; line-height:1.5; z-index:10000; pointer-events:none; white-space:normal;">This frequency period is already occupied by another collection</div>'; li.addEventListener("mouseenter",()=>{ const rect=li.getBoundingClientRect(); const t=li.querySelector(".future-tooltip"); if(t){ t.style.display="block"; t.style.top=rect.top+"px"; t.style.left=(rect.left-230)+"px"; } }); li.addEventListener("mouseleave",()=>{ const t=li.querySelector(".future-tooltip"); if(t)t.style.display="none"; }); } else { li.addEventListener("click",()=>{ closeActionMenu(); showConfirmDialog("Send for Collection Now","Are you sure you want to send this collection now? The collection date will change to today and it will move to Ready for Collection.","Send Now",()=>{ tr.remove(); showToast("Collection moved to Ready for Collection with today\\'s date."); },"var(--teal)"); }); } menu.appendChild(li); }
 function toggleNavGroup(name){ document.querySelectorAll("#nav-sub-"+name).forEach(sub=>{ const open=sub.style.display!=="none"; sub.style.display=open?"none":"flex"; }); document.querySelectorAll("#nav-group-"+name+"-chevron").forEach(chevron=>{ const sub=document.querySelector("#nav-sub-"+name); const open=sub&&sub.style.display!=="none"; chevron.style.transform=open?"rotate(180deg)":""; }); }
-function showColScreen(id){ document.querySelectorAll(".phase5-desktop-screen").forEach(s=>s.classList.remove("is-active")); const el=document.getElementById(id); if(el)el.classList.add("is-active"); document.querySelectorAll(".prototype-nav a[data-screen]").forEach(a=>{a.classList.toggle("active",a.getAttribute("data-screen")===id);}); document.querySelectorAll(".nav-sub-item").forEach(a=>a.classList.remove("active")); document.querySelectorAll('.nav-sub-item[href="#'+id+'"]').forEach(a=>a.classList.add("active")); document.querySelectorAll("#nav-sub-collections").forEach(sub=>{sub.style.display="flex";}); document.querySelectorAll("#nav-group-collections-chevron").forEach(c=>{c.style.transform="rotate(180deg)";}); closeActionMenu(); try{history.replaceState(null,"","#"+id);}catch(e){} if(window.lucide)lucide.createIcons(); if(id==="screen-col001")applyColFilters(); if(id==="screen-col002")applyDueColFilters(); if(id==="screen-col003")applyFutureColFilters(); if(id==="screen-col004")applyLogColFilters(); }
-function initColTables(){ ["colTableBody","dueColTableBody","logColTableBody"].forEach(tid=>{ const tbody=document.getElementById(tid); if(!tbody)return; tbody.querySelectorAll("tr").forEach(rebuildColActionMenu); tbody.addEventListener("click",e=>{ const btn=e.target.closest("[data-action]"); if(!btn)return; const tr=btn.closest("tr"); if(tr)handleColAction(btn,tr); }); }); applyColFilters(); applyDueColFilters(); applyFutureColFilters(); applyLogColFilters(); }
+function showColScreen(id){ document.querySelectorAll(".phase5-desktop-screen").forEach(s=>s.classList.remove("is-active")); const el=document.getElementById(id); if(el)el.classList.add("is-active"); document.querySelectorAll(".prototype-nav a[data-screen]").forEach(a=>{a.classList.toggle("active",a.getAttribute("data-screen")===id);}); document.querySelectorAll(".nav-sub-item").forEach(a=>a.classList.remove("active")); document.querySelectorAll('.nav-sub-item[href="#'+id+'"]').forEach(a=>a.classList.add("active")); document.querySelectorAll("#nav-sub-collections").forEach(sub=>{sub.style.display="flex";}); document.querySelectorAll("#nav-group-collections-chevron").forEach(c=>{c.style.transform="rotate(180deg)";}); closeActionMenu(); try{history.replaceState(null,"","#"+id);}catch(e){} if(window.lucide)lucide.createIcons(); if(id==="screen-col001")applyColFilters(); if(id==="screen-col002")applyDueColFilters(); if(id==="screen-col003")applyFutureColFilters(); if(id==="screen-col004")applyLogColFilters(); if(id==="screen-col005")initStmtUploadValidation(); }
+function initColTables(){ ["dueColTableBody","logColTableBody"].forEach(tid=>{ const tbody=document.getElementById(tid); if(!tbody)return; tbody.querySelectorAll("tr").forEach(rebuildColActionMenu); tbody.addEventListener("click",e=>{ const btn=e.target.closest("[data-action]"); if(!btn)return; const tr=btn.closest("tr"); if(tr)handleColAction(btn,tr); }); }); const futureBody=document.getElementById("futureColTableBody"); if(futureBody){ futureBody.querySelectorAll("tr").forEach(buildFutureRowMenu); } applyColFilters(); applyDueColFilters(); applyFutureColFilters(); applyLogColFilters(); }
 function initFutureDateDefaults(){ const today=new Date(); const end=new Date(today); end.setDate(end.getDate()+30); const fmt=d=>d.toISOString().slice(0,10); const a=document.getElementById("filter-future-date-a"); const b=document.getElementById("filter-future-date-b"); const mode=document.getElementById("filter-future-date-mode"); if(mode)mode.value="between"; if(a){a.value=fmt(today);a.style.display="";} if(b){b.value=fmt(end);b.style.display="";} const sep=document.getElementById("filter-future-date-sep"); if(sep)sep.style.display=""; }
-function bootPhase5(){ initFutureDateDefaults(); const hash=(location.hash||"#screen-col001").replace("#",""); const id=document.getElementById(hash)?hash:"screen-col001"; showColScreen(id); initColTables(); document.querySelectorAll(".prototype-nav a[data-screen]").forEach(a=>{a.addEventListener("click",e=>{e.preventDefault();showColScreen(a.getAttribute("data-screen"));});}); if(window.lucide)lucide.createIcons(); }
+function bootPhase5(){ initFutureDateDefaults(); const hash=(location.hash||"#screen-col001").replace("#",""); const id=document.getElementById(hash)?hash:"screen-col001"; showColScreen(id); initColTables(); initStmtUploadValidation(); document.getElementById("mandate-preview-modal")?.addEventListener("click",function(e){ if(e.target===this)closeMandatePreview(); }); document.querySelectorAll(".prototype-nav a[data-screen]").forEach(a=>{a.addEventListener("click",e=>{e.preventDefault();showColScreen(a.getAttribute("data-screen"));});}); if(window.lucide)lucide.createIcons(); }
 window.addEventListener("load",bootPhase5);
 window.addEventListener("hashchange",()=>{ const id=(location.hash||"#screen-col001").replace("#",""); if(document.getElementById(id))showColScreen(id); });
 </script>
